@@ -1,0 +1,43 @@
+select,
+button,
+input,
+a {
+  font-weight: 400;
+  border-radius: 0.25rem;
+  outline: none;
+}
+
+input,
+select {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+select,
+button,
+a,
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+.select {
+  border: 0;
+  padding: 6px 28px 6px 12px;
+  border: 1px solid #ced4da;
+}
+
+button {
+  padding: 6px 14px;
+}
+
+.btn {
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+
+.input {
+  color: #495057;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}

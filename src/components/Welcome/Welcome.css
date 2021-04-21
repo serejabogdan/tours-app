@@ -1,0 +1,45 @@
+.welcome {
+  background-image: url('../../assets/images/bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  margin: 2rem 0;
+  border-radius: 1rem;
+}
+
+.welcome__hower {
+  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(56, 124, 137, 0.6); */
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.welcome__board {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10rem 0;
+}
+
+.welcome__title {
+  /* margin-bottom: 50px; */
+  font-weight: 400;
+  font-size: 48px;
+  color: #fff;
+}
+
+.welcome__text {
+  padding: 1rem 0;
+  font-size: 24px;
+  color: #f1ffff;
+}
+
+.search__form {
+  margin-top: 3rem;
+}
+
+form > * {
+  margin-left: 6px;
+}

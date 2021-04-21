@@ -1,0 +1,39 @@
+.cards {
+  background-color: #f8f8f8;
+}
+
+.cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px;
+}
+
+.better-countries__card {
+  display: flex;
+  flex: 0 0 32%;
+  margin: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.better-countries__card img {
+  width: 100%;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  transition: 0.2s ease;
+  color: white;
+  font-size: 24px;
+}
+
+.better-countries__card:hover .card__content {
+  transform: translateY(-20%);
+}
