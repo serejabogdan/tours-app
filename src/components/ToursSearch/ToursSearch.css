@@ -3,28 +3,13 @@
   padding: 2rem 0;
 }
 
-.ToursSearch__filters,
 .tour-search__result {
   padding: 0 10px;
-}
-
-.filter {
-  border-bottom: 1px solid #efefef;
-  padding-bottom: 16px;
 }
 
 .chose__header {
   display: flex;
   justify-content: space-between;
-}
-
-.filter__title {
-  line-height: 1.5;
-  font-weight: 600;
-  font-size: 16px;
-  color: #4b5669;
-  opacity: 0.9;
-  padding: 14px 0;
 }
 
 .price-form {
@@ -44,26 +29,4 @@
 
 .clear-btn:hover {
   color: #4d9baa;
-}
-
-.filter-text {
-  display: inline-block;
-  font-size: 13px;
-  color: #4b5669;
-}
-
-.filter__btn {
-  display: inline-block;
-  border-radius: 5px;
-  padding: 4px 6px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  transition: 0.2s ease;
-  cursor: pointer;
-  box-sizing: border-box;
-  margin: 0 5px 5px 0;
-}
-
-.filter__btn-active,
-.filter__btn:hover {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }

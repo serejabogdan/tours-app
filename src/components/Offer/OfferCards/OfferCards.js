@@ -12,6 +12,7 @@ function OfferCards({title}) {
           <OfferCard />
           <OfferCard />
           <OfferCard />
+          <OfferCard />
         </div>
       </div>
     </section>
