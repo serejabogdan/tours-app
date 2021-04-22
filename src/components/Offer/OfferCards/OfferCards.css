@@ -1,0 +1,10 @@
+.OfferCards {
+  background-color: #f8f8f8;
+  padding-bottom: 1rem;
+}
+
+.OfferCards__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px;
+}

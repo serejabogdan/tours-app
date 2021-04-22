@@ -7,20 +7,17 @@
 .header__logo {
   display: flex;
   align-items: center;
-  /* flex: 0 1 33%; */
 }
 
 .header__nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* flex: 1 0 33%; */
 }
 
 .header__auth {
   display: flex;
   align-items: center;
-  /* flex: 0 1 33%; */
   justify-content: flex-end;
 }
 

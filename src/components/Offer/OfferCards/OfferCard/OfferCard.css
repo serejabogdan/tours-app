@@ -1,16 +1,6 @@
-.cards {
-  background-color: #f8f8f8;
-}
-
-.cards__list {
+.OfferCard {
   display: flex;
-  flex-wrap: wrap;
-  margin: 0 -5px;
-}
-
-.better-countries__card {
-  display: flex;
-  flex: 0 0 32%;
+  flex: 1 0 32%;
   margin: 5px;
   cursor: pointer;
   overflow: hidden;
@@ -19,11 +9,11 @@
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
-.better-countries__card img {
+.OfferCard img {
   width: 100%;
 }
 
-.card__content {
+.OfferCard__content {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -34,6 +24,6 @@
   font-size: 24px;
 }
 
-.better-countries__card:hover .card__content {
+.OfferCard:hover .OfferCard__content {
   transform: translateY(-20%);
 }

@@ -23,8 +23,8 @@ function Welcome() {
               <option>Пункт 1</option>
               <option>Пункт 2</option>
             </select>
-            <button className="btn" type="submit">
-              Пошук
+            <button className="submit-btn btn" type="submit">
+              Полетіли
             </button>
           </form>
         </div>
