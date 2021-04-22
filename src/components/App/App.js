@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBoard from '../../shared/SearchBoard';
 import Offer from '../Offer';
+import Tour from '../Tour';
 import ToursSearch from '../ToursSearch';
 import './App.css';
 
@@ -9,8 +10,9 @@ function App() {
     <div className="App">
       <SearchBoard />
 
-      {/* <Offer /> */}
-      <ToursSearch />
+      {/* <Offer />
+      <ToursSearch /> */}
+      <Tour />
     </div>
   );
 }

@@ -1,0 +1,227 @@
+.hotel {
+  padding: 30px 0;
+}
+
+.hotel__titles {
+  padding-bottom: 1rem;
+}
+
+.services__nav {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.hotel__list {
+  display: flex;
+}
+
+.services__list > li {
+  padding: 0 15px;
+  font-size: 14px;
+  display: inline-block;
+  padding: 12px;
+  text-decoration: none;
+
+  position: relative;
+}
+
+.hotel__tour {
+  display: flex;
+  border-radius: 4px;
+  box-shadow: 0 10px 24px 0 rgba(33, 84, 94, 0.15);
+}
+
+.tour__info {
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tour__info-wrapper {
+}
+
+.slider {
+  flex: 0 0 60%;
+}
+
+.slider img {
+  display: flex;
+  width: 100%;
+}
+
+.slider,
+.slider img {
+  border-radius: 6px;
+}
+
+.tour__info-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tour__info-list > li {
+  flex: 0 1 50%;
+  margin-bottom: 8px;
+  color: #4b5669;
+}
+
+.tour__added-title {
+  margin-bottom: 4px;
+}
+
+.tour__price-info {
+  padding: 14px 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.request-btn {
+  background-color: #ff8508;
+  color: #fff;
+  padding: 10px 0;
+  width: 100%;
+  font-size: 1rem;
+}
+.request-btn:hover {
+  background-color: #e15e02;
+}
+
+.tour-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.tour__flight {
+  width: 100%;
+}
+
+.tour__flight label,
+.people-number label {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-title {
+  font-size: 12px;
+}
+
+.people-number {
+  display: flex;
+}
+
+.number-old {
+  margin-right: 10px;
+}
+
+.number-old,
+.number-children {
+  width: 30px;
+}
+
+.tour-info__title {
+  color: #ababab;
+}
+
+.tour-info__item {
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.input,
+.select {
+  margin-bottom: 6px;
+}
+
+/* TODO: IT IS NOT END */
+
+/* hotel_main_info */
+
+.about {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.about__title {
+  font-size: 26px;
+}
+
+.about__text {
+  font-size: 14px;
+  color: #636363;
+
+  margin: 8px 0;
+}
+
+.services {
+}
+
+.service__list {
+  display: none;
+}
+
+.service__list li {
+  font-size: 13px;
+  padding: 3px 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.service__title {
+  color: #595959;
+  font-size: 16px;
+  padding: 6px 0;
+}
+
+.check {
+  width: 14px;
+  margin-right: 8px;
+}
+
+.services__list > li {
+  cursor: pointer;
+  position: relative;
+}
+
+.services__list > li:hover::before {
+  content: '';
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #0c614a;
+}
+
+.sub__list {
+  display: none;
+
+  min-width: 300px;
+  background-color: white;
+  padding: 14px;
+}
+
+.services__list > li:hover .sub__list {
+  display: block;
+}
+
+.sub__list > li {
+  display: flex;
+  align-items: center;
+
+  padding: 2px 0;
+}
+
+.sub-list-wrapper {
+  padding-top: 14px;
+  position: absolute;
+  left: 0;
+}
+
+/*tour*/
+.tour__title {
+  margin-bottom: 18px;
+}
