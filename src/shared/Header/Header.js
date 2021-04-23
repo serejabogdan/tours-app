@@ -14,7 +14,7 @@ function Header({color}) {
       className: isColor(color, LINK_CLASS_NAME, `${LINK_CLASS_NAME} ${LINK_CLASS_NAME}--black`)
     },
     {
-      name: 'Гарячі тури',
+      name: 'Пошук турів',
       href: './index.html',
       className: isColor(color, LINK_CLASS_NAME, `${LINK_CLASS_NAME} ${LINK_CLASS_NAME}--black`)
     },
