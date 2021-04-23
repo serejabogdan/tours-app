@@ -41,11 +41,12 @@ function Filters() {
       </div>
       <div className="filter">
         <h3 className="filter__title">Послуги</h3>
-        <div className="filter__btn filter-text">Безкоштовний інтернет</div>
+        <div className="filter__btn filter-text">Безкоштовний Wi-Fi</div>
         <div className="filter__btn filter-text">Розміщення з тваринами</div>
         <div className="filter__btn filter-text">Дитячий басейн</div>
         <div className="filter__btn filter-text">Дитячий клуб</div>
         <div className="filter__btn filter-text">Дитяче меню</div>
+        <div className="filter__btn filter-text">Водяні гірки</div>
       </div>
       <div className="filter">
         <h3 className="filter__title">Берегова лінія</h3>

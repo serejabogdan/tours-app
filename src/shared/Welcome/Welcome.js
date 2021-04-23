@@ -13,6 +13,12 @@ function Welcome() {
             <select className="form__control select" name="country" id="country">
               <option>Країна</option>
               <option>Єгипет</option>
+              <option>Турція</option>
+              <option>ОАЕ</option>
+              <option>Домінікана</option>
+              <option>Мальдіви</option>
+              <option>Греція</option>
+              <option>Кіпр</option>
             </select>
             <select className="form__control select" name="city" id="city">
               <option>Київ</option>
