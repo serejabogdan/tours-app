@@ -52,7 +52,7 @@
   border-bottom: 2px solid rgba(255, 255, 255, 0.6);
 }
 
-.header__link.active {
+.header__link--active {
   border-bottom: 2px solid rgba(255, 255, 255, 0.6);
 }
 

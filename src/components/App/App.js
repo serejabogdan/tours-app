@@ -1,18 +1,23 @@
 import React from 'react';
+import './App.css';
+
 import SearchBoard from '../../shared/SearchBoard';
 import Offer from '../Offer';
 import Tour from '../Tour';
 import ToursSearch from '../ToursSearch';
-import './App.css';
+
+import {Switch, Route, Redirect} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <SearchBoard />
-
-      {/* <Offer /> */}
-      <ToursSearch />
-      {/* <Tour /> */}
+      <Switch>
+        <Route path="/search" component={ToursSearch} />
+        <Route path="/tour" component={Tour} />
+        <Route path="/hot" component={Offer} />
+        <Redirect to="/hot" />
+      </Switch>
     </div>
   );
 }
