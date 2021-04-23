@@ -1,4 +1,5 @@
 import React from 'react';
+import Datepicker from '../Datepicker';
 import './Welcome.css';
 
 function Welcome() {
@@ -9,21 +10,23 @@ function Welcome() {
           <h1 className="welcome__title title-h1">Знайдіть тур саме в нас.</h1>
           <span className="welcome__text">Обирайте улюблену країну і збирайте речі.</span>
           <form className="search__form">
-            <select className="select" name="city" id="city">
-              <option>Пункт 1</option>
+            <select className="form__control select" name="country" id="country">
+              <option>Країна</option>
+              <option>Єгипет</option>
+            </select>
+            <select className="form__control select" name="city" id="city">
+              <option>Київ</option>
+              <option>Дніпро</option>
+              <option>Запоріжжя</option>
+              <option>Львів</option>
+              <option>Харків</option>
+            </select>
+            <Datepicker classNames="form__control" />
+            <select className="form__control select" name="children" id="children">
+              <option>Дорослі</option>
               <option>Пункт 2</option>
             </select>
-            <select className="select" name="country" id="country">
-              <option>Пункт 1</option>
-              <option>Пункт 2</option>
-            </select>
-            <input className="start-date input" placeholder="Something" type="text" />
-            <input className="end-date input" placeholder="Something" type="text" />
-            <select className="select" name="children" id="city">
-              <option>Пункт 1</option>
-              <option>Пункт 2</option>
-            </select>
-            <button className="submit-btn btn" type="submit">
+            <button className="form__control submit-btn btn" type="submit">
               Полетіли
             </button>
           </form>
