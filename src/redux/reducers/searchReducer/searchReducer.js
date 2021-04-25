@@ -1,17 +1,18 @@
 import {SET_SEARCH_DATA} from '../../types';
 
 const initialState = {
-  country: '',
-  city: '',
-  startDate: '',
-  endDate: ''
+  main: {
+    country: 'Єгипет',
+    city: 'Київ',
+    startDate: new Date(),
+    endDate: new Date()
+  }
 };
 
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SEARCH_DATA:
-      console.log(action.payload);
-      return state;
+      return {main: {...state.main, ...action.payload}};
     default:
       return state;
   }

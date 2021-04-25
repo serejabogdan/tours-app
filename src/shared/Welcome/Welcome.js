@@ -83,11 +83,6 @@ function Welcome({setSearchData, ...props}) {
   );
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {};
-};
-
 const mapDispatchToState = {setSearchData};
 
-export default connect(mapStateToProps, mapDispatchToState)(Welcome);
+export default connect(null, mapDispatchToState)(Welcome);

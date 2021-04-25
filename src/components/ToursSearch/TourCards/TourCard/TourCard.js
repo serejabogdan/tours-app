@@ -2,7 +2,7 @@ import React from 'react';
 import './TourCard.css';
 import hotel from '../../../../assets/hotels/fortuna.jpg';
 
-function TourCard() {
+function TourCard({name, country, resort, startDate, endDate, description, price, ...props}) {
   return (
     <div className="TourCard">
       <div className="TourCard__img">
@@ -12,16 +12,17 @@ function TourCard() {
       </div>
       <div className="TourCard__content">
         <a href="./index.html" className="TourCard__title">
-          Fortuna Ssh 4*
+          {name}
         </a>
-        <div className="TourCard__text TourCard__country">Египет, Шарм-эль-Шейх</div>
-        <div className="TourCard__text">С 08.04 по 15.04 (7 ночей)</div>
+        <div className="TourCard__text TourCard__country">
+          {country}, {resort}
+        </div>
+        <div className="TourCard__text">
+          З {startDate.getDate()}.0{startDate.getMonth()} по {endDate}
+        </div>
         <div className="TourCard__text">Все включено</div>
         <div className="TourCard__text">Проезд включен (из Киева)</div>
-        <div className="TourCard__text TourCard__description">
-          При покупке туров в отель системы Fortuna туристы размещаются в одном из отелей указанной категории (2*, 3*, 4*, 5*). Воспользуйтесь прекрасной возможностью испытать судьбу, приготовить себе
-          сюрприз и при этом сэкономить деньги!
-        </div>
+        <div className="TourCard__text TourCard__description">{description}</div>
       </div>
       <div className="TourCard__other">
         <div className="reviews">
@@ -29,7 +30,7 @@ function TourCard() {
         </div>
         <div className="TourCard__other-bottom">
           <div className="TourCard__price">
-            <span className="price">8871</span>
+            <span className="price">{price}</span>
             <span className="currency">грн</span>
           </div>
           <a href="./index.html" className="TourCard__btn btn">
