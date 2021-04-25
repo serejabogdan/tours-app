@@ -1,15 +1,63 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import './Filters.css';
 
-function Filters() {
+import {toggleFilter, clearFilters, removeFilter} from '../../../redux/actions';
+
+function Filters({toggleFilter, clearFilters, removeFilter, selected, ...props}) {
+  const filters = [
+    {
+      title: 'Клас отеля',
+      body: ['5*', '4*', '3*']
+    },
+    {
+      title: 'Тип харчування',
+      body: [
+        'Без харчування',
+        'Тільки сніданки',
+        'Сніданок і вечеря',
+        'Сніданок, обід і вечеря',
+        'Все включено'
+      ]
+    },
+    {
+      title: 'Послуги',
+      body: [
+        'Безкоштовний Wi-Fi',
+        'Розміщення з тваринами',
+        'Дитячий басейн',
+        'Дитяче меню',
+        'Водяні гірки'
+      ]
+    },
+    {
+      title: 'Берегова лінія',
+      body: ['1-ша лінія', '2-га лінія']
+    }
+  ];
+
   return (
     <div className="Filters">
       <div className="Filters__chose chose">
         <div className="chose__header">
           <h3 className="filter__title">Обрані</h3>
-          <button className="clear-btn btn">Витерти</button>
+          <button className="clear-btn btn" onClick={() => clearFilters('yo')}>
+            Витерти
+          </button>
         </div>
-        <div className="filter-text">Нічого не обрано</div>
+        <div className="filter-text">
+          {!selected.length
+            ? 'Нічого не обрано'
+            : selected.map((item) => (
+                <div
+                  className="filter__btn filter-text filter__btn-active"
+                  key={item}
+                  onClick={() => removeFilter(item)}
+                >
+                  {item}
+                </div>
+              ))}
+        </div>
       </div>
       <div className="filter filter__price">
         <h3 className="filter__title">Ціна</h3>
@@ -24,35 +72,24 @@ function Filters() {
         <h3 className="filter__title">Пошук отеля</h3>
         <input className="input" type="text" placeholder="Fortuna Ssh" />
       </div>
-      <div className="filter">
-        <h3 className="filter__title">Клас отеля</h3>
-        <div className="filter__btn filter__btn-active filter-text">5*</div>
-        <div className="filter__btn filter-text">4*</div>
-        <div className="filter__btn filter-text">3*</div>
-      </div>
-      <div className="filter">
-        <h3 className="filter__title">Тип харчування</h3>
-
-        <div className="filter__btn filter-text">Без харчування</div>
-        <div className="filter__btn filter-text">Тільки сніданки</div>
-        <div className="filter__btn filter-text">Сніданок і вечеря</div>
-        <div className="filter__btn filter-text">Сніданок, обід і вечеря</div>
-        <div className="filter__btn filter-text">Все включено</div>
-      </div>
-      <div className="filter">
-        <h3 className="filter__title">Послуги</h3>
-        <div className="filter__btn filter-text">Безкоштовний Wi-Fi</div>
-        <div className="filter__btn filter-text">Розміщення з тваринами</div>
-        <div className="filter__btn filter-text">Дитячий басейн</div>
-        <div className="filter__btn filter-text">Дитячий клуб</div>
-        <div className="filter__btn filter-text">Дитяче меню</div>
-        <div className="filter__btn filter-text">Водяні гірки</div>
-      </div>
-      <div className="filter">
-        <h3 className="filter__title">Берегова лінія</h3>
-        <div className="filter__btn filter-text">1-ша лінія</div>
-        <div className="filter__btn filter-text">2-га лінія</div>
-      </div>
+      {filters.map(({title, body}) => {
+        return (
+          <div className="filter" key={title}>
+            <h3 className="filter__title">{title}</h3>
+            {body.map((item) => (
+              <div
+                className={`filter__btn filter-text ${
+                  selected.includes(item) && 'filter__btn-active'
+                }`}
+                key={item}
+                onClick={() => toggleFilter(item)}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        );
+      })}
       <div className="filter">
         <h3 className="filter__title">Курорт</h3>
         <div className="filter__btn filter-text">Дахаб</div>
@@ -64,4 +101,16 @@ function Filters() {
   );
 }
 
-export default Filters;
+const mapStateToProps = (state) => {
+  return {
+    selected: state.filters
+  };
+};
+
+const mapDispatchToProps = {
+  toggleFilter,
+  clearFilters,
+  removeFilter
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);
