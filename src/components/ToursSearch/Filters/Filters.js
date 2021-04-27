@@ -2,9 +2,31 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './Filters.css';
 
-import {toggleFilter, clearFilters, removeFilter} from '../../../redux/actions';
+import {
+  toggleFilter,
+  clearFilters,
+  removeFilter,
+  changeMinPrice,
+  changeMaxPrice,
+  changeTourName
+} from '../../../redux/actions';
 
-function Filters({toggleFilter, clearFilters, removeFilter, selected, tours}, ...props) {
+function Filters(
+  {
+    toggleFilter,
+    clearFilters,
+    removeFilter,
+    changeMinPrice,
+    changeMaxPrice,
+    changeTourName,
+    selected,
+    minPrice,
+    maxPrice,
+    tourName,
+    tours
+  },
+  ...props
+) {
   const filters = [
     {
       title: 'Клас отеля',
@@ -35,9 +57,9 @@ function Filters({toggleFilter, clearFilters, removeFilter, selected, tours}, ..
       body: ['1-ша лінія', '2-га лінія']
     }
   ];
-  const toursPrices = tours.map((item) => item.price);
+  /*   const toursPrices = tours.map((item) => item.price);
   const minPrice = Math.min(...toursPrices);
-  const maxPrice = Math.max(...toursPrices);
+  const maxPrice = Math.max(...toursPrices); */
 
   return (
     <div className="Filters">
@@ -65,15 +87,33 @@ function Filters({toggleFilter, clearFilters, removeFilter, selected, tours}, ..
       <div className="filter filter__price">
         <h3 className="filter__title">Ціна</h3>
         <div className="price-form">
-          <input className="price-input input" type="text" placeholder={minPrice} />
+          <input
+            className="price-input input"
+            type="text"
+            placeholder={minPrice}
+            value={minPrice}
+            onChange={(e) => changeMinPrice(e.target.value)}
+          />
           <span className="filter-text">&nbsp;-&nbsp;</span>
-          <input className="price-input input" type="text" placeholder={maxPrice} />
+          <input
+            className="price-input input"
+            type="text"
+            placeholder={maxPrice}
+            value={maxPrice}
+            onChange={(e) => changeMaxPrice(e.target.value)}
+          />
           <span className="filter-text">&nbsp;грн</span>
         </div>
       </div>
       <div className="filter">
         <h3 className="filter__title">Пошук отеля</h3>
-        <input className="input" type="text" placeholder="Fortuna Ssh" />
+        <input
+          className="input"
+          type="text"
+          placeholder="Fortuna Ssh"
+          value={tourName}
+          onChange={(e) => changeTourName(e.target.value)}
+        />
       </div>
       {filters.map(({title, body}) => {
         return (
@@ -106,7 +146,10 @@ function Filters({toggleFilter, clearFilters, removeFilter, selected, tours}, ..
 
 const mapStateToProps = (state) => {
   return {
-    selected: state.filters,
+    selected: state.filters.selected,
+    minPrice: state.filters.minPrice,
+    maxPrice: state.filters.maxPrice,
+    tourName: state.filters.tourName,
     tours: state.tours
   };
 };
@@ -114,7 +157,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   toggleFilter,
   clearFilters,
-  removeFilter
+  removeFilter,
+  changeMinPrice,
+  changeMaxPrice,
+  changeTourName
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filters);

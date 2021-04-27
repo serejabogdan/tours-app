@@ -1,5 +1,6 @@
 import {SET_SEARCH_DATA} from '../../types';
 
+// TODO: fix DATE
 const initialState = {
   main: {
     country: 'Єгипет',

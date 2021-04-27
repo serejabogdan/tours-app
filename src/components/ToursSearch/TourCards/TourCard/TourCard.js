@@ -21,7 +21,8 @@ function TourCard(
           {country}, {resort}
         </div>
         <div className="TourCard__text">
-          З {startDate.getDate()}.0{startDate.getMonth()} по {endDate}
+          З {startDate.getDate()}.0{startDate.getMonth()} по {endDate.getDate()}.0
+          {endDate.getMonth()}
         </div>
         <div className="TourCard__text">Все включено</div>
         <div className="TourCard__text">Проезд включен (з м. {city})</div>

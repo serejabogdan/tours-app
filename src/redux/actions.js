@@ -1,4 +1,12 @@
-import {SET_SEARCH_DATA, CLEAR_FILTERS, REMOVE_FILTER, TOGGLE_FILTER} from './types';
+import {
+  SET_SEARCH_DATA,
+  CLEAR_FILTERS,
+  REMOVE_FILTER,
+  TOGGLE_FILTER,
+  CHANGE_MIN_PRICE,
+  CHANGE_MAX_PRICE,
+  CHANGE_TOUR_NAME
+} from './types';
 
 export function setSearchData(data) {
   return {
@@ -24,6 +32,27 @@ export function removeFilter(data) {
 export function clearFilters(data) {
   return {
     type: CLEAR_FILTERS,
+    payload: data
+  };
+}
+
+export function changeMinPrice(data) {
+  return {
+    type: CHANGE_MIN_PRICE,
+    payload: data
+  };
+}
+
+export function changeMaxPrice(data) {
+  return {
+    type: CHANGE_MAX_PRICE,
+    payload: data
+  };
+}
+
+export function changeTourName(data) {
+  return {
+    type: CHANGE_TOUR_NAME,
     payload: data
   };
 }

@@ -2,6 +2,7 @@
 
 const initialState = [
   {
+    id: 1,
     name: 'Fortuna Ssh',
     country: 'Єгипет',
     resort: 'Шарм-эль-Шейх',
@@ -24,6 +25,7 @@ const initialState = [
     ]
   },
   {
+    id: 2,
     name: 'Fortuna hhh',
     country: 'Єгипет',
     resort: 'Шарм-эль-Шейх',
@@ -43,6 +45,7 @@ const initialState = [
     ]
   },
   {
+    id: 3,
     name: 'Fortuna adw',
     country: 'Єгипет',
     resort: 'Шарм-эль-Шейх',
@@ -63,6 +66,7 @@ const initialState = [
     ]
   },
   {
+    id: 4,
     name: 'Fortuna ggg',
     country: 'Єгипет',
     resort: 'Шарм-эль-Шейх',

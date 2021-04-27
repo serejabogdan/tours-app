@@ -3,7 +3,8 @@ import './TourCards.css';
 import TourCard from './TourCard';
 import {connect} from 'react-redux';
 
-function TourCards({tours, search, selected}, ...props) {
+function TourCards({tours, search, selected, minPrice, maxPrice, tourName}, ...props) {
+  console.log(minPrice, maxPrice);
   const countryFilter = tours.filter((tour) => tour.country === search.country);
 
   const formFiltered = countryFilter.filter((tour) =>
@@ -14,9 +15,18 @@ function TourCards({tours, search, selected}, ...props) {
 
   return (
     <div className="TourCards">
-      {toursResult.map((tour) => (
-        <TourCard key={tour.name} {...tour} city={search.city} startDate={search.startDate} />
-      ))}
+      {toursResult
+        .filter((tour) => tour.price >= Number(minPrice) && tour.price <= Number(maxPrice))
+        .filter((tour) => tour.name.includes(tourName))
+        .map((tour) => (
+          <TourCard
+            key={tour.name}
+            {...tour}
+            city={search.city}
+            startDate={search.startDate}
+            endDate={search.endDate}
+          />
+        ))}
     </div>
   );
 }
@@ -25,7 +35,10 @@ const mapStateToProps = (state) => {
   return {
     tours: state.tours,
     search: state.search.main,
-    selected: state.filters
+    selected: state.filters.selected,
+    minPrice: state.filters.minPrice,
+    maxPrice: state.filters.maxPrice,
+    tourName: state.filters.tourName
   };
 };
 
