@@ -2,7 +2,10 @@ import React from 'react';
 import './TourCard.css';
 import hotel from '../../../../assets/hotels/fortuna.jpg';
 
-function TourCard({name, country, resort, startDate, endDate, description, price, ...props}) {
+function TourCard(
+  {name, country, resort, startDate, endDate, description, price, rate, city},
+  ...props
+) {
   return (
     <div className="TourCard">
       <div className="TourCard__img">
@@ -12,7 +15,7 @@ function TourCard({name, country, resort, startDate, endDate, description, price
       </div>
       <div className="TourCard__content">
         <a href="./index.html" className="TourCard__title">
-          {name}
+          {name}, {rate}
         </a>
         <div className="TourCard__text TourCard__country">
           {country}, {resort}
@@ -21,7 +24,7 @@ function TourCard({name, country, resort, startDate, endDate, description, price
           З {startDate.getDate()}.0{startDate.getMonth()} по {endDate}
         </div>
         <div className="TourCard__text">Все включено</div>
-        <div className="TourCard__text">Проезд включен (из Киева)</div>
+        <div className="TourCard__text">Проезд включен (з м. {city})</div>
         <div className="TourCard__text TourCard__description">{description}</div>
       </div>
       <div className="TourCard__other">

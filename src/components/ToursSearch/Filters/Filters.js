@@ -4,7 +4,7 @@ import './Filters.css';
 
 import {toggleFilter, clearFilters, removeFilter} from '../../../redux/actions';
 
-function Filters({toggleFilter, clearFilters, removeFilter, selected, ...props}) {
+function Filters({toggleFilter, clearFilters, removeFilter, selected, tours}, ...props) {
   const filters = [
     {
       title: 'Клас отеля',
@@ -35,13 +35,16 @@ function Filters({toggleFilter, clearFilters, removeFilter, selected, ...props})
       body: ['1-ша лінія', '2-га лінія']
     }
   ];
+  const toursPrices = tours.map((item) => item.price);
+  const minPrice = Math.min(...toursPrices);
+  const maxPrice = Math.max(...toursPrices);
 
   return (
     <div className="Filters">
       <div className="Filters__chose chose">
         <div className="chose__header">
           <h3 className="filter__title">Обрані</h3>
-          <button className="clear-btn btn" onClick={() => clearFilters('yo')}>
+          <button className="clear-btn btn" onClick={clearFilters}>
             Витерти
           </button>
         </div>
@@ -62,9 +65,9 @@ function Filters({toggleFilter, clearFilters, removeFilter, selected, ...props})
       <div className="filter filter__price">
         <h3 className="filter__title">Ціна</h3>
         <div className="price-form">
-          <input className="price-input input" type="text" placeholder="0" />
+          <input className="price-input input" type="text" placeholder={minPrice} />
           <span className="filter-text">&nbsp;-&nbsp;</span>
-          <input className="price-input input" type="text" placeholder="40000" />
+          <input className="price-input input" type="text" placeholder={maxPrice} />
           <span className="filter-text">&nbsp;грн</span>
         </div>
       </div>
@@ -103,7 +106,8 @@ function Filters({toggleFilter, clearFilters, removeFilter, selected, ...props})
 
 const mapStateToProps = (state) => {
   return {
-    selected: state.filters
+    selected: state.filters,
+    tours: state.tours
   };
 };
 
