@@ -1,11 +1,13 @@
 import React from 'react';
 import './TourCard.css';
 import hotel from '../../../../assets/hotels/fortuna.jpg';
+import {Link} from 'react-router-dom';
 
-function TourCard(
-  {name, country, resort, startDate, endDate, description, price, rate, city},
-  ...props
-) {
+function TourCard(props) {
+  console.log('props', props);
+  const {id, name, rate, country, resort, description, price} = props.tour;
+  const {city, startDate, endDate} = props.search;
+
   return (
     <div className="TourCard">
       <div className="TourCard__img">
@@ -37,9 +39,9 @@ function TourCard(
             <span className="price">{price}</span>
             <span className="currency">грн</span>
           </div>
-          <a href="./index.html" className="TourCard__btn btn">
+          <Link className="TourCard__btn btn" to={`/tour/${id}`} key={id}>
             Більше
-          </a>
+          </Link>
         </div>
       </div>
     </div>
