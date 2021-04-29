@@ -3,16 +3,15 @@ import './Tabs.css';
 
 function Tabs(props) {
   const {children} = props;
-  console.log(children);
 
   const navs = children.map(({props}) => props.label);
 
   const [state, setState] = useState(children[0].props.label);
   return (
     <div className="Tabs">
-      <nav className="nav">
+      <nav className="Tabs__nav">
         {navs.map((nav) => (
-          <button className={`nav__link nav__link--reset ${state === nav && 'nav__link--active'}`} key={nav} onClick={() => setState(nav)}>
+          <button className={`Tabs__link Tabs__link--reset ${state === nav && 'Tabs__link--active'}`} key={nav} onClick={() => setState(nav)}>
             {nav}
           </button>
         ))}

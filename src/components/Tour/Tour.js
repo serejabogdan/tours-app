@@ -1,9 +1,8 @@
 import React from 'react';
 import './Tour.css';
-
 import slider from '../../assets/hotels/fortuna.jpg';
-import TourServices from './TourServices';
-import Tabs from '../../shared/Tabs';
+
+import TourTabs from './TourTabs';
 
 function Tour(props) {
   const {match} = props;
@@ -60,36 +59,7 @@ function Tour(props) {
         <h2 className="title-h2">Расположение</h2>
         <p className="about__text">20 км от аэропорта, в 6 км от Naama Bay, в 2 км от Старого города, в районе Hadaba, на второй линии.</p>
  */}
-        <Tabs>
-          {services.map((service) => {
-            const {title, main, free, paid} = service;
-            return (
-              <div label={title} key={title}>
-                {main && (
-                  <ul>
-                    {main?.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                )}
-                {free && (
-                  <ul>
-                    {free?.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                )}
-                {paid && (
-                  <ul>
-                    {paid?.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            );
-          })}
-        </Tabs>
+        <TourTabs />
       </section>
     </div>
   );

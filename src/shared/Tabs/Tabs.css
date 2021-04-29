@@ -2,30 +2,36 @@
   display: flex;
 }
 
-.nav {
+.Tabs__nav {
   display: flex;
   flex-flow: column wrap;
   flex: 0 0 20%;
   padding: 0 1rem;
 }
 
-.nav__link--reset {
+.Tabs__link--reset {
   border: none;
   outline: none;
   cursor: pointer;
 }
-.nav__link {
+.Tabs__link {
   border-radius: 0.25rem;
   display: block;
   padding: 0.5rem 1rem;
-  color: #007bff;
+  color: #ff8508;
   background-color: transparent;
-  border: 1px solid #007bff;
+  border: 1px solid #ff8508;
   margin: 4px 0;
   text-align: left;
+  font-size: 14px;
+}
+.Tabs__link:hover:not(.Tabs__link--active) {
+  background-color: #e15e02;
+  color: #fff;
+  border: 1px solid transparent;
 }
 
-.nav__link--active {
+.Tabs__link--active {
   color: #fff;
-  background-color: #007bff;
+  background-color: #ff8508;
 }
