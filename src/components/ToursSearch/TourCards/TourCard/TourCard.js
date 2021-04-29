@@ -40,7 +40,7 @@ function TourCard(props) {
             <span className="currency">грн</span>
           </div>
           <Link className="TourCard__btn btn" to={`/tour/${id}`} key={id}>
-            Більше
+            Більше {id}
           </Link>
         </div>
       </div>

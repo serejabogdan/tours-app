@@ -68,10 +68,7 @@ function Tabs(props) {
               {tab.title}
 
               <div className="sub-list-wrapper">
-                <ul className="sub__list list">
-                  {tab.main !== undefined &&
-                    tab.main.map((item, index) => <li key={index}>{item}</li>)}
-                </ul>
+                <ul className="sub__list list">{tab.main !== undefined && tab.main.map((item, index) => <li key={index}>{item}</li>)}</ul>
               </div>
             </li>
           );

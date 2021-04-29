@@ -5,12 +5,14 @@ import slider from '../../assets/hotels/fortuna.jpg';
 import TourServices from './TourServices';
 import Tabs from '../../shared/Tabs';
 
-function Tour() {
+function Tour(props) {
+  const {match} = props;
+  console.log(match);
   return (
     <div className="wrapper">
       <section className="hotel">
         <div className="hotel__titles">
-          <h1 className="title-h1">TIVOLI HOTEL & AQUA PARK ( EX :TROPICANA TIVOLI)</h1>
+          <h1 className="title-h1">TIVOLI HOTEL & AQUA PARK ( EX :TROPICANA TIVOLI) {match.params.id}</h1>
           <div className="hotel__text">Шарм-эль-Шейх, Египет</div>
         </div>
         <div className="hotel__tour tour">
