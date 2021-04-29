@@ -8,51 +8,6 @@ import Tabs from '../../shared/Tabs';
 function Tour(props) {
   const {match} = props;
 
-  const services = [
-    {
-      title: 'Про отель',
-      main: ['Пляжний', 'Check-in 14:00', 'Check-out 12:00']
-      /* free: [],
-        paid: [] */
-    },
-    {
-      title: 'Місцезнаходження',
-      main: ['1 лінія (на березі моря)']
-      /* free: [],
-        paid: [] */
-    },
-    {
-      title: 'Територія',
-      /* main: [], */
-      free: ['Wi-Fi на території', 'Місця для паркування']
-      /* paid: [] */
-    },
-    {
-      title: 'Пляж',
-      main: ['Пісчаний', 'Власний'],
-      /* free: [], */
-      paid: ['Парасольки', 'Бар', 'Рушники', 'Шезлонги']
-    },
-    {
-      title: 'Номера',
-      /* main: [], */
-      free: ['Фен', 'Кондиціонер'],
-      paid: ['Wi-Fi в номері', 'Міні-бар в номері', 'Сейф', 'Праска']
-    },
-    {
-      title: 'Басейни',
-      /* main: [], */
-      free: ['Парасольки', 'Шезлонги', 'Рушники'],
-      paid: []
-    },
-    {
-      title: 'Розваги',
-      /* main: [], */
-      free: ['Аніматори', 'Дискотека', 'Настільний теніс'],
-      paid: ['Сауна', 'Більярд', 'Водний спорт', 'Фітнес клуб']
-    }
-  ];
-
   return (
     <div className="wrapper">
       <section className="hotel">
@@ -105,7 +60,6 @@ function Tour(props) {
         <h2 className="title-h2">Расположение</h2>
         <p className="about__text">20 км от аэропорта, в 6 км от Naama Bay, в 2 км от Старого города, в районе Hadaba, на второй линии.</p>
  */}
-        {/* {console.log(services.map((service) => console.log(service)))} */}
         <Tabs>
           {services.map((service) => {
             const {title, main, free, paid} = service;
@@ -136,7 +90,6 @@ function Tour(props) {
             );
           })}
         </Tabs>
-        {/* <TourServices /> */}
       </section>
     </div>
   );
