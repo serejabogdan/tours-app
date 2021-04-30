@@ -3,6 +3,7 @@ import './Tour.css';
 import slider from '../../assets/hotels/fortuna.jpg';
 
 import TourTabs from './TourTabs';
+import Slider from '../../shared/Slider';
 
 function Tour(props) {
   const {match} = props;
@@ -16,7 +17,7 @@ function Tour(props) {
         </div>
         <div className="hotel__tour tour">
           <div className="tour__slider slider">
-            <img src={slider} alt="It is some" />
+            <Slider />
           </div>
 
           <div className="tour__info">
