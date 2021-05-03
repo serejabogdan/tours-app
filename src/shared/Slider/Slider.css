@@ -2,3 +2,11 @@
   margin: 0 !important;
   margin-top: 2px !important;
 }
+
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 350px;
+}
