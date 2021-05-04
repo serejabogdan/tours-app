@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.57902dc3.chunk.css",
-    "main.js": "/static/js/main.67d25278.chunk.js",
-    "main.js.map": "/static/js/main.67d25278.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.5cf4c934.js",
-    "runtime-main.js.map": "/static/js/runtime-main.5cf4c934.js.map",
-    "static/css/2.9d7bb686.chunk.css": "/static/css/2.9d7bb686.chunk.css",
-    "static/js/2.2d1125cd.chunk.js": "/static/js/2.2d1125cd.chunk.js",
-    "static/js/2.2d1125cd.chunk.js.map": "/static/js/2.2d1125cd.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.9d7bb686.chunk.css.map": "/static/css/2.9d7bb686.chunk.css.map",
-    "static/css/main.57902dc3.chunk.css.map": "/static/css/main.57902dc3.chunk.css.map",
-    "static/js/2.2d1125cd.chunk.js.LICENSE.txt": "/static/js/2.2d1125cd.chunk.js.LICENSE.txt",
-    "static/media/bg-home1.50dfaba4.jpg": "/static/media/bg-home1.50dfaba4.jpg",
-    "static/media/Welcome.css": "/static/media/bg.c70526a9.png",
-    "static/media/fortuna.a2c96fa0.jpg": "/static/media/fortuna.a2c96fa0.jpg"
+    "main.css": "/tours-app/static/css/main.953349c4.chunk.css",
+    "main.js": "/tours-app/static/js/main.67d25278.chunk.js",
+    "main.js.map": "/tours-app/static/js/main.67d25278.chunk.js.map",
+    "runtime-main.js": "/tours-app/static/js/runtime-main.f7c644fc.js",
+    "runtime-main.js.map": "/tours-app/static/js/runtime-main.f7c644fc.js.map",
+    "static/css/2.9d7bb686.chunk.css": "/tours-app/static/css/2.9d7bb686.chunk.css",
+    "static/js/2.2d1125cd.chunk.js": "/tours-app/static/js/2.2d1125cd.chunk.js",
+    "static/js/2.2d1125cd.chunk.js.map": "/tours-app/static/js/2.2d1125cd.chunk.js.map",
+    "index.html": "/tours-app/index.html",
+    "static/css/2.9d7bb686.chunk.css.map": "/tours-app/static/css/2.9d7bb686.chunk.css.map",
+    "static/css/main.953349c4.chunk.css.map": "/tours-app/static/css/main.953349c4.chunk.css.map",
+    "static/js/2.2d1125cd.chunk.js.LICENSE.txt": "/tours-app/static/js/2.2d1125cd.chunk.js.LICENSE.txt",
+    "static/media/bg-home1.50dfaba4.jpg": "/tours-app/static/media/bg-home1.50dfaba4.jpg",
+    "static/media/Welcome.css": "/tours-app/static/media/bg.c70526a9.png",
+    "static/media/fortuna.a2c96fa0.jpg": "/tours-app/static/media/fortuna.a2c96fa0.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5cf4c934.js",
+    "static/js/runtime-main.f7c644fc.js",
     "static/css/2.9d7bb686.chunk.css",
     "static/js/2.2d1125cd.chunk.js",
-    "static/css/main.57902dc3.chunk.css",
+    "static/css/main.953349c4.chunk.css",
     "static/js/main.67d25278.chunk.js"
   ]
 }
