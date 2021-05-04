@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.57902dc3.chunk.css",
+    "main.js": "/static/js/main.67d25278.chunk.js",
+    "main.js.map": "/static/js/main.67d25278.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5cf4c934.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5cf4c934.js.map",
+    "static/css/2.9d7bb686.chunk.css": "/static/css/2.9d7bb686.chunk.css",
+    "static/js/2.2d1125cd.chunk.js": "/static/js/2.2d1125cd.chunk.js",
+    "static/js/2.2d1125cd.chunk.js.map": "/static/js/2.2d1125cd.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.9d7bb686.chunk.css.map": "/static/css/2.9d7bb686.chunk.css.map",
+    "static/css/main.57902dc3.chunk.css.map": "/static/css/main.57902dc3.chunk.css.map",
+    "static/js/2.2d1125cd.chunk.js.LICENSE.txt": "/static/js/2.2d1125cd.chunk.js.LICENSE.txt",
+    "static/media/bg-home1.50dfaba4.jpg": "/static/media/bg-home1.50dfaba4.jpg",
+    "static/media/Welcome.css": "/static/media/bg.c70526a9.png",
+    "static/media/fortuna.a2c96fa0.jpg": "/static/media/fortuna.a2c96fa0.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5cf4c934.js",
+    "static/css/2.9d7bb686.chunk.css",
+    "static/js/2.2d1125cd.chunk.js",
+    "static/css/main.57902dc3.chunk.css",
+    "static/js/main.67d25278.chunk.js"
+  ]
+}
