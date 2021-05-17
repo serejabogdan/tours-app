@@ -1,9 +1,19 @@
-import React from 'react';
-import './TourCards.css';
-import TourCard from './TourCard';
-import {connect} from 'react-redux';
+import React, { useEffect } from "react";
+import "./TourCards.css";
+import TourCard from "./TourCard";
 
-function TourCards({tours, search, selected, minPrice, maxPrice, tourName, ...props}) {
+import { connect } from "react-redux";
+
+import { database } from "../../../firebase.config";
+
+function TourCards({ tours, search, selected, minPrice, maxPrice, tourName, ...props }) {
+  useEffect(() => {
+    console.log("e");
+    database.ref("Єгипет").on("value", (snapshot) => {
+      console.log(snapshot.val());
+    });
+  }, []);
+
   const countryFilter = tours.filter((tour) => tour.country === search.country);
   const formFiltered = countryFilter.filter((tour) => selected.some((item) => tour.filters.includes(item)));
   const toursResult = !formFiltered.length ? countryFilter : formFiltered;
@@ -27,7 +37,7 @@ const mapStateToProps = (state) => {
     selected: state.filters.selected,
     minPrice: state.filters.minPrice,
     maxPrice: state.filters.maxPrice,
-    tourName: state.filters.tourName
+    tourName: state.filters.tourName,
   };
 };
 
