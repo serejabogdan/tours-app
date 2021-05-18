@@ -174,7 +174,9 @@ function AdminForm() {
         stateEntertainmentService
       ]
     });
-    database.ref(resultState.country).push(resultState);
+    const pushedUrl = database.ref(resultState.country).push(resultState);
+    const key = pushedUrl.getKey();
+    database.ref(`${resultState.country}/${key}`).update({ id: key });
   }
 
   async function onLoadPictures(e) {
