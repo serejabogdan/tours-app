@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './AdminForm.css';
 
+import { database, storage } from '../../../firebase.config';
+
 function AdminForm() {
   const [stateAboutService, setStateAboutService] = useState({
     main: [],
@@ -37,7 +39,7 @@ function AdminForm() {
     free: [],
     paid: []
   });
-  const [mainState, setMainState] = useState({ name: '', country: '', resort: '', description: '', price: '', filters: [] });
+  const [mainState, setMainState] = useState({ name: 'Sharm Cliff Resort', country: 'Єгипет', resort: 'Шарм-ель-Шейх', description: 'При купівлі турів в готель системи Fortuna туристи розміщуються в одному з готелів зазначеної категорії (3 *, 4 *, 5 *). Скористайтеся чудовою нагодою випробувати долю, приготувати собі сюрприз і при цьому заощадити гроші!', price: '12222', filters: [], urls: [] });
   function somethingDelete(array, item) {
     return array.filter((filter) => filter !== item);
   }
@@ -47,17 +49,11 @@ function AdminForm() {
   }
   function toggleAttribute(item, attributeName, serviceState) {
     const [state, setState] = serviceState;
-    /* if (selected.includes(action.payload)) {
-      return { ...state, selected: toggleFilter };
-    } else {
-      return { ...state, selected: selected.concat([action.payload]) };
-    } */
     if (hasAttr(item, state[attributeName])) {
       setState((prevState) => ({ ...prevState, [attributeName]: somethingDelete(prevState[attributeName], item) }));
     } else {
       setState((prevState) => ({ ...prevState, [attributeName]: prevState[attributeName].concat(item) }));
     }
-    console.log(state);
   }
   const filters = [
     {
@@ -79,7 +75,7 @@ function AdminForm() {
   ];
   const services = [
     {
-      title: 'Про отель',
+      title: 'Про готель',
       main: ['Пляжний', 'Check-in 14:00', 'Check-out 12:00'],
       free: [],
       paid: [],
@@ -87,7 +83,7 @@ function AdminForm() {
     },
     {
       title: 'Місцезнаходження',
-      main: ['1 лінія (на березі моря)'],
+      main: ['1 лінія (на березі моря)', '2 лінія (до моря треба пройти)'],
       free: [],
       paid: [],
       state: [stateLocationService, setLocationService]
@@ -95,36 +91,36 @@ function AdminForm() {
     {
       title: 'Територія',
       main: [],
-      free: ['Wi-Fi на території', 'Місця для паркування'],
-      paid: [],
+      free: ['Wi-Fi на території', 'Місця для паркування', 'Пральня / Хімчистка', ' Wi-Fi в лобі'],
+      paid: ['Wi-Fi на території', 'Місця для паркування', 'Пральня / Хімчистка', ' Wi-Fi в лобі'],
       state: [stateTerritoryService, setTerritoryService]
     },
     {
       title: 'Пляж',
-      main: ['Пісчаний', 'Власний'],
-      free: [],
+      main: ['Пісчаний', 'Власний', 'Пісок, Корали'],
+      free: ['Парасольки', 'Бар', 'Рушники', 'Шезлонги'],
       paid: ['Парасольки', 'Бар', 'Рушники', 'Шезлонги'],
       state: [stateBeachService, setBeachService]
     },
     {
       title: 'Номера',
       main: [],
-      free: ['Фен', 'Кондиціонер'],
-      paid: ['Wi-Fi в номері', 'Міні-бар в номері', 'Сейф', 'Праска'],
+      free: ['Кондиціонер', 'Wi-Fi в номері', 'Міні-бар в номері', 'Сейф', 'Фен', 'Праска', 'Обслуговування номера'],
+      paid: ['Wi-Fi в номері', 'Міні-бар в номері', 'Сейф', 'Фен', 'Праска', 'Обслуговування номера'],
       state: [stateRoomService, setRoomService]
     },
     {
       title: 'Басейни',
-      main: [],
+      main: ['Один басейн', 'Два басейни', 'Три басейни'],
       free: ['Парасольки', 'Шезлонги', 'Рушники'],
-      paid: [],
+      paid: ['Парасольки', 'Шезлонги', 'Рушники', 'Басейн з підігрівом'],
       state: [statePoolsService, setPoolsService]
     },
     {
       title: 'Розваги',
       main: [],
-      free: ['Аніматори', 'Дискотека', 'Настільний теніс'],
-      paid: ['Сауна', 'Більярд', 'Водний спорт', 'Фітнес клуб'],
+      free: ['Аніматори', 'Дискотека', 'Настільний теніс', 'Сауна', 'Більярд', 'Водний спорт', 'Фітнес клуб'],
+      paid: ['Сауна', 'Більярд', 'Водний спорт', 'Фітнес клуб', 'Аніматори', 'Дискотека', 'Настільний теніс'],
       state: [stateEntertainmentService, setEntertainmentService]
     }
   ];
@@ -154,140 +150,109 @@ function AdminForm() {
   }
   console.log(Object.assign({}, mainState, { services: [stateAboutService, stateLocationService, stateTerritoryService, stateBeachService, stateRoomService, statePoolsService, stateEntertainmentService] }));
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const resultState = Object.assign({}, mainState, { services: [stateAboutService, stateLocationService, stateTerritoryService, stateBeachService, stateRoomService, statePoolsService, stateEntertainmentService] });
+    console.log(resultState.country);
+    database.ref(resultState.country).push(resultState);
+  }
+
+  async function onLoadPictures(e) {
+    const files = e.target.files;
+    let fileUrls = [];
+    for (let file of files) {
+      try {
+        const url = await storage.ref('Єгипет').child(file.name).getDownloadURL();
+        fileUrls.push(url);
+      } catch (exception) {
+        console.error(exception);
+        await storage.ref(`Єгипет/${file.name}`).put(file);
+        const url = await storage.ref('Єгипет').child(file.name).getDownloadURL();
+        fileUrls.push(url);
+      }
+    }
+    setMainState((prevState) => ({ ...prevState, urls: fileUrls }));
+  }
+
   return (
-    <div>
-      <label>
-        Фоточки:
-        <input
-          type='file'
-          id='file'
-          className='input-block'
-          onChange={(e) => {
-            console.log(e.target.files);
-          }}
-          multiple
-        />
-      </label>
-      <label>
-        Ім'я:
-        <input type='text' placeholder='name' value={mainState.name} onChange={(e) => setMainState((prevState) => ({ ...prevState, name: e.target.value }))} />
-      </label>
-      <label>
-        Країни:
-        <select className='form__control select' onChange={(e) => setMainState((prevState) => ({ ...prevState, country: e.target.value }))}>
-          <option value='Єгипет'>Єгипет</option>
-          <option value='Турція'>Турція</option>
-          <option value='ОАЕ'>ОАЕ</option>
-          <option value='Домінікана'>Домінікана</option>
-          <option value='Мальдіви'>Мальдіви</option>
-          <option value='Греція'>Греція</option>
-          <option value='Кіпр'>Кіпр</option>
-        </select>
-      </label>
-      <label>
-        Курорт:
-        <select className='form__control select' /*  onChange={(e) => setMainState((prevState) => ({ ...prevState, name: e.target.value }))} */>
-          <option value='Дахаб'>Дахаб</option>
-          <option value='Сафара'>Сафара</option>
-          <option value='Хургада'>Хургада</option>
-          <option value='Шарм-ель-Шейх'>Шарм-ель-Шейх</option>
-        </select>
-      </label>
-      <label>
-        Description:
-        <input type='text' placeholder='Description' onChange={(e) => setMainState((prevState) => ({ ...prevState, description: e.target.value }))} />
-      </label>
-      <label>
-        Price:
-        <input type='text' placeholder='Price' onChange={(e) => setMainState((prevState) => ({ ...prevState, price: e.target.value }))} />
-      </label>
-      <div>
-        Filters*:
+    <div className='wrapper'>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Ім'я:
+          <input type='text' placeholder='name' value={mainState.name} onChange={(e) => setMainState((prevState) => ({ ...prevState, name: e.target.value }))} />
+        </label>
+        <label>
+          Фоточки:
+          <input type='file' id='file' className='input-block' onChange={onLoadPictures} multiple />
+          {/* <button className='btn'>123</button> */}
+        </label>
+        <label>
+          Країни:
+          <select className='form__control select' value={mainState.country} onChange={(e) => setMainState((prevState) => ({ ...prevState, country: e.target.value }))}>
+            <option value='Єгипет'>Єгипет</option>
+            <option value='Турція'>Турція</option>
+            <option value='ОАЕ'>ОАЕ</option>
+            <option value='Домінікана'>Домінікана</option>
+            <option value='Мальдіви'>Мальдіви</option>
+            <option value='Греція'>Греція</option>
+            <option value='Кіпр'>Кіпр</option>
+          </select>
+        </label>
+        <label>
+          Курорт:
+          <select className='form__control select' value={mainState.resort} onChange={(e) => setMainState((prevState) => ({ ...prevState, resort: e.target.value }))}>
+            <option value='Дахаб'>Дахаб</option>
+            <option value='Сафара'>Сафара</option>
+            <option value='Хургада'>Хургада</option>
+            <option value='Шарм-ель-Шейх'>Шарм-ель-Шейх</option>
+          </select>
+        </label>
+        <label>
+          Description:
+          <input type='text' placeholder='Description' value={mainState.description} onChange={(e) => setMainState((prevState) => ({ ...prevState, description: e.target.value }))} />
+        </label>
+        <label>
+          Price:
+          <input type='text' placeholder='Price' value={mainState.price} onChange={(e) => setMainState((prevState) => ({ ...prevState, price: e.target.value }))} />
+        </label>
         <div>
-          {filters.map(({ title, body }) => {
-            return (
-              <div className='filter' key={title}>
-                <h3 className='filter__title'>{title}</h3>
-                {body.map((item) => (
-                  <div className={`filter__btn filter-text ${mainState.filters.includes(item) && 'filter__btn-active'}`} key={item} onClick={() => toggleAttribute(item, 'filters', [mainState, setMainState])}>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+          Filters*:
+          <div>
+            {filters.map(({ title, body }) => {
+              return (
+                <div className='filter' key={title}>
+                  <h3 className='filter__title'>{title}</h3>
+                  {body.map((item) => (
+                    <div className={`filter__btn filter-text ${mainState.filters.includes(item) && 'filter__btn-active'}`} key={item} onClick={() => toggleAttribute(item, 'filters', [mainState, setMainState])}>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div className='services'>
-        Послуги:
-        <div>
-          {services.map((service) => {
-            return (
-              <div key={service.title}>
-                <h3>{service.title}</h3>
-                {servicesComponent(service, 'Основні:', 'main')}
-                {servicesComponent(service, 'Безкоштовно:', 'free')}
-                {servicesComponent(service, 'Платно:', 'paid')}
-              </div>
-            );
-          })}
+        <div className='services'>
+          Послуги:
+          <div>
+            {services.map((service) => {
+              return (
+                <div key={service.title}>
+                  <h3 className='filter__title'>{service.title}</h3>
+                  {servicesComponent(service, 'Основні:', 'main')}
+                  {servicesComponent(service, 'Безкоштовно:', 'free')}
+                  {servicesComponent(service, 'Платно:', 'paid')}
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+        <div className='submit-block'>
+          <button type='submit'>Відправити</button>
+        </div>
+      </form>
     </div>
   );
 }
 
 export default AdminForm;
-// name: 'Fortuna Ssh',
-// country: 'Єгипет',
-// resort: 'Шарм-эль-Шейх',
-// startDate: '',
-// endDate: '',
-// description: 'При покупке туров в отель системы Fortuna туристы размещаются в одном из отелей указанной категории (2*, 3*, 4*, 5*). Воспользуйтесь прекрасной возможностью испытать судьбу, приготовить себе сюрприз и при этом сэкономить деньги!',
-// price: '16999',
-// rate: '5*',
-// filters: ['5*', 'Сніданок, обід і вечеря', 'Безкоштовний Wi-Fi', 'Розміщення з тваринами', 'Дитячий басейн', 'Дитяче меню', 'Водяні гірки', '1-ша лінія', 'Шарм-ель-Шейх'],
-// services: [
-//   {
-//     title: 'Про отель',
-//     main: ['Пляжний', 'Check-in 14:00', 'Check-out 12:00'],
-//     /* free: [],
-//       paid: [] */
-//   },
-//   {
-//     title: 'Місцезнаходження',
-//     main: ['1 лінія (на березі моря)'],
-//     /* free: [],
-//       paid: [] */
-//   },
-//   {
-//     title: 'Територія',
-//     /* main: [], */
-//     free: ['Wi-Fi на території', 'Місця для паркування'],
-//     /* paid: [] */
-//   },
-//   {
-//     title: 'Пляж',
-//     main: ['Пісчаний', 'Власний'],
-//     /* free: [], */
-//     paid: ['Парасольки', 'Бар', 'Рушники', 'Шезлонги'],
-//   },
-//   {
-//     title: 'Номера',
-//     /* main: [], */
-//     free: ['Фен', 'Кондиціонер'],
-//     paid: ['Wi-Fi в номері', 'Міні-бар в номері', 'Сейф', 'Праска'],
-//   },
-//   {
-//     title: 'Басейни',
-//     /* main: [], */
-//     free: ['Парасольки', 'Шезлонги', 'Рушники'],
-//     paid: [],
-//   },
-//   {
-//     title: 'Розваги',
-//     /* main: [], */
-//     free: ['Аніматори', 'Дискотека', 'Настільний теніс'],
-//     paid: ['Сауна', 'Більярд', 'Водний спорт', 'Фітнес клуб'],
-//   },
-// ],
