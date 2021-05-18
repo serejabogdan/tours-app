@@ -38,12 +38,23 @@ function AdminForm() {
     paid: []
   });
   const [mainState, setMainState] = useState({ name: '', country: '', resort: '', description: '', price: '', filters: [] });
+  function somethingDelete(array, item) {
+    return array.filter((filter) => filter !== item);
+  }
+
   function hasAttr(item, state) {
     return state.includes(item);
   }
-  function addAttr(item, attributeName, serviceState) {
+  function toggleAttribute(item, attributeName, serviceState) {
     const [state, setState] = serviceState;
-    if (!hasAttr(item, state[attributeName])) {
+    /* if (selected.includes(action.payload)) {
+      return { ...state, selected: toggleFilter };
+    } else {
+      return { ...state, selected: selected.concat([action.payload]) };
+    } */
+    if (hasAttr(item, state[attributeName])) {
+      setState((prevState) => ({ ...prevState, [attributeName]: somethingDelete(prevState[attributeName], item) }));
+    } else {
       setState((prevState) => ({ ...prevState, [attributeName]: prevState[attributeName].concat(item) }));
     }
     console.log(state);
@@ -117,8 +128,46 @@ function AdminForm() {
       state: [stateEntertainmentService, setEntertainmentService]
     }
   ];
+
+  function servicesComponent(service, title, attributeName) {
+    const [serviceState, setServiceState] = service.state;
+    if (service[attributeName].length) {
+      return (
+        <div>
+          {title}
+          <div className={attributeName}>
+            {service[attributeName].map((item) => (
+              <div
+                key={item}
+                className={`filter__btn filter-text ${serviceState[attributeName].includes(item) && 'filter__btn-active'}`}
+                onClick={() => {
+                  toggleAttribute(item, attributeName, service.state);
+                }}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+  }
+  console.log(Object.assign({}, mainState, { services: [stateAboutService, stateLocationService, stateTerritoryService, stateBeachService, stateRoomService, statePoolsService, stateEntertainmentService] }));
+
   return (
     <div>
+      <label>
+        Фоточки:
+        <input
+          type='file'
+          id='file'
+          className='input-block'
+          onChange={(e) => {
+            console.log(e.target.files);
+          }}
+          multiple
+        />
+      </label>
       <label>
         Ім'я:
         <input type='text' placeholder='name' value={mainState.name} onChange={(e) => setMainState((prevState) => ({ ...prevState, name: e.target.value }))} />
@@ -152,15 +201,15 @@ function AdminForm() {
         Price:
         <input type='text' placeholder='Price' onChange={(e) => setMainState((prevState) => ({ ...prevState, price: e.target.value }))} />
       </label>
-      <label>
-        Filters:
+      <div>
+        Filters*:
         <div>
           {filters.map(({ title, body }) => {
             return (
               <div className='filter' key={title}>
                 <h3 className='filter__title'>{title}</h3>
                 {body.map((item) => (
-                  <div className={`filter__btn filter-text ${mainState.filters.includes(item) && 'filter__btn-active'}`} key={item} onClick={() => addAttr(item, 'filters', [mainState, setMainState])}>
+                  <div className={`filter__btn filter-text ${mainState.filters.includes(item) && 'filter__btn-active'}`} key={item} onClick={() => toggleAttribute(item, 'filters', [mainState, setMainState])}>
                     {item}
                   </div>
                 ))}
@@ -168,64 +217,22 @@ function AdminForm() {
             );
           })}
         </div>
-      </label>
-      <label>
+      </div>
+      <div className='services'>
         Послуги:
         <div>
-          {services.map((service, index) => {
+          {services.map((service) => {
             return (
               <div key={service.title}>
                 <h3>{service.title}</h3>
-                Основні:
-                <div className='main'>
-                  {service.main.map((item) => (
-                    <div
-                      key={item}
-                      className={`filter__btn filter-text`}
-                      onClick={() => {
-                        addAttr(item, 'main', service.state);
-                        console.log(service.state[0], index);
-                      }}
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-                Безкоштовно:
-                <div className='free'>
-                  {service.free.map((item) => (
-                    <div
-                      key={item}
-                      className={`filter__btn filter-text`}
-                      onClick={() => {
-                        addAttr(item, 'free', service.state);
-                        console.log(service.state[0], index);
-                      }}
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-                Платно:
-                <div className='paid'>
-                  {service.paid.map((item) => (
-                    <div
-                      key={item}
-                      className={`filter__btn filter-text`}
-                      onClick={() => {
-                        addAttr(item, 'paid', service.state);
-                        console.log(service.state[0], index);
-                      }}
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
+                {servicesComponent(service, 'Основні:', 'main')}
+                {servicesComponent(service, 'Безкоштовно:', 'free')}
+                {servicesComponent(service, 'Платно:', 'paid')}
               </div>
             );
           })}
         </div>
-      </label>
+      </div>
     </div>
   );
 }
