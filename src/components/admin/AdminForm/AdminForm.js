@@ -208,15 +208,15 @@ function AdminForm() {
           </select>
         </label>
         <label>
-          Description:
+          Опис:
           <input type='text' placeholder='Description' value={mainState.description} onChange={(e) => setMainState((prevState) => ({ ...prevState, description: e.target.value }))} />
         </label>
         <label>
-          Price:
+          Ціна:
           <input type='text' placeholder='Price' value={mainState.price} onChange={(e) => setMainState((prevState) => ({ ...prevState, price: e.target.value }))} />
         </label>
         <div>
-          Filters*:
+          Фільтри*:
           <div>
             {filters.map(({ title, body }) => {
               return (
