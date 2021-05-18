@@ -5,7 +5,8 @@ import {
   TOGGLE_FILTER,
   CHANGE_MIN_PRICE,
   CHANGE_MAX_PRICE,
-  CHANGE_TOUR_NAME
+  CHANGE_TOUR_NAME,
+  SET_TOURS
 } from './types';
 
 export function setSearchData(data) {
@@ -53,6 +54,13 @@ export function changeMaxPrice(data) {
 export function changeTourName(data) {
   return {
     type: CHANGE_TOUR_NAME,
+    payload: data
+  };
+}
+
+export function setTours(data) {
+  return {
+    type: SET_TOURS,
     payload: data
   };
 }
