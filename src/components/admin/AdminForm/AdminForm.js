@@ -39,7 +39,17 @@ function AdminForm() {
     free: [],
     paid: []
   });
-  const [mainState, setMainState] = useState({ name: 'Sharm Cliff Resort', country: 'Єгипет', resort: 'Шарм-ель-Шейх', description: 'При купівлі турів в готель системи Fortuna туристи розміщуються в одному з готелів зазначеної категорії (3 *, 4 *, 5 *). Скористайтеся чудовою нагодою випробувати долю, приготувати собі сюрприз і при цьому заощадити гроші!', price: '12222', filters: [], urls: [] });
+  const [mainState, setMainState] = useState({
+    name: 'Sharm Cliff Resort',
+    country: 'Єгипет',
+    resort: 'Шарм-ель-Шейх',
+    rate: '5*',
+    description:
+      'При купівлі турів в готель системи Fortuna туристи розміщуються в одному з готелів зазначеної категорії (3 *, 4 *, 5 *). Скористайтеся чудовою нагодою випробувати долю, приготувати собі сюрприз і при цьому заощадити гроші!',
+    price: '12222',
+    filters: [],
+    urls: []
+  });
   function somethingDelete(array, item) {
     return array.filter((filter) => filter !== item);
   }
@@ -135,7 +145,9 @@ function AdminForm() {
             {service[attributeName].map((item) => (
               <div
                 key={item}
-                className={`filter__btn filter-text ${serviceState[attributeName].includes(item) && 'filter__btn-active'}`}
+                className={`filter__btn filter-text ${
+                  serviceState[attributeName].includes(item) && 'filter__btn-active'
+                }`}
                 onClick={() => {
                   toggleAttribute(item, attributeName, service.state);
                 }}
@@ -148,12 +160,20 @@ function AdminForm() {
       );
     }
   }
-  console.log(Object.assign({}, mainState, { services: [stateAboutService, stateLocationService, stateTerritoryService, stateBeachService, stateRoomService, statePoolsService, stateEntertainmentService] }));
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    const resultState = Object.assign({}, mainState, { services: [stateAboutService, stateLocationService, stateTerritoryService, stateBeachService, stateRoomService, statePoolsService, stateEntertainmentService] });
-    console.log(resultState.country);
+    const resultState = Object.assign({}, mainState, {
+      services: [
+        stateAboutService,
+        stateLocationService,
+        stateTerritoryService,
+        stateBeachService,
+        stateRoomService,
+        statePoolsService,
+        stateEntertainmentService
+      ]
+    });
     database.ref(resultState.country).push(resultState);
   }
 
@@ -162,12 +182,12 @@ function AdminForm() {
     let fileUrls = [];
     for (let file of files) {
       try {
-        const url = await storage.ref('Єгипет').child(file.name).getDownloadURL();
+        const url = await storage.ref(mainState.country).child(file.name).getDownloadURL();
         fileUrls.push(url);
       } catch (exception) {
         console.error(exception);
-        await storage.ref(`Єгипет/${file.name}`).put(file);
-        const url = await storage.ref('Єгипет').child(file.name).getDownloadURL();
+        await storage.ref(`${mainState.country}/${file.name}`).put(file);
+        const url = await storage.ref(mainState.country).child(file.name).getDownloadURL();
         fileUrls.push(url);
       }
     }
@@ -179,7 +199,12 @@ function AdminForm() {
       <form onSubmit={handleSubmit}>
         <label>
           Ім'я:
-          <input type='text' placeholder='name' value={mainState.name} onChange={(e) => setMainState((prevState) => ({ ...prevState, name: e.target.value }))} />
+          <input
+            type='text'
+            placeholder='name'
+            value={mainState.name}
+            onChange={(e) => setMainState((prevState) => ({ ...prevState, name: e.target.value }))}
+          />
         </label>
         <label>
           Фоточки:
@@ -188,7 +213,11 @@ function AdminForm() {
         </label>
         <label>
           Країни:
-          <select className='form__control select' value={mainState.country} onChange={(e) => setMainState((prevState) => ({ ...prevState, country: e.target.value }))}>
+          <select
+            className='form__control select'
+            value={mainState.country}
+            onChange={(e) => setMainState((prevState) => ({ ...prevState, country: e.target.value }))}
+          >
             <option value='Єгипет'>Єгипет</option>
             <option value='Турція'>Турція</option>
             <option value='ОАЕ'>ОАЕ</option>
@@ -200,7 +229,11 @@ function AdminForm() {
         </label>
         <label>
           Курорт:
-          <select className='form__control select' value={mainState.resort} onChange={(e) => setMainState((prevState) => ({ ...prevState, resort: e.target.value }))}>
+          <select
+            className='form__control select'
+            value={mainState.resort}
+            onChange={(e) => setMainState((prevState) => ({ ...prevState, resort: e.target.value }))}
+          >
             <option value='Дахаб'>Дахаб</option>
             <option value='Сафара'>Сафара</option>
             <option value='Хургада'>Хургада</option>
@@ -208,12 +241,34 @@ function AdminForm() {
           </select>
         </label>
         <label>
+          Курорт:
+          <select
+            className='form__control select'
+            value={mainState.rate}
+            onChange={(e) => setMainState((prevState) => ({ ...prevState, rate: e.target.value }))}
+          >
+            <option value='5*'>5*</option>
+            <option value='4*'>4*</option>
+            <option value='3*'>3*</option>
+          </select>
+        </label>
+        <label>
           Опис:
-          <input type='text' placeholder='Description' value={mainState.description} onChange={(e) => setMainState((prevState) => ({ ...prevState, description: e.target.value }))} />
+          <input
+            type='text'
+            placeholder='Description'
+            value={mainState.description}
+            onChange={(e) => setMainState((prevState) => ({ ...prevState, description: e.target.value }))}
+          />
         </label>
         <label>
           Ціна:
-          <input type='text' placeholder='Price' value={mainState.price} onChange={(e) => setMainState((prevState) => ({ ...prevState, price: e.target.value }))} />
+          <input
+            type='text'
+            placeholder='Price'
+            value={mainState.price}
+            onChange={(e) => setMainState((prevState) => ({ ...prevState, price: e.target.value }))}
+          />
         </label>
         <div>
           Фільтри*:
@@ -223,7 +278,11 @@ function AdminForm() {
                 <div className='filter' key={title}>
                   <h3 className='filter__title'>{title}</h3>
                   {body.map((item) => (
-                    <div className={`filter__btn filter-text ${mainState.filters.includes(item) && 'filter__btn-active'}`} key={item} onClick={() => toggleAttribute(item, 'filters', [mainState, setMainState])}>
+                    <div
+                      className={`filter__btn filter-text ${mainState.filters.includes(item) && 'filter__btn-active'}`}
+                      key={item}
+                      onClick={() => toggleAttribute(item, 'filters', [mainState, setMainState])}
+                    >
                       {item}
                     </div>
                   ))}

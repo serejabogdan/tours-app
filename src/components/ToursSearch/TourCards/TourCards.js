@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TourCards.css';
 import TourCard from './TourCard';
 
@@ -7,13 +7,15 @@ import { connect } from 'react-redux';
 import { database } from '../../../firebase.config';
 
 function TourCards({ tours, search, selected, minPrice, maxPrice, tourName, ...props }) {
+  const [state, setState] = useState([]);
   useEffect(() => {
     database.ref('Єгипет').on('value', (snapshot) => {
-      console.log(snapshot.val());
+      const tours = Object.values(snapshot.val());
+      setState(tours);
     });
   }, []);
 
-  const countryFilter = tours.filter((tour) => tour.country === search.country);
+  const countryFilter = state.filter((tour) => tour.country === search.country);
   const formFiltered = countryFilter.filter((tour) => selected.some((item) => tour.filters.includes(item)));
   const toursResult = !formFiltered.length ? countryFilter : formFiltered;
 

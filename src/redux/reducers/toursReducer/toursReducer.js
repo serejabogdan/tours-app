@@ -1,4 +1,4 @@
-import { SET_TOURS } from './types';
+import { SET_TOURS } from '../../types';
 
 const initialState = [];
 
