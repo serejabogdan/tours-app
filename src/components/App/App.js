@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 
 import SearchBoard from '../../shared/SearchBoard';
@@ -6,13 +6,23 @@ import Offer from '../Offer';
 import Tour from '../Tour';
 import ToursSearch from '../ToursSearch';
 
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import AdminForm from '../admin/AdminForm/AdminForm';
 import Signup from '../auth/Signup';
 import Signin from '../auth/Signin';
 import Header from '../../shared/Header';
 
-function App() {
+import {connect} from 'react-redux';
+import {setCurrentUser} from '../../redux/actions';
+import {auth} from '../../firebase.config';
+
+function App({setCurrentUser}) {
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+  }, []);
+
   return (
     <div className='App'>
       {/* <AdminForm /> */}
@@ -30,4 +40,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = {
+  setCurrentUser
+};
+
+export default connect(null, mapDispatchToProps)(App);
