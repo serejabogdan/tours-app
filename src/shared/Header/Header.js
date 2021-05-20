@@ -1,13 +1,38 @@
 import React from 'react';
 import './Header.css';
 
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {signOut} from '../utils/auth';
 
 function isColor(color, white, black) {
   return color ? white : black;
 }
 
-function Header({ color }) {
+function renderAuthOrLogout(authLinks, userAuth) {
+  if (userAuth) {
+    {
+      return (
+        <a href='' className='header__link' onClick={handleLogOut}>
+          LogOut
+        </a>
+      );
+    }
+  } else {
+    return authLinks.map(({name, href, className}) => (
+      <NavLink className={className} activeClassName='header__link--active' to={href} key={name}>
+        {name}
+      </NavLink>
+    ));
+  }
+}
+
+function handleLogOut(e) {
+  e.preventDefault();
+  signOut();
+}
+
+function Header({color, userAuth}) {
   const LINK_CLASS_NAME = 'header__link';
   const navLinks = [
     {
@@ -53,24 +78,19 @@ function Header({ color }) {
         <span className={isColor(color, 'header__text', 'header__text header__text--black')}>подорож</span>
       </div>
       <nav className='header__nav'>
-        {navLinks.map(({ name, href, className }) => (
+        {navLinks.map(({name, href, className}) => (
           <NavLink className={className} activeClassName='header__link--active' to={href} key={name}>
             {name}
           </NavLink>
         ))}
       </nav>
-      <div className='header__auth auth'>
-        {authLinks.map(({ name, href, className }) => (
-          <NavLink className={className} activeClassName='header__link--active' to={href} key={name}>
-            {name}
-          </NavLink>
-        ))}
-        <a href='' className='header__link'>
-          LogOut
-        </a>
-      </div>
+      <div className='header__auth auth'>{renderAuthOrLogout(authLinks, userAuth)}</div>
     </header>
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {userAuth: state.userAuth.currentUser};
+};
+
+export default connect(mapStateToProps)(Header);
