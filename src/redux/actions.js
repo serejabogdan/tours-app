@@ -6,7 +6,8 @@ import {
   CHANGE_MIN_PRICE,
   CHANGE_MAX_PRICE,
   CHANGE_TOUR_NAME,
-  SET_TOURS
+  SET_TOURS,
+  SET_CURRENT_USER
 } from './types';
 
 export function setSearchData(data) {
@@ -62,5 +63,12 @@ export function setTours(data) {
   return {
     type: SET_TOURS,
     payload: data
+  };
+}
+
+export function setCurrentUser(user) {
+  return {
+    type: SET_CURRENT_USER,
+    payload: user
   };
 }
