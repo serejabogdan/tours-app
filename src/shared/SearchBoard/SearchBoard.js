@@ -5,8 +5,8 @@ import Welcome from '../Welcome/';
 
 function SearchBoard() {
   return (
-    <div className="SearchBoard">
-      <div className="wrapper">
+    <div className='SearchBoard'>
+      <div className='wrapper'>
         <Header color={true} />
         <Welcome />
       </div>

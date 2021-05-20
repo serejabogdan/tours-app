@@ -12,7 +12,7 @@ import AdminForm from '../admin/AdminForm/AdminForm';
 function App() {
   return (
     <div className='App'>
-      <AdminForm />
+      {/* <AdminForm /> */}
       <SearchBoard />
       <Switch>
         <Route path='/tour/:id' component={Tour} />
