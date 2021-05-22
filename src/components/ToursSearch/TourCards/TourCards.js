@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './TourCards.css';
 import TourCard from './TourCard';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import { database } from '../../../firebase.config';
+import {database} from '../../../firebase.config';
 
-function TourCards({ tours, search, selected, minPrice, maxPrice, tourName, ...props }) {
+function TourCards({tours, search, selected, minPrice, maxPrice, tourName, ...props}) {
   const [state, setState] = useState([]);
   useEffect(() => {
-    database.ref('Єгипет').on('value', (snapshot) => {
+    database.ref(`tours/${search.country}`).on('value', (snapshot) => {
       const tours = Object.values(snapshot.val());
       setState(tours);
     });

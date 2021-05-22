@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import './Filters.css';
 
@@ -10,6 +10,7 @@ import {
   changeMaxPrice,
   changeTourName
 } from '../../../redux/actions';
+import {database} from '../../../firebase.config';
 
 function Filters(
   {
@@ -23,59 +24,51 @@ function Filters(
     minPrice,
     maxPrice,
     tourName,
-    tours
+    tours,
+    country
   },
   ...props
 ) {
-  const filters = [
-    {
-      title: 'Клас отеля',
-      body: ['5*', '4*', '3*']
-    },
-    {
-      title: 'Тип харчування',
-      body: [
-        'Без харчування',
-        'Тільки сніданки',
-        'Сніданок і вечеря',
-        'Сніданок, обід і вечеря',
-        'Все включено'
-      ]
-    },
-    {
-      title: 'Послуги',
-      body: [
-        'Безкоштовний Wi-Fi',
-        'Розміщення з тваринами',
-        'Дитячий басейн',
-        'Дитяче меню',
-        'Водяні гірки'
-      ]
-    },
-    {
-      title: 'Берегова лінія',
-      body: ['1-ша лінія', '2-га лінія']
-    }
-  ];
-  /*   const toursPrices = tours.map((item) => item.price);
-  const minPrice = Math.min(...toursPrices);
-  const maxPrice = Math.max(...toursPrices); */
+  const [filters, setFilters] = useState([]);
+  const [resorts, setResorts] = useState([]);
+  useEffect(() => {
+    database.ref(`filters/filters`).on('value', (snapshot) => {
+      const data = snapshot.val();
+      setFilters(data);
+    });
+    database.ref(`filters/resorts/${country}`).on('value', (snapshot) => {
+      const data = snapshot.val();
+      setResorts(data);
+    });
+  }, [country]);
+
+  function filtersRender(array) {
+    return array.map((item) => (
+      <div
+        className={`filter__btn filter-text ${selected.includes(item) && 'filter__btn-active'}`}
+        key={item}
+        onClick={() => toggleFilter(item)}
+      >
+        {item}
+      </div>
+    ));
+  }
 
   return (
-    <div className="Filters">
-      <div className="Filters__chose chose">
-        <div className="chose__header">
-          <h3 className="filter__title">Обрані</h3>
-          <button className="clear-btn btn" onClick={clearFilters}>
+    <div className='Filters'>
+      <div className='Filters__chose chose'>
+        <div className='chose__header'>
+          <h3 className='filter__title'>Обрані</h3>
+          <button className='clear-btn btn' onClick={clearFilters}>
             Витерти
           </button>
         </div>
-        <div className="filter-text">
+        <div className='filter-text'>
           {!selected.length
             ? 'Нічого не обрано'
             : selected.map((item) => (
                 <div
-                  className="filter__btn filter-text filter__btn-active"
+                  className='filter__btn filter-text filter__btn-active'
                   key={item}
                   onClick={() => removeFilter(item)}
                 >
@@ -84,61 +77,49 @@ function Filters(
               ))}
         </div>
       </div>
-      <div className="filter filter__price">
-        <h3 className="filter__title">Ціна</h3>
-        <div className="price-form">
+      <div className='filter filter__price'>
+        <h3 className='filter__title'>Ціна</h3>
+        <div className='price-form'>
           <input
-            className="price-input input"
-            type="text"
+            className='price-input input'
+            type='text'
             placeholder={minPrice}
             value={minPrice}
             onChange={(e) => changeMinPrice(e.target.value)}
           />
-          <span className="filter-text">&nbsp;-&nbsp;</span>
+          <span className='filter-text'>&nbsp;-&nbsp;</span>
           <input
-            className="price-input input"
-            type="text"
+            className='price-input input'
+            type='text'
             placeholder={maxPrice}
             value={maxPrice}
             onChange={(e) => changeMaxPrice(e.target.value)}
           />
-          <span className="filter-text">&nbsp;грн</span>
+          <span className='filter-text'>&nbsp;грн</span>
         </div>
       </div>
-      <div className="filter">
-        <h3 className="filter__title">Пошук отеля</h3>
+      <div className='filter'>
+        <h3 className='filter__title'>Пошук отеля</h3>
         <input
-          className="input"
-          type="text"
-          placeholder="Fortuna Ssh"
+          className='input'
+          type='text'
+          placeholder='Fortuna Ssh'
           value={tourName}
           onChange={(e) => changeTourName(e.target.value)}
         />
       </div>
-      {filters.map(({title, body}) => {
-        return (
-          <div className="filter" key={title}>
-            <h3 className="filter__title">{title}</h3>
-            {body.map((item) => (
-              <div
-                className={`filter__btn filter-text ${
-                  selected.includes(item) && 'filter__btn-active'
-                }`}
-                key={item}
-                onClick={() => toggleFilter(item)}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        );
-      })}
-      <div className="filter">
-        <h3 className="filter__title">Курорт</h3>
-        <div className="filter__btn filter-text">Дахаб</div>
-        <div className="filter__btn filter-text">Сафара</div>
-        <div className="filter__btn filter-text">Хургада</div>
-        <div className="filter__btn filter-text">Шарм-ель-Шейх</div>
+      {filters &&
+        filters.map(({title, body}) => {
+          return (
+            <div className='filter' key={title}>
+              <h3 className='filter__title'>{title}</h3>
+              {filtersRender(body)}
+            </div>
+          );
+        })}
+      <div className='filter'>
+        <h3 className='filter__title'>Курорт</h3>
+        {filtersRender(resorts)}
       </div>
     </div>
   );
@@ -150,7 +131,8 @@ const mapStateToProps = (state) => {
     minPrice: state.filters.minPrice,
     maxPrice: state.filters.maxPrice,
     tourName: state.filters.tourName,
-    tours: state.tours
+    tours: state.tours,
+    country: state.search.main.country
   };
 };
 

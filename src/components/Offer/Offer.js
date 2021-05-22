@@ -9,7 +9,7 @@ function Offer() {
       <Welcome />
       <OfferCards title='Кращі країни для відпустки' />
       <OfferCards title='Акції' />
-      <OfferCards title='Хіти' />
+      {/* <OfferCards title='Хіти' /> */}
     </div>
   );
 }

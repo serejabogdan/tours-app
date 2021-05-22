@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './AdminForm.css';
 
-import { database, storage } from '../../../firebase.config';
+import {database, storage} from '../../../firebase.config';
 
 function AdminForm() {
   const [stateAboutService, setStateAboutService] = useState({
@@ -60,9 +60,9 @@ function AdminForm() {
   function toggleAttribute(item, attributeName, serviceState) {
     const [state, setState] = serviceState;
     if (hasAttr(item, state[attributeName])) {
-      setState((prevState) => ({ ...prevState, [attributeName]: somethingDelete(prevState[attributeName], item) }));
+      setState((prevState) => ({...prevState, [attributeName]: somethingDelete(prevState[attributeName], item)}));
     } else {
-      setState((prevState) => ({ ...prevState, [attributeName]: prevState[attributeName].concat(item) }));
+      setState((prevState) => ({...prevState, [attributeName]: prevState[attributeName].concat(item)}));
     }
   }
   const filters = [
@@ -176,7 +176,7 @@ function AdminForm() {
     });
     const pushedUrl = database.ref(resultState.country).push(resultState);
     const key = pushedUrl.getKey();
-    database.ref(`${resultState.country}/${key}`).update({ id: key });
+    database.ref(`${resultState.country}/${key}`).update({id: key});
   }
 
   async function onLoadPictures(e) {
@@ -193,7 +193,7 @@ function AdminForm() {
         fileUrls.push(url);
       }
     }
-    setMainState((prevState) => ({ ...prevState, urls: fileUrls }));
+    setMainState((prevState) => ({...prevState, urls: fileUrls}));
   }
 
   return (
@@ -205,7 +205,7 @@ function AdminForm() {
             type='text'
             placeholder='name'
             value={mainState.name}
-            onChange={(e) => setMainState((prevState) => ({ ...prevState, name: e.target.value }))}
+            onChange={(e) => setMainState((prevState) => ({...prevState, name: e.target.value}))}
           />
         </label>
         <label>
@@ -218,14 +218,11 @@ function AdminForm() {
           <select
             className='form__control select'
             value={mainState.country}
-            onChange={(e) => setMainState((prevState) => ({ ...prevState, country: e.target.value }))}
+            onChange={(e) => setMainState((prevState) => ({...prevState, country: e.target.value}))}
           >
             <option value='Єгипет'>Єгипет</option>
-            <option value='Турція'>Турція</option>
-            <option value='ОАЕ'>ОАЕ</option>
+            <option value='Туреччина'>Туреччина</option>
             <option value='Домінікана'>Домінікана</option>
-            <option value='Мальдіви'>Мальдіви</option>
-            <option value='Греція'>Греція</option>
             <option value='Кіпр'>Кіпр</option>
           </select>
         </label>
@@ -234,7 +231,7 @@ function AdminForm() {
           <select
             className='form__control select'
             value={mainState.resort}
-            onChange={(e) => setMainState((prevState) => ({ ...prevState, resort: e.target.value }))}
+            onChange={(e) => setMainState((prevState) => ({...prevState, resort: e.target.value}))}
           >
             <option value='Дахаб'>Дахаб</option>
             <option value='Сафара'>Сафара</option>
@@ -247,7 +244,7 @@ function AdminForm() {
           <select
             className='form__control select'
             value={mainState.rate}
-            onChange={(e) => setMainState((prevState) => ({ ...prevState, rate: e.target.value }))}
+            onChange={(e) => setMainState((prevState) => ({...prevState, rate: e.target.value}))}
           >
             <option value='5*'>5*</option>
             <option value='4*'>4*</option>
@@ -260,7 +257,7 @@ function AdminForm() {
             type='text'
             placeholder='Description'
             value={mainState.description}
-            onChange={(e) => setMainState((prevState) => ({ ...prevState, description: e.target.value }))}
+            onChange={(e) => setMainState((prevState) => ({...prevState, description: e.target.value}))}
           />
         </label>
         <label>
@@ -269,13 +266,13 @@ function AdminForm() {
             type='text'
             placeholder='Price'
             value={mainState.price}
-            onChange={(e) => setMainState((prevState) => ({ ...prevState, price: e.target.value }))}
+            onChange={(e) => setMainState((prevState) => ({...prevState, price: e.target.value}))}
           />
         </label>
         <div>
           Фільтри*:
           <div>
-            {filters.map(({ title, body }) => {
+            {filters.map(({title, body}) => {
               return (
                 <div className='filter' key={title}>
                   <h3 className='filter__title'>{title}</h3>

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import Datepicker from '../Datepicker';
 import './Welcome.css';
 
-import { setSearchData, setTours } from '../../redux/actions';
-import { useHistory } from 'react-router-dom';
-import { database } from '../../firebase.config';
+import {setSearchData, setTours} from '../../redux/actions';
+import {useHistory} from 'react-router-dom';
+import {database} from '../../firebase.config';
 
 function generateEndDate() {
   const date = new Date();
   return new Date(date.setDate(date.getDate() + 7));
 }
 
-function Welcome({ setSearchData, ...props }) {
+function Welcome({setSearchData, ...props}) {
   const [country, setCountry] = useState('Єгипет');
   const [city, setCity] = useState('Київ');
   const [startDate, setStartDate] = useState(new Date());
@@ -55,11 +55,8 @@ function Welcome({ setSearchData, ...props }) {
               onChange={(e) => setCountry(e.target.value)}
             >
               <option value='Єгипет'>Єгипет</option>
-              <option value='Турція'>Турція</option>
-              <option value='ОАЕ'>ОАЕ</option>
+              <option value='Туреччина'>Туреччина</option>
               <option value='Домінікана'>Домінікана</option>
-              <option value='Мальдіви'>Мальдіви</option>
-              <option value='Греція'>Греція</option>
               <option value='Кіпр'>Кіпр</option>
             </select>
             <select
@@ -92,6 +89,6 @@ function Welcome({ setSearchData, ...props }) {
   );
 }
 
-const mapDispatchToState = { setSearchData, setTours };
+const mapDispatchToState = {setSearchData, setTours};
 
 export default connect(null, mapDispatchToState)(Welcome);
