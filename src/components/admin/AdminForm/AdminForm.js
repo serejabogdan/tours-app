@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './AdminForm.css';
 
 import {database, storage} from '../../../firebase.config';
@@ -42,14 +42,29 @@ function AdminForm() {
   const [mainState, setMainState] = useState({
     name: 'Sharm Cliff Resort',
     country: 'Єгипет',
-    resort: 'Шарм-ель-Шейх',
+    resort: 'Дахаб',
     rate: '5*',
     description:
-      'При купівлі турів в готель системи Fortuna туристи розміщуються в одному з готелів зазначеної категорії (3 *, 4 *, 5 *). Скористайтеся чудовою нагодою випробувати долю, приготувати собі сюрприз і при цьому заощадити гроші!',
-    price: '12222',
+      'При купівлі турів туристи розміщуються готелі зазначеної категорії. Скористайтеся чудовою нагодою випробувати долю, приготувати собі сюрприз і при цьому заощадити гроші!',
+    price: '12499',
     filters: [],
     urls: []
   });
+
+  const [resorts, setResorts] = useState(null);
+
+  useEffect(() => {
+    const ref = database.ref(`filters/resorts/${mainState.country}`);
+    ref.on('value', (snapshot) => {
+      const data = snapshot.val();
+      setResorts(data);
+      setMainState((prevState) => ({...prevState, resort: data[0]}));
+    });
+    return () => {
+      ref.off('value');
+    };
+  }, [mainState.country]);
+
   function somethingDelete(array, item) {
     return array.filter((filter) => filter !== item);
   }
@@ -65,11 +80,12 @@ function AdminForm() {
       setState((prevState) => ({...prevState, [attributeName]: prevState[attributeName].concat(item)}));
     }
   }
+  // TODO: get filters from DB
   const filters = [
-    {
+    /* {
       title: 'Клас отеля',
       body: ['5*', '4*', '3*']
-    },
+    }, */
     {
       title: 'Тип харчування',
       body: ['Без харчування', 'Тільки сніданки', 'Сніданок і вечеря', 'Сніданок, обід і вечеря', 'Все включено']
@@ -174,9 +190,10 @@ function AdminForm() {
         stateEntertainmentService
       ]
     });
-    const pushedUrl = database.ref(resultState.country).push(resultState);
+    const ref = database.ref(`tours/${resultState.country}`);
+    const pushedUrl = ref.push(resultState);
     const key = pushedUrl.getKey();
-    database.ref(`${resultState.country}/${key}`).update({id: key});
+    database.ref(`tours/${resultState.country}/${key}`).update({id: key});
   }
 
   async function onLoadPictures(e) {
@@ -231,20 +248,41 @@ function AdminForm() {
           <select
             className='form__control select'
             value={mainState.resort}
-            onChange={(e) => setMainState((prevState) => ({...prevState, resort: e.target.value}))}
+            onChange={(e) => {
+              setMainState((prevState) => ({...prevState, resort: e.target.value}));
+              setMainState((prevState) => {
+                const newFilters = prevState.filters.filter((item) => !resorts.includes(item));
+                return {
+                  ...prevState,
+                  filters: newFilters.concat([e.target.value])
+                };
+              });
+            }}
           >
-            <option value='Дахаб'>Дахаб</option>
-            <option value='Сафара'>Сафара</option>
-            <option value='Хургада'>Хургада</option>
-            <option value='Шарм-ель-Шейх'>Шарм-ель-Шейх</option>
+            {resorts &&
+              resorts.map((country) => (
+                <option value={country} key={country}>
+                  {country}
+                </option>
+              ))}
           </select>
         </label>
         <label>
-          Курорт:
+          Клас готеля:
           <select
             className='form__control select'
             value={mainState.rate}
-            onChange={(e) => setMainState((prevState) => ({...prevState, rate: e.target.value}))}
+            onChange={(e) => {
+              setMainState((prevState) => ({...prevState, rate: e.target.value}));
+              setMainState((prevState) => {
+                const newFilters = prevState.filters.filter((item) => item !== '5*' && item !== '4*' && item !== '3*');
+                return {
+                  ...prevState,
+                  filters: newFilters.concat([e.target.value])
+                };
+              });
+              console.log(mainState);
+            }}
           >
             <option value='5*'>5*</option>
             <option value='4*'>4*</option>
