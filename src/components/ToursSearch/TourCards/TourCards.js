@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './TourCards.css';
 import TourCard from './TourCard';
 
@@ -6,24 +6,22 @@ import {connect} from 'react-redux';
 
 import {database} from '../../../firebase.config';
 
-function TourCards({tours, search, selected, minPrice, maxPrice, tourName, ...props}) {
-  const [state, setState] = useState([]);
+import {setTours} from '../../../redux/actions';
+
+function TourCards({tours, search, selected, minPrice, maxPrice, tourName, setTours, ...props}) {
   useEffect(() => {
     const ref = database.ref(`tours/${search.country}`);
     ref.on('value', (snapshot) => {
       const tours = Object.values(snapshot.val());
-      /* console.log(tours);
-      console.log(search.country); */
-      setState(tours);
+      setTours(tours);
     });
     return () => {
       ref.off('value');
     };
   }, [search, minPrice, maxPrice, selected]);
 
-  // const countryFilter = state.filter((tour) => tour.country === search.country);
-  const formFiltered = state.filter((tour) => selected.some((item) => tour.filters.includes(item)));
-  const toursResult = !formFiltered.length ? state : formFiltered;
+  const formFiltered = tours.filter((tour) => selected.some((item) => tour.filters.includes(item)));
+  const toursResult = !formFiltered.length ? tours : formFiltered;
 
   return (
     <div className='TourCards'>
@@ -52,4 +50,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(TourCards);
+const mapDispatchToProps = {
+  setTours
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourCards);
