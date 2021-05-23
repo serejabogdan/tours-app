@@ -1,17 +1,17 @@
 import React from 'react';
 import './TourCard.css';
 import hotel from '../../../../assets/hotels/fortuna.jpg';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function TourCard(props) {
-  const { id, name, rate, country, resort, description, price, urls } = props.tour;
-  const { city, startDate, endDate } = props.search;
+  const {id, name, rate, country, resort, description, price, urls} = props.tour;
+  const {city, startDate, endDate} = props.search;
 
   return (
     <div className='TourCard'>
       <div className='TourCard__img'>
         <a href='./index.html'>
-          <img src={urls[0]} alt='It is a hotel' />
+          <img src={urls && urls[0]} alt='It is a hotel' />
         </a>
       </div>
       <div className='TourCard__content'>
