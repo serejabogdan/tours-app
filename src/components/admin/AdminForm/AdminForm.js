@@ -5,36 +5,43 @@ import {database, storage} from '../../../firebase.config';
 
 function AdminForm() {
   const [stateAboutService, setStateAboutService] = useState({
+    title: 'Про готель',
     main: [],
     free: [],
     paid: []
   });
   const [stateLocationService, setLocationService] = useState({
+    title: 'Місцезнаходження',
     main: [],
     free: [],
     paid: []
   });
   const [stateTerritoryService, setTerritoryService] = useState({
+    title: 'Територія',
     main: [],
     free: [],
     paid: []
   });
   const [stateBeachService, setBeachService] = useState({
+    title: 'Пляж',
     main: [],
     free: [],
     paid: []
   });
   const [stateRoomService, setRoomService] = useState({
+    title: 'Кімнати',
     main: [],
     free: [],
     paid: []
   });
   const [statePoolsService, setPoolsService] = useState({
+    title: 'Басейни',
     main: [],
     free: [],
     paid: []
   });
   const [stateEntertainmentService, setEntertainmentService] = useState({
+    title: 'Розваги',
     main: [],
     free: [],
     paid: []
