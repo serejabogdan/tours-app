@@ -79,6 +79,8 @@ function AdminForm() {
   function hasAttr(item, state) {
     return state.includes(item);
   }
+  const PAID = 'paid';
+  const FREE = 'free';
   function toggleAttribute(item, attributeName, serviceState) {
     const [state, setState] = serviceState;
     if (hasAttr(item, state[attributeName])) {
@@ -86,7 +88,21 @@ function AdminForm() {
     } else {
       setState((prevState) => ({...prevState, [attributeName]: prevState[attributeName].concat(item)}));
     }
+    if (attributeName === PAID || attributeName === FREE) {
+      removeDuplicate(item, attributeName, setState);
+    }
+    console.log(state);
   }
+
+  function removeDuplicate(item, attributeName, setState) {
+    const minorAtribute = attributeName === PAID ? FREE : PAID;
+
+    setState((prevState) => ({
+      ...prevState,
+      [minorAtribute]: prevState[minorAtribute].filter((item) => !prevState[attributeName].includes(item))
+    }));
+  }
+
   // TODO: get filters from DB
   const filters = [
     /* {
