@@ -8,7 +8,8 @@ import {
   removeFilter,
   changeMinPrice,
   changeMaxPrice,
-  changeTourName
+  changeTourName,
+  setResorts
 } from '../../../redux/actions';
 import {database} from '../../../firebase.config';
 
@@ -24,21 +25,22 @@ function Filters(
     minPrice,
     maxPrice,
     tourName,
-    tours,
-    country
+    // tours,
+    country,
+    setResorts,
+    resorts
   },
   ...props
 ) {
   const [filters, setFilters] = useState([]);
-  const [resorts, setResorts] = useState([]);
   useEffect(() => {
     database.ref(`filters/filters`).on('value', (snapshot) => {
       const data = snapshot.val();
       setFilters(data);
     });
     database.ref(`filters/resorts/${country}`).on('value', (snapshot) => {
-      const data = snapshot.val();
-      setResorts(data);
+      const resorts = snapshot.val();
+      setResorts(resorts);
     });
   }, [country]);
 
@@ -131,7 +133,8 @@ const mapStateToProps = (state) => {
     minPrice: state.filters.minPrice,
     maxPrice: state.filters.maxPrice,
     tourName: state.filters.tourName,
-    tours: state.tours,
+    resorts: state.filters.resorts,
+    // tours: state.tours,
     country: state.search.main.country
   };
 };
@@ -142,7 +145,8 @@ const mapDispatchToProps = {
   removeFilter,
   changeMinPrice,
   changeMaxPrice,
-  changeTourName
+  changeTourName,
+  setResorts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filters);
