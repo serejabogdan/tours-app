@@ -4,14 +4,16 @@ import {
   REMOVE_FILTER,
   CHANGE_MIN_PRICE,
   CHANGE_MAX_PRICE,
-  CHANGE_TOUR_NAME
+  CHANGE_TOUR_NAME,
+  SET_RESORTS
 } from '../../types';
 
 const initialState = {
   minPrice: 0,
   maxPrice: 20000,
   tourName: '',
-  selected: []
+  selected: [],
+  resorts: []
 };
 
 export const filtersReducer = (state = initialState, action) => {
@@ -35,6 +37,8 @@ export const filtersReducer = (state = initialState, action) => {
       return {...state, maxPrice: action.payload};
     case CHANGE_TOUR_NAME:
       return {...state, tourName: action.payload};
+    case SET_RESORTS:
+      return {...state, resorts: action.payload};
     default:
       return state;
   }

@@ -10,3 +10,5 @@ export const CHANGE_TOUR_NAME = 'CHANGE_TOUR_NAME';
 export const SET_TOURS = 'SET_TOURS';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+
+export const SET_RESORTS = 'SET_RESORTS';
