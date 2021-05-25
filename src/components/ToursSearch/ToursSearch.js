@@ -7,13 +7,10 @@ import Welcome from '../../shared/Welcome';
 
 function ToursSearch() {
   return (
-    <div className='wrapper'>
-      <Welcome />
-      <section className='ToursSearch'>
-        <Filters />
-        <TourCards />
-      </section>
-    </div>
+    <section className='ToursSearch'>
+      <Filters />
+      <TourCards />
+    </section>
   );
 }
 

@@ -27,15 +27,15 @@ function App({setCurrentUser}) {
   return (
     <div className='App'>
       {/* <AdminForm /> */}
-      <Header color={true} />
+      {/* <Header color={true} /> */}
       <Switch>
         <Route path='/order' component={RequestForm} />
         <Route path='/tour/:id' component={Tour} />
-        <Route path='/search' component={ToursSearch} />
+        <Route path='/search' component={SearchBoard} />
         <Route path='/hot' component={Offer} />
         <Route path='/register' component={Signup} />
         <Route path='/in' component={Signin} />
-        <Redirect to='/hot' />
+        <Redirect to='/search' />
       </Switch>
     </div>
   );
