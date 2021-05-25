@@ -25,21 +25,15 @@ function TourCards({tours, search, selected, minPrice, maxPrice, tourName, setTo
     return tour;
   });
   const mostMatchedFiltersMax = Math.max(...tours.map((tour) => tour.filters.length));
-  const resultToursAfterFilters = toursWithMatches.filter((tour) => tour.filters.length === mostMatchedFiltersMax);
-
-  // const formFiltered = a.filter((tour) => selected.some((item) => tour.filters.includes(item)));
-
+  const resultToursAfterFilters = toursWithMatches
+    .filter((tour) => tour.filters.length === mostMatchedFiltersMax)
+    .filter((tour) => Number(tour.price) >= Number(minPrice) && Number(tour.price) <= Number(maxPrice))
+    .filter((tour) => tour.name.toLowerCase().includes(tourName.toLowerCase()));
   return (
     <div className='TourCards'>
-      {
-        /* toursResult
-        .filter((tour) => Number(tour.price) >= Number(minPrice) && Number(tour.price) <= Number(maxPrice))
-        .filter((tour) => selected.some((item) => tour.filters.includes(item)))
-        .filter((tour) => tour.name.includes(tourName)) */
-        resultToursAfterFilters.length
-          ? resultToursAfterFilters.map((tour) => <TourCard key={tour.id} tour={tour} search={search} />)
-          : 'Немає турів, котрі б задовольняли умову вибірки'
-      }
+      {resultToursAfterFilters.length
+        ? resultToursAfterFilters.map((tour) => <TourCard key={tour.id} tour={tour} search={search} />)
+        : 'Немає турів, котрі б задовольняли умову вибірки'}
     </div>
   );
 }
