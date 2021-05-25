@@ -56,12 +56,19 @@ function Filters(
     ));
   }
 
+  function clearFiltersBoard() {
+    clearFilters();
+    changeMinPrice(0);
+    changeMaxPrice(40000);
+    changeTourName('');
+  }
+
   return (
     <div className='Filters'>
       <div className='Filters__chose chose'>
         <div className='chose__header'>
           <h3 className='filter__title'>Обрані</h3>
-          <button className='clear-btn btn' onClick={clearFilters}>
+          <button className='clear-btn btn' onClick={clearFiltersBoard}>
             Витерти
           </button>
         </div>
