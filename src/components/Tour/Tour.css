@@ -87,6 +87,7 @@
   padding: 10px 0;
   width: 100%;
   font-size: 1rem;
+  text-align: center;
 }
 .request-btn:hover {
   background-color: #e15e02;
