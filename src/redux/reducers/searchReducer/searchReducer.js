@@ -6,7 +6,9 @@ const initialState = {
     country: 'Єгипет',
     city: 'Київ',
     startDate: new Date(),
-    endDate: generateEndDate()
+    endDate: generateEndDate(),
+    adults: 2,
+    children: 0
   }
 };
 
