@@ -13,9 +13,14 @@ function renderAuthOrLogout(authLinks, userAuth) {
   if (userAuth) {
     {
       return (
-        <a href='' className='header__link' onClick={handleLogOut}>
-          LogOut
-        </a>
+        <>
+          <NavLink className='header__link' activeClassName='header__link--active' to='/profile'>
+            Профіль
+          </NavLink>
+          <a href='#' className='header__link' onClick={handleLogOut}>
+            Вийти
+          </a>
+        </>
       );
     }
   } else {
