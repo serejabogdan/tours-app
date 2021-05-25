@@ -13,15 +13,11 @@ function Tour(props) {
     return tours.find((tour) => tour.id === match.params.id);
   }
   const tour = getTour();
-  console.log(tour);
-  console.log('search', search);
   return (
     <div className='wrapper'>
       <section className='hotel'>
         <div className='hotel__titles'>
-          <h1 className='title-h1'>
-            {tour.name} {match.params.id}
-          </h1>
+          <h1 className='title-h1'>{tour.name}</h1>
           <div className='hotel__text'>
             {tour.resort}, {tour.country}
           </div>
