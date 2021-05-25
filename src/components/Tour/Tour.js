@@ -1,18 +1,25 @@
 import React from 'react';
 import './Tour.css';
-import slider from '../../assets/hotels/fortuna.jpg';
 
 import TourTabs from './TourTabs';
 import Slider from '../../shared/Slider';
 
 import {connect} from 'react-redux';
+import {Link, useHistory} from 'react-router-dom';
 
 function Tour(props) {
   const {match, tours, search} = props;
+
   function getTour() {
     return tours.find((tour) => tour.id === match.params.id);
   }
   const tour = getTour();
+  const history = useHistory();
+  if (!tour) {
+    history.push('/');
+    return null;
+  }
+
   return (
     <div className='wrapper'>
       <section className='hotel'>
@@ -48,7 +55,7 @@ function Tour(props) {
               </ul>
               <div className='tour__added'>
                 <h4 className='tour__added-title title-h4'>Включено</h4>
-                <span className='tour__text text'>Проезд, проживание, страховка, трансфер</span>
+                <span className='tour__text text'>Проїзд, проживання, страховка</span>
               </div>
               <div className='tour__price-info'>
                 <div className='price'>
@@ -57,7 +64,9 @@ function Tour(props) {
                 <span>тур за 2 дорослих</span>
               </div>
             </div>
-            <button className='request-btn btn'>Оформити заявку</button>
+            <Link className='request-btn btn' to={`/request`}>
+              Оформити заявку
+            </Link>
           </div>
         </div>
       </section>
