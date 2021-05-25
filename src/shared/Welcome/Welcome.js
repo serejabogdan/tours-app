@@ -17,6 +17,8 @@ function Welcome({setSearchData, ...props}) {
   const [city, setCity] = useState('Київ');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(generateEndDate());
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
 
   const history = useHistory();
 
@@ -26,11 +28,13 @@ function Welcome({setSearchData, ...props}) {
       country,
       city,
       startDate,
-      endDate
+      endDate,
+      adults,
+      children
     };
     setSearchData(searchData);
     getTours();
-    history.push('/search');
+    history.push('/search/result');
   }
 
   function getTours() {
@@ -92,8 +96,8 @@ function Welcome({setSearchData, ...props}) {
                 className='form__control select'
                 name='country'
                 id='country'
-                // value={country}
-                // onChange={(e) => setCountry(e.target.value)}
+                value={adults}
+                onChange={(e) => setAdults(e.target.value)}
               >
                 <option value='1'>1</option>
                 <option value='2'>2</option>
@@ -107,9 +111,10 @@ function Welcome({setSearchData, ...props}) {
                 className='form__control select'
                 name='country'
                 id='country'
-                // value={country}
-                // onChange={(e) => setCountry(e.target.value)}
+                value={children}
+                onChange={(e) => setChildren(e.target.value)}
               >
+                <option value='0'>0</option>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
                 <option value='3'>3</option>
