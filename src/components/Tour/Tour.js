@@ -20,6 +20,24 @@ function Tour(props) {
     return null;
   }
 
+  function getTourPrice() {
+    if (search.children > 0) {
+      return Number(tour.price) * Number(search.adults) * Number(search.children / 2);
+    }
+    return Number(tour.price) * Number(search.adults);
+  }
+
+  function tourNumberOfPeople() {
+    if (search.children > 0) {
+      return (
+        <span>
+          тур за {search.adults} дорослих та {search.children} дітей
+        </span>
+      );
+    }
+    return <span>тур за {search.adults} дорослих</span>;
+  }
+
   return (
     <div className='wrapper'>
       <section className='hotel'>
@@ -59,12 +77,12 @@ function Tour(props) {
               </div>
               <div className='tour__price-info'>
                 <div className='price'>
-                  {tour.price} <span>грн</span>
+                  {getTourPrice()} <span>грн</span>
                 </div>
-                <span>тур за 2 дорослих</span>
+                {tourNumberOfPeople()}
               </div>
             </div>
-            <Link className='request-btn btn' to={`/request`}>
+            <Link className='request-btn btn' to={`/order`}>
               Оформити заявку
             </Link>
           </div>
