@@ -22,8 +22,7 @@ function TourCard(props) {
           {country}, {resort}
         </div>
         <div className='TourCard__text'>
-          З {startDate.getDate()}.0{startDate.getMonth()} по {endDate.getDate()}.0
-          {endDate.getMonth()}
+          З {startDate.toLocaleDateString()} по {endDate.toLocaleDateString()}
         </div>
         <div className='TourCard__text'>Все включено</div>
         <div className='TourCard__text'>Проезд включен (з м. {city})</div>
@@ -34,7 +33,7 @@ function TourCard(props) {
         <div className='TourCard__other-bottom'>
           <div className='TourCard__price'>
             <span className='price'>{price}</span>
-            <span className='currency'>грн</span>
+            <span className='currency'> грн</span>
           </div>
           <Link className='TourCard__btn btn' to={`/tour/${id}`} key={id}>
             Більше
