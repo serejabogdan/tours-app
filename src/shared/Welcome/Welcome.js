@@ -85,6 +85,37 @@ function Welcome({setSearchData, ...props}) {
               endDate={endDate}
               setEndDate={(date) => setEndDate(date)}
             />
+
+            <label>
+              <span>Дорослих:</span>
+              <select
+                className='form__control select'
+                name='country'
+                id='country'
+                // value={country}
+                // onChange={(e) => setCountry(e.target.value)}
+              >
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+              </select>
+            </label>
+            <label>
+              <span>Дітей:</span>
+              <select
+                className='form__control select'
+                name='country'
+                id='country'
+                // value={country}
+                // onChange={(e) => setCountry(e.target.value)}
+              >
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+              </select>
+            </label>
             <label>
               <button className='form__control submit-btn btn' type='submit'>
                 Полетіли
