@@ -15,6 +15,7 @@ import Header from '../../shared/Header';
 import {connect} from 'react-redux';
 import {setCurrentUser} from '../../redux/actions';
 import {auth} from '../../firebase.config';
+import RequestForm from '../RequestForm';
 
 function App({setCurrentUser}) {
   useEffect(() => {
@@ -28,6 +29,7 @@ function App({setCurrentUser}) {
       {/* <AdminForm /> */}
       <Header color={true} />
       <Switch>
+        <Route path='/order' component={RequestForm} />
         <Route path='/tour/:id' component={Tour} />
         <Route path='/search' component={ToursSearch} />
         <Route path='/hot' component={Offer} />
