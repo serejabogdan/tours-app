@@ -6,9 +6,14 @@ const initialState = {
     country: 'Єгипет',
     city: 'Київ',
     startDate: new Date(),
-    endDate: new Date()
+    endDate: generateEndDate()
   }
 };
+
+function generateEndDate() {
+  const date = new Date();
+  return new Date(date.setDate(date.getDate() + 7));
+}
 
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
