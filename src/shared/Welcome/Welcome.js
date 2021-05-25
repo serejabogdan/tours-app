@@ -47,31 +47,37 @@ function Welcome({setSearchData, ...props}) {
           <h1 className='welcome__title title-h1'>Знайдіть тур саме в нас.</h1>
           <span className='welcome__text'>Обирайте улюблену країну і збирайте речі.</span>
           <form className='search__form' onSubmit={handleSubmit}>
-            <select
-              className='form__control select'
-              name='country'
-              id='country'
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            >
-              <option value='Єгипет'>Єгипет</option>
-              <option value='Туреччина'>Туреччина</option>
-              <option value='Домінікана'>Домінікана</option>
-              <option value='Кіпр'>Кіпр</option>
-            </select>
-            <select
-              className='form__control select'
-              name='city'
-              id='city'
-              valye={city}
-              onChange={(e) => setCity(e.target.value)}
-            >
-              <option value='Київ'>Київ</option>
-              <option value='Дніпро'>Дніпро</option>
-              <option value='Запоріжжя'>Запоріжжя</option>
-              <option value='Львів'>Львів</option>
-              <option value='Харків'>Харків</option>
-            </select>
+            <label>
+              <span>Місто вильоту:</span>
+              <select
+                className='form__control select'
+                name='city'
+                id='city'
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              >
+                <option value='Київ'>Київ</option>
+                <option value='Дніпро'>Дніпро</option>
+                <option value='Запоріжжя'>Запоріжжя</option>
+                <option value='Львів'>Львів</option>
+                <option value='Харків'>Харків</option>
+              </select>
+            </label>
+            <label>
+              <span>Країна:</span>
+              <select
+                className='form__control select'
+                name='country'
+                id='country'
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                <option value='Єгипет'>Єгипет</option>
+                <option value='Туреччина'>Туреччина</option>
+                <option value='Домінікана'>Домінікана</option>
+                <option value='Кіпр'>Кіпр</option>
+              </select>
+            </label>
             <Datepicker
               classNames='form__control'
               startDate={startDate}
@@ -79,9 +85,11 @@ function Welcome({setSearchData, ...props}) {
               endDate={endDate}
               setEndDate={(date) => setEndDate(date)}
             />
-            <button className='form__control submit-btn btn' type='submit'>
-              Полетіли
-            </button>
+            <label>
+              <button className='form__control submit-btn btn' type='submit'>
+                Полетіли
+              </button>
+            </label>
           </form>
         </div>
       </div>
