@@ -1,0 +1,26 @@
+.request-form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: flex;
+  justify-content: center;
+}
+.request-form__board {
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 1rem;
+}
+
+.request-form__fields {
+  display: flex;
+  margin: 0 -1rem;
+  padding: 10px;
+}
+
+.request-form label {
+  display: flex;
+  flex-direction: column;
+  margin: 0 6px;
+}
