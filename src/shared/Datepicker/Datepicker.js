@@ -14,7 +14,7 @@ function Datepicker({classNames, startDate, setStartDate, endDate, setEndDate, .
 
   return (
     <>
-      <label>
+      <label className='welcome__label'>
         <span>Початок:</span>
         <DatePicker
           className={`datepicker input ${classNames}`}
@@ -28,7 +28,7 @@ function Datepicker({classNames, startDate, setStartDate, endDate, setEndDate, .
           maxDate={maxDate(new Date(), 12)}
         />
       </label>
-      <label>
+      <label className='welcome__label'>
         <span>Кінець:</span>
         <DatePicker
           className={`datepicker input ${classNames}`}
