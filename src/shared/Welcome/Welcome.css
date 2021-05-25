@@ -47,7 +47,7 @@
   color: white;
 }
 
-label {
+.welcome__label {
   display: flex;
   flex-direction: column;
   margin: 0 4px;
@@ -55,10 +55,10 @@ label {
   justify-content: center;
 }
 
-.submit-btn {
-  height: 70%;
+.welcome__label span {
+  margin-bottom: 4px;
 }
 
-label span {
-  margin-bottom: 4px;
+.submit-btn {
+  height: 70%;
 }

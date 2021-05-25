@@ -47,7 +47,7 @@ function Welcome({setSearchData, ...props}) {
           <h1 className='welcome__title title-h1'>Знайдіть тур саме в нас.</h1>
           <span className='welcome__text'>Обирайте улюблену країну і збирайте речі.</span>
           <form className='search__form' onSubmit={handleSubmit}>
-            <label>
+            <label className='welcome__label'>
               <span>Місто вильоту:</span>
               <select
                 className='form__control select'
@@ -63,7 +63,7 @@ function Welcome({setSearchData, ...props}) {
                 <option value='Харків'>Харків</option>
               </select>
             </label>
-            <label>
+            <label className='welcome__label'>
               <span>Країна:</span>
               <select
                 className='form__control select'
@@ -86,7 +86,7 @@ function Welcome({setSearchData, ...props}) {
               setEndDate={(date) => setEndDate(date)}
             />
 
-            <label>
+            <label className='welcome__label'>
               <span>Дорослих:</span>
               <select
                 className='form__control select'
@@ -101,7 +101,7 @@ function Welcome({setSearchData, ...props}) {
                 <option value='4'>4</option>
               </select>
             </label>
-            <label>
+            <label className='welcome__label'>
               <span>Дітей:</span>
               <select
                 className='form__control select'
