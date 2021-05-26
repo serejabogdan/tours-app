@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Datepicker from '../Datepicker';
 import './Welcome.css';
 
-import {setSearchData, setTours} from '../../redux/actions';
+import {clearFilters, setSearchData, setTours} from '../../redux/actions';
 import {useHistory} from 'react-router-dom';
 import {database} from '../../firebase.config';
 
@@ -12,7 +12,7 @@ function generateEndDate() {
   return new Date(date.setDate(date.getDate() + 7));
 }
 
-function Welcome({setSearchData, ...props}) {
+function Welcome({setSearchData, clearFilters, ...props}) {
   const [country, setCountry] = useState('Єгипет');
   const [city, setCity] = useState('Київ');
   const [startDate, setStartDate] = useState(new Date());
@@ -122,7 +122,7 @@ function Welcome({setSearchData, ...props}) {
               </select>
             </label>
             <label>
-              <button className='form__control submit-btn btn' type='submit'>
+              <button className='form__control submit-btn btn' type='submit' onClick={clearFilters}>
                 Полетіли
               </button>
             </label>
@@ -133,6 +133,6 @@ function Welcome({setSearchData, ...props}) {
   );
 }
 
-const mapDispatchToState = {setSearchData, setTours};
+const mapDispatchToState = {setSearchData, setTours, clearFilters};
 
 export default connect(null, mapDispatchToState)(Welcome);
