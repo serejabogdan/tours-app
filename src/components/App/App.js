@@ -27,8 +27,8 @@ function App({setCurrentUser}) {
   }, []);
 
   return (
-    <div className='App'>
-      {/* <Header color={true} /> */}
+    <div className='App wrapper'>
+      <Header color={true} />
       <Switch>
         <Route path='/order' component={RequestForm} />
         <Route path='/tour/:id' component={Tour} />

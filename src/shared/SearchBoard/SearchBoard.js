@@ -9,7 +9,7 @@ function SearchBoard() {
   return (
     <div className='SearchBoard'>
       <div className='wrapper'>
-        <Header color={true} />
+        {/* <Header color={true} /> */}
         <Welcome />
 
         <Switch>

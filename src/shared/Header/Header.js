@@ -14,9 +14,6 @@ function renderAuthOrLogout(authLinks, userAuth) {
     {
       return (
         <>
-          <NavLink className='header__link' activeClassName='header__link--active' to='/order'>
-            Оформити заявку
-          </NavLink>
           <NavLink className='header__link' activeClassName='header__link--active' to='/profile'>
             Профіль
           </NavLink>
