@@ -15,6 +15,38 @@ function Signup() {
   }
 
   return (
+    <div className='signup'>
+      <div className='signup__left-side'>
+        <h2>Company</h2>
+        <h1>Розпочни свою подорож.</h1>
+        <h1 className='signup__main-title'>Сьогодні.</h1>
+      </div>
+      <div className='signup__right-side'>
+        <form className='signup__form' onSubmit={handleSubmit}>
+          <label>
+            <span>І'мя:</span>
+            <input className='input' type='text' />
+          </label>
+          <label>
+            <span>E-mail:</span>
+            <input className='input' type='password' />
+          </label>
+          <label>
+            <span>Пароль:</span>
+            <input className='input' type='password' />
+          </label>
+          <label>
+            <span>Пароль:</span>
+            <input className='input' type='password' />
+          </label>
+          <button className='submit-btn btn' type='submit'>
+            До зірок!
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+  /* (
     <form className='signup' onSubmit={handleSubmit}>
       <label>
         <span>Login:</span>
@@ -47,7 +79,7 @@ function Signup() {
         Go!
       </button>
     </form>
-  );
+  ); */
 }
 
 export default Signup;
