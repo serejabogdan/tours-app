@@ -85,9 +85,9 @@ function Tour(props) {
                 {tourNumberOfPeople()}
               </div>
             </div>
-            <Link className='request-btn btn' to={`/order`}>
+            {/* <Link className='request-btn btn' to={`/order`}>
               Оформити заявку
-            </Link>
+            </Link> */}
             {order && <RequestForm tour={tour} search={search} setOrder={setOrder} />}
             <button className='request-btn btn' onClick={() => setOrder(true)}>
               Оформити заявку

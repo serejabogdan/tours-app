@@ -24,8 +24,15 @@ function RequestForm({tour, search, ...props}) {
     <div className='black-overlay'>
       <div className='request-form'>
         <div className='request-form__board'>
-          <h1 className='title'>Оформлення заявки на тур</h1>
-          <span className='request-from__message'>Заповніть форму і ми зателефонуємо вам найближчим часом!</span>
+          <div className='request-form__header'>
+            <div className='request-form__title'>
+              <h1 className='title'>Оформлення заявки на тур</h1>
+              <span className='request-from__message'>Заповніть форму і ми зателефонуємо вам найближчим часом!</span>
+            </div>
+            <div className='request-form__close-button'>
+              <button onClick={() => props.setOrder(false)}>&#10006;</button>
+            </div>
+          </div>
           <form onSubmit={handleSubmit}>
             <div className='request-form__fields'>
               <label>

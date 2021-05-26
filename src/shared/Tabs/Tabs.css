@@ -24,6 +24,7 @@
   margin: 4px 0;
   text-align: left;
   font-size: 14px;
+  transition: 0.3s ease;
 }
 .Tabs__link:hover:not(.Tabs__link--active) {
   background-color: #e15e02;
