@@ -8,7 +8,8 @@ import {
   CHANGE_TOUR_NAME,
   SET_TOURS,
   SET_CURRENT_USER,
-  SET_RESORTS
+  SET_RESORTS,
+  SET_USER
 } from './types';
 
 export function setSearchData(data) {
@@ -78,5 +79,12 @@ export function setResorts(resorts) {
   return {
     type: SET_RESORTS,
     payload: resorts
+  };
+}
+
+export function setUser(user) {
+  return {
+    type: SET_USER,
+    payload: user
   };
 }

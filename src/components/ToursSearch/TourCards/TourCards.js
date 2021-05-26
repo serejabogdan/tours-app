@@ -21,12 +21,12 @@ function TourCards({tours, search, selected, minPrice, maxPrice, tourName, setTo
   }, [search, minPrice, maxPrice, selected]);
 
   const toursWithMatches = tours.map((tour) => {
-    tour.filters = tour.filters.filter((item) => selected.includes(item));
+    tour.findFilters = tour.filters.filter((item) => selected.includes(item));
     return tour;
   });
-  const mostMatchedFiltersMax = Math.max(...tours.map((tour) => tour.filters.length));
+  const mostMatchedFiltersMax = Math.max(...tours.map((tour) => tour.findFilters.length));
   const resultToursAfterFilters = toursWithMatches
-    .filter((tour) => tour.filters.length === mostMatchedFiltersMax)
+    .filter((tour) => tour.findFilters.length === mostMatchedFiltersMax)
     .filter((tour) => Number(tour.price) >= Number(minPrice) && Number(tour.price) <= Number(maxPrice))
     .filter((tour) => tour.name.toLowerCase().includes(tourName.toLowerCase()));
   return (

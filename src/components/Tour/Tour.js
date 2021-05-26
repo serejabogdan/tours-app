@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Tour.css';
 
 import TourTabs from './TourTabs';
@@ -6,8 +6,11 @@ import Slider from '../../shared/Slider';
 
 import {connect} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
+import RequestForm from '../RequestForm';
 
 function Tour(props) {
+  const [order, setOrder] = useState(false);
+
   const {match, tours, search} = props;
 
   function getTour() {
@@ -85,6 +88,10 @@ function Tour(props) {
             <Link className='request-btn btn' to={`/order`}>
               Оформити заявку
             </Link>
+            {order && <RequestForm tour={tour} search={search} setOrder={setOrder} />}
+            <button className='request-btn btn' onClick={() => setOrder(true)}>
+              Оформити заявку
+            </button>
           </div>
         </div>
       </section>

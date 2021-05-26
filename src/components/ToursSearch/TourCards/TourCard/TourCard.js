@@ -23,7 +23,17 @@ function TourCard(props) {
         <div className='TourCard__text'>
           З {startDate.toLocaleDateString()} по {endDate.toLocaleDateString()}
         </div>
-        <div className='TourCard__text'>Все включено</div>
+        <div className='TourCard__text'>
+          {props.tour.filters.find((filter) =>
+            [
+              'Без харчування',
+              'Тільки сніданки',
+              'Сніданок і вечеря',
+              'Все включено',
+              'Сніданок, обід і вечеря'
+            ].includes(filter)
+          )}
+        </div>
         <div className='TourCard__text'>Переліт (з м. {city})</div>
         <div className='TourCard__text TourCard__description'>{description}</div>
       </div>

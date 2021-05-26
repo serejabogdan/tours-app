@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import './AdminForm.css';
+import './AddTourForm.css';
 
 import {database, storage} from '../../../firebase.config';
 
-function AdminForm() {
+function AddTourForm() {
   const [stateAboutService, setStateAboutService] = useState({
     title: 'Про готель',
     main: [],
@@ -374,4 +374,4 @@ function AdminForm() {
   );
 }
 
-export default AdminForm;
+export default AddTourForm;
