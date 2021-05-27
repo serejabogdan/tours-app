@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tours-app/static/css/main.3c3d2d64.chunk.css",
-    "main.js": "/tours-app/static/js/main.7297e06d.chunk.js",
-    "main.js.map": "/tours-app/static/js/main.7297e06d.chunk.js.map",
+    "main.js": "/tours-app/static/js/main.51e03ea2.chunk.js",
+    "main.js.map": "/tours-app/static/js/main.51e03ea2.chunk.js.map",
     "runtime-main.js": "/tours-app/static/js/runtime-main.f7c644fc.js",
     "runtime-main.js.map": "/tours-app/static/js/runtime-main.f7c644fc.js.map",
     "static/css/2.9d7bb686.chunk.css": "/tours-app/static/css/2.9d7bb686.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.9d7bb686.chunk.css",
     "static/js/2.f06dd19b.chunk.js",
     "static/css/main.3c3d2d64.chunk.css",
-    "static/js/main.7297e06d.chunk.js"
+    "static/js/main.51e03ea2.chunk.js"
   ]
 }
