@@ -47,7 +47,7 @@ function Header({color, userAuth}) {
     }, */
     {
       name: 'Пошук турів',
-      href: '/search',
+      href: '/search/result',
       className: isColor(color, LINK_CLASS_NAME, `${LINK_CLASS_NAME} ${LINK_CLASS_NAME}--black`)
     }
     /* {

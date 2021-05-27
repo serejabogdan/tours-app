@@ -63,7 +63,9 @@ function Tour(props) {
         <>
           <section className='hotel'>
             <div className='hotel__titles'>
-              <h1 className='title-h1'>{tour.name}</h1>
+              <h1 className='title-h1'>
+                {tour.name}, {tour.rate}
+              </h1>
               <div className='hotel__text'>
                 {tour.resort}, {tour.country}
               </div>

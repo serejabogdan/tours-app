@@ -37,7 +37,7 @@ function App({setCurrentUser}) {
         <Route path='/register' component={Signup} />
         <Route path='/in' component={Signin} />
         <Route path='/admin' component={Admin} />
-        <Redirect to='/search' />
+        <Redirect to='/search/result' />
       </Switch>
     </div>
   );
