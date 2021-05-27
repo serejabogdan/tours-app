@@ -14,7 +14,10 @@ function RequestForm({tour, search, userAuth, ...props}) {
   function handleSubmit(e) {
     e.preventDefault();
     orderFormation();
-    addOrderToUser();
+
+    if (userAuth) {
+      addOrderToUser();
+    }
   }
 
   function orderFormation() {
@@ -33,6 +36,9 @@ function RequestForm({tour, search, userAuth, ...props}) {
     );
     const ref = database.ref(`/orders`);
     ref.push(order);
+
+    const key = ref.getKey();
+    database.ref(`/orders/${key}`).update({id: key});
     props.setOrder(false);
   }
 

@@ -5,7 +5,7 @@ import {signup} from '../../../shared/utils/auth';
 import {useHistory} from 'react-router';
 
 function Signup() {
-  const [formData, setFormData] = useState({login: '', password: '', passwordConfirm: ''});
+  const [formData, setFormData] = useState({login: 'balgar@gmail.com', password: '123123', passwordConfirm: ''});
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -29,7 +29,7 @@ function Signup() {
           </label>
           <label>
             <span>E-mail:</span>
-            <input className='input' type='password' />
+            <input className='input' type='email' />
           </label>
           <label>
             <span>Пароль:</span>

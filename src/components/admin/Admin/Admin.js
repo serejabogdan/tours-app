@@ -3,7 +3,7 @@ import './Admin.css';
 
 import {NavLink, Route, Switch} from 'react-router-dom';
 import AddTourForm from '../AddTourForm';
-import Orders from '../Orders';
+import OrderCards from '../OrderCards';
 
 function Admin() {
   return (
@@ -14,7 +14,7 @@ function Admin() {
 
       <Switch>
         <Route path='/admin/addtour' component={AddTourForm} />
-        <Route path='/admin/orders' component={Orders} />
+        <Route path='/admin/orders' component={OrderCards} />
       </Switch>
     </div>
   );
