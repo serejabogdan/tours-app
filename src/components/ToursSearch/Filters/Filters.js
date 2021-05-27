@@ -142,7 +142,7 @@ const mapStateToProps = (state) => {
     tourName: state.filters.tourName,
     resorts: state.filters.resorts,
     // tours: state.tours,
-    country: state.search.main.country
+    country: state.search.country
   };
 };
 

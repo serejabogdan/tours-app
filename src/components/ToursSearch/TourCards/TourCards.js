@@ -32,7 +32,7 @@ function TourCards({tours, search, selected, minPrice, maxPrice, tourName, setTo
   return (
     <div className='TourCards'>
       {resultToursAfterFilters.length
-        ? resultToursAfterFilters.map((tour) => <TourCard key={tour.id} tour={tour} search={search} />)
+        ? resultToursAfterFilters.map((tour) => <TourCard key={tour.id} search={search} />)
         : 'Немає турів, котрі б задовольняли умову вибірки'}
     </div>
   );
@@ -41,7 +41,7 @@ function TourCards({tours, search, selected, minPrice, maxPrice, tourName, setTo
 const mapStateToProps = (state) => {
   return {
     tours: state.tours,
-    search: state.search.main,
+    search: state.search,
     selected: state.filters.selected,
     minPrice: state.filters.minPrice,
     maxPrice: state.filters.maxPrice,

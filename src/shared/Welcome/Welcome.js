@@ -1,24 +1,23 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import Datepicker from '../Datepicker';
+import MultiDatepicker from '../MultiDatepicker';
 import './Welcome.css';
 
 import {clearFilters, setSearchData, setTours} from '../../redux/actions';
 import {useHistory} from 'react-router-dom';
-import {database} from '../../firebase.config';
 
-function generateEndDate() {
+/* function generateEndDate() {
   const date = new Date();
   return new Date(date.setDate(date.getDate() + 7));
-}
+} */
 
-function Welcome({setSearchData, clearFilters, ...props}) {
-  const [country, setCountry] = useState('Єгипет');
-  const [city, setCity] = useState('Київ');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(generateEndDate());
-  const [adults, setAdults] = useState(2);
-  const [children, setChildren] = useState(0);
+function Welcome({setSearchData, clearFilters, search, ...props}) {
+  const [country, setCountry] = useState(search.country);
+  const [city, setCity] = useState(search.city);
+  const [startDate, setStartDate] = useState(search.startDate);
+  const [endDate, setEndDate] = useState(search.endDate);
+  const [adults, setAdults] = useState(search.adults);
+  const [children, setChildren] = useState(search.children);
 
   const history = useHistory();
 
@@ -33,15 +32,8 @@ function Welcome({setSearchData, clearFilters, ...props}) {
       children
     };
     setSearchData(searchData);
-    getTours();
     history.push('/search/result');
-  }
-
-  function getTours() {
-    return database.ref(country).on('value', (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-    });
+    localStorage.setItem('search', JSON.stringify(searchData));
   }
 
   return (
@@ -82,7 +74,7 @@ function Welcome({setSearchData, clearFilters, ...props}) {
                 <option value='Кіпр'>Кіпр</option>
               </select>
             </label>
-            <Datepicker
+            <MultiDatepicker
               classNames='form__control'
               startDate={startDate}
               setStartDate={(date) => setStartDate(date)}
@@ -133,6 +125,12 @@ function Welcome({setSearchData, clearFilters, ...props}) {
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    search: state.search
+  };
+};
+
 const mapDispatchToState = {setSearchData, setTours, clearFilters};
 
-export default connect(null, mapDispatchToState)(Welcome);
+export default connect(mapStateToProps, mapDispatchToState)(Welcome);
