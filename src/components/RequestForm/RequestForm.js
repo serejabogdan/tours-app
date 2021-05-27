@@ -20,8 +20,7 @@ function RequestForm({tour, search, userAuth, ...props}) {
     }
   }
 
-  function orderFormation() {
-    console.log();
+  async function orderFormation() {
     const order = Object.assign(
       {isActive: true},
       {tour},
@@ -35,14 +34,14 @@ function RequestForm({tour, search, userAuth, ...props}) {
       {user: {...state}}
     );
     const ref = database.ref(`/orders`);
-    ref.push(order);
+    const pushedUrl = await ref.push(order);
 
-    const key = ref.getKey();
-    database.ref(`/orders/${key}`).update({id: key});
+    const key = await pushedUrl.getKey();
+    await database.ref(`/orders/${key}`).update({id: key});
     props.setOrder(false);
   }
 
-  function addOrderToUser() {
+  async function addOrderToUser() {
     const order = Object.assign(
       {},
       {tour},
@@ -55,8 +54,8 @@ function RequestForm({tour, search, userAuth, ...props}) {
       },
       {user: {...state}}
     );
-    const ref = database.ref(`/users/${userAuth.uid}/orders`);
-    ref.push(order);
+    const ref = await database.ref(`/users/${userAuth.uid}/orders`);
+    await ref.push(order);
   }
 
   return (
