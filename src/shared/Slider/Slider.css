@@ -10,3 +10,9 @@
   background-size: cover;
   height: 350px;
 }
+
+.react-slideshow-container .default-nav:last-of-type,
+.react-slideshow-container .default-nav:first-of-type {
+  padding: 1px 6px;
+  opacity: 0.8;
+}

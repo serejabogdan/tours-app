@@ -1,19 +1,41 @@
 import {SET_SEARCH_DATA} from '../../types';
 
-// TODO: fix DATE
-const initialState = {
-  main: {
+/* const initialState = {
+  country: 'Єгипет',
+  city: 'Київ',
+  startDate: new Date(),
+  endDate: generateEndDate(),
+  adults: 2,
+  children: 0
+}; */
+
+function initialState() {
+  const localStorageData = localStorage.getItem('search');
+  const parsedData = JSON.parse(localStorageData);
+  parsedData.startDate = new Date(parsedData.startDate);
+  parsedData.endDate = new Date(parsedData.endDate);
+  if (localStorageData) {
+    return parsedData;
+  }
+  return {
     country: 'Єгипет',
     city: 'Київ',
     startDate: new Date(),
-    endDate: new Date()
-  }
-};
+    endDate: generateEndDate(),
+    adults: 2,
+    children: 0
+  };
+}
 
-export const searchReducer = (state = initialState, action) => {
+function generateEndDate() {
+  const date = new Date();
+  return new Date(date.setDate(date.getDate() + 7));
+}
+
+export const searchReducer = (state = initialState(), action) => {
   switch (action.type) {
     case SET_SEARCH_DATA:
-      return {main: {...state.main, ...action.payload}};
+      return {...state.main, ...action.payload};
     default:
       return state;
   }

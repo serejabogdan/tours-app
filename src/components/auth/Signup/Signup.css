@@ -1,0 +1,63 @@
+.signup {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.signup__form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup__left-side,
+.signup__right-side {
+  flex-basis: 20%;
+  padding: 3rem 2rem;
+  box-shadow: 3px 4px 1rem rgba(0, 0, 0, 0.4);
+}
+
+.signup__left-side {
+  /* background-color: #22475e; */
+  background: linear-gradient(to right, #20628b, #22475e);
+
+  border-radius: 0.7rem 0 0 0.7rem;
+}
+
+.signup__right-side {
+  border-radius: 0 0.7rem 0.7rem 0;
+  background-color: #fff;
+}
+
+.signup__right-side label {
+  margin-bottom: 2rem;
+}
+
+.signup__left-side h2 {
+  margin-bottom: 4rem;
+  color: var(--main-bg-color);
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.signup__left-side h1 {
+  font-size: 2.6rem;
+  color: #fff;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.signup__main-title {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.input-error {
+  border: 1px solid darkred;
+}

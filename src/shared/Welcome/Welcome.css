@@ -42,11 +42,23 @@
   padding: 1rem;
 }
 
-.form__control {
-  margin: 0 4px;
-}
-
 .submit-btn {
   background-color: var(--big-title-color);
   color: white;
+}
+
+.welcome__label {
+  display: flex;
+  flex-direction: column;
+  margin: 0 4px;
+  height: 100%;
+  justify-content: center;
+}
+
+.welcome__label span {
+  margin-bottom: 4px;
+}
+
+.submit-btn {
+  height: 70%;
 }

@@ -1,21 +1,39 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './TourCards.css';
 import TourCard from './TourCard';
+
 import {connect} from 'react-redux';
 
-function TourCards({tours, search, selected, minPrice, maxPrice, tourName, ...props}) {
-  const countryFilter = tours.filter((tour) => tour.country === search.country);
-  const formFiltered = countryFilter.filter((tour) => selected.some((item) => tour.filters.includes(item)));
-  const toursResult = !formFiltered.length ? countryFilter : formFiltered;
+import {database} from '../../../firebase.config';
 
+import {setTours} from '../../../redux/actions';
+
+function TourCards({tours, search, selected, minPrice, maxPrice, tourName, setTours, ...props}) {
+  useEffect(() => {
+    const ref = database.ref(`tours/${search.country}`);
+    ref.on('value', (snapshot) => {
+      const tours = Object.values(snapshot.val());
+      setTours(tours);
+    });
+    return () => {
+      ref.off('value');
+    };
+  }, [search, minPrice, maxPrice, selected]);
+
+  const toursWithMatches = tours.map((tour) => {
+    tour.findFilters = tour.filters.filter((item) => selected.includes(item));
+    return tour;
+  });
+  const mostMatchedFiltersMax = Math.max(...tours.map((tour) => tour.findFilters.length));
+  const resultToursAfterFilters = toursWithMatches
+    .filter((tour) => tour.findFilters.length === mostMatchedFiltersMax)
+    .filter((tour) => Number(tour.price) >= Number(minPrice) && Number(tour.price) <= Number(maxPrice))
+    .filter((tour) => tour.name.toLowerCase().includes(tourName.toLowerCase()));
   return (
-    <div className="TourCards">
-      {toursResult
-        .filter((tour) => tour.price >= Number(minPrice) && tour.price <= Number(maxPrice))
-        .filter((tour) => tour.name.includes(tourName))
-        .map((tour) => (
-          <TourCard key={tour.name} tour={tour} search={search} />
-        ))}
+    <div className='TourCards'>
+      {resultToursAfterFilters.length
+        ? resultToursAfterFilters.map((tour) => <TourCard key={tour.id} tour={tour} search={search} />)
+        : 'Немає турів, котрі б задовольняли умову вибірки'}
     </div>
   );
 }
@@ -23,7 +41,7 @@ function TourCards({tours, search, selected, minPrice, maxPrice, tourName, ...pr
 const mapStateToProps = (state) => {
   return {
     tours: state.tours,
-    search: state.search.main,
+    search: state.search,
     selected: state.filters.selected,
     minPrice: state.filters.minPrice,
     maxPrice: state.filters.maxPrice,
@@ -31,4 +49,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(TourCards);
+const mapDispatchToProps = {
+  setTours
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourCards);
