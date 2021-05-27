@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import {database} from '../../firebase.config';
 import './RequestForm.css';
 
-function RequestForm({tour, search, ...props}) {
+function RequestForm({tour, search, userAuth, ...props}) {
   const [state, setstate] = useState({name: '', tel: '', email: ''});
 
   function changeState(e, attr) {
@@ -12,12 +13,44 @@ function RequestForm({tour, search, ...props}) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    orderFormation();
+    addOrderToUser();
+  }
 
-    const order = Object.assign({isActive: true}, {tour}, {search}, {user: {...state}});
-    const orderJSON = JSON.stringify(order);
+  function orderFormation() {
+    console.log();
+    const order = Object.assign(
+      {isActive: true},
+      {tour},
+      {
+        search: {
+          ...search,
+          startDate: search.startDate.toDateString(),
+          endDate: search.endDate.toDateString()
+        }
+      },
+      {user: {...state}}
+    );
     const ref = database.ref(`/orders`);
-    ref.push(orderJSON);
+    ref.push(order);
     props.setOrder(false);
+  }
+
+  function addOrderToUser() {
+    const order = Object.assign(
+      {},
+      {tour},
+      {
+        search: {
+          ...search,
+          startDate: search.startDate.toDateString(),
+          endDate: search.endDate.toDateString()
+        }
+      },
+      {user: {...state}}
+    );
+    const ref = database.ref(`/users/${userAuth.uid}/orders`);
+    ref.push(order);
   }
 
   return (
@@ -58,4 +91,10 @@ function RequestForm({tour, search, ...props}) {
   );
 }
 
-export default RequestForm;
+const mapStateToProps = (state) => {
+  return {
+    userAuth: state.userAuth.currentUser
+  };
+};
+
+export default connect(mapStateToProps)(RequestForm);
