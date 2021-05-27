@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './OrderCards.css';
+import './UserOrders.css';
 import OrderCard from './OrderCard';
 
 import {connect} from 'react-redux';
@@ -8,11 +8,12 @@ import {database} from '../../../firebase.config';
 
 import {setTours} from '../../../redux/actions';
 
-function OrderCards(props) {
+function UserOrders({userAuth, ...props}) {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    const ref = database.ref(`orders`);
+    const ref = database.ref(`users/${userAuth.uid}/orders`);
     ref.on('value', (snapshot) => {
+      console.log(Object.values(snapshot.val()));
       if (snapshot.exists()) {
         const data = Object.values(snapshot.val());
         setOrders(
@@ -28,13 +29,12 @@ function OrderCards(props) {
     };
   }, []);
 
-  const ordersFilter = orders.filter((order) => order.isActive);
-
   return (
-    <div className='OrderCards'>
-      {ordersFilter.length
-        ? ordersFilter.map(({id, tour, search, user}, index) => (
-            <OrderCard key={id} id={id} tour={tour} user={user} search={search} />
+    <div className='UserOrders'>
+      {console.log(orders)}
+      {orders
+        ? orders.map(({id, tour, search, user}, index) => (
+            <OrderCard key={index} id={id} tour={tour} user={user} search={search} />
           ))
         : 'Немає замовлень'}
     </div>
@@ -52,8 +52,14 @@ const mapStateToProps = (state) => {
   };
 }; */
 
+const mapStateToProps = (state) => {
+  return {
+    userAuth: state.userAuth.currentUser
+  };
+};
+
 const mapDispatchToProps = {
   setTours
 };
 
-export default connect(null, mapDispatchToProps)(OrderCards);
+export default connect(mapStateToProps, mapDispatchToProps)(UserOrders);
