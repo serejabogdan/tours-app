@@ -1,10 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {database} from '../../firebase.config';
 import './RequestForm.css';
 
 function RequestForm({tour, search, userAuth, ...props}) {
+  const [user, setUser] = useState({name: '', email: '', tel: ''});
   const [state, setstate] = useState({name: '', tel: '', email: ''});
+
+  useEffect(() => {
+    return () => {
+      cleanup;
+    };
+  }, [input]);
 
   function changeState(e, attr) {
     const value = e.target.value;
@@ -55,7 +62,10 @@ function RequestForm({tour, search, userAuth, ...props}) {
       {user: {...state}}
     );
     const ref = await database.ref(`/users/${userAuth.uid}/orders`);
-    await ref.push(order);
+    const pushedUrl = await ref.push(order);
+
+    const key = await pushedUrl.getKey();
+    await database.ref(`/users/${userAuth.uid}/orders/${key}`).update({id: key});
   }
 
   return (
@@ -75,15 +85,33 @@ function RequestForm({tour, search, userAuth, ...props}) {
             <div className='request-form__fields'>
               <label>
                 <span>Ім'я:</span>
-                <input className='input' type='text' value={state.name} onChange={(e) => changeState(e, 'name')} />
+                <input
+                  className='input'
+                  type='text'
+                  // value={state.name}
+                  onChange={(e) => changeState(e, 'name')}
+                  defaultValue={user.name}
+                />
               </label>
               <label>
                 <span>Телефон:</span>
-                <input className='input' type='text' value={state.tel} onChange={(e) => changeState(e, 'tel')} />
+                <input
+                  className='input'
+                  type='text'
+                  // value={state.tel}
+                  onChange={(e) => changeState(e, 'tel')}
+                  defaultValue={user.tel}
+                />
               </label>
               <label>
                 <span>E-mail:</span>
-                <input className='input' type='text' value={state.email} onChange={(e) => changeState(e, 'email')} />
+                <input
+                  className='input'
+                  type='text'
+                  // value={state.email}
+                  onChange={(e) => changeState(e, 'email')}
+                  defaultValue={user.email}
+                />
               </label>
             </div>
             <button type='submit' className='submit-btn btn'>
