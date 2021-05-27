@@ -32,7 +32,7 @@ function TourCards({tours, search, selected, minPrice, maxPrice, tourName, setTo
   return (
     <div className='TourCards'>
       {resultToursAfterFilters.length
-        ? resultToursAfterFilters.map((tour) => <TourCard key={tour.id} search={search} />)
+        ? resultToursAfterFilters.map((tour) => <TourCard key={tour.id} tour={tour} search={search} />)
         : 'Немає турів, котрі б задовольняли умову вибірки'}
     </div>
   );
