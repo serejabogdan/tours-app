@@ -14,7 +14,7 @@ function renderAuthOrLogout(authLinks, userAuth) {
     {
       return (
         <>
-          <NavLink className='header__link' activeClassName='header__link--active' to='/profile'>
+          <NavLink className='header__link' activeClassName='header__link--active' to='/profile/orders'>
             Профіль
           </NavLink>
           <a href='#' className='header__link' onClick={handleLogOut}>

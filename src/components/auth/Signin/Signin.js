@@ -5,7 +5,7 @@ import {signin} from '../../../shared/utils/auth';
 import {useHistory} from 'react-router';
 
 function Signin() {
-  const [formData, setFormData] = useState({login: 'a@gmail.com', password: '123123123'});
+  const [formData, setFormData] = useState({login: 'serhii.bohdan@nure.ua', password: 'nure123'});
   const history = useHistory();
 
   function handleSubmit(e) {

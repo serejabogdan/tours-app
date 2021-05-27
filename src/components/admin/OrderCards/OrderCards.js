@@ -30,7 +30,7 @@ function OrderCards(props) {
   const ordersFilter = orders.filter((order) => order.isActive);
 
   return (
-    <div className='TourCards'>
+    <div className='OrderCards'>
       {ordersFilter.length
         ? ordersFilter.map(({id, tour, search, user}, index) => (
             <OrderCard key={id} id={id} tour={tour} user={user} search={search} />

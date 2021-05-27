@@ -3,7 +3,7 @@ import './Profile.css';
 import {connect} from 'react-redux';
 import {database} from '../../firebase.config';
 
-import Admin from '../admin/Admin/Admin';
+import Admin from '../admin/Admin';
 
 function Profile({userAuth, ...props}) {
   const [user, setUser] = useState({
