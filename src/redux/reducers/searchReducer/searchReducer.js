@@ -11,10 +11,11 @@ import {SET_SEARCH_DATA} from '../../types';
 
 function initialState() {
   const localStorageData = localStorage.getItem('search');
-  const parsedData = JSON.parse(localStorageData);
-  parsedData.startDate = new Date(parsedData.startDate);
-  parsedData.endDate = new Date(parsedData.endDate);
   if (localStorageData) {
+    const parsedData = JSON.parse(localStorageData);
+    parsedData.startDate = new Date(parsedData.startDate);
+    parsedData.endDate = new Date(parsedData.endDate);
+
     return parsedData;
   }
   return {
