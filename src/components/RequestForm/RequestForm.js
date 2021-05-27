@@ -8,10 +8,14 @@ function RequestForm({tour, search, userAuth, ...props}) {
   const [state, setstate] = useState({name: '', tel: '', email: ''});
 
   useEffect(() => {
-    return () => {
-      cleanup;
-    };
-  }, [input]);
+    if (userAuth) {
+      database
+        .ref(`users/${userAuth.uid}`)
+        .get()
+        .then((snapshot) => setUser(snapshot.val()));
+    }
+    return () => {};
+  }, []);
 
   function changeState(e, attr) {
     const value = e.target.value;
