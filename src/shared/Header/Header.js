@@ -40,21 +40,21 @@ function handleLogOut(e) {
 function Header({color, userAuth}) {
   const LINK_CLASS_NAME = 'header__link';
   const navLinks = [
-    {
+    /* {
       name: 'Гарячі тури',
       href: '/hot',
       className: isColor(color, LINK_CLASS_NAME, `${LINK_CLASS_NAME} ${LINK_CLASS_NAME}--black`)
-    },
+    }, */
     {
       name: 'Пошук турів',
       href: '/search',
       className: isColor(color, LINK_CLASS_NAME, `${LINK_CLASS_NAME} ${LINK_CLASS_NAME}--black`)
-    },
-    {
+    }
+    /* {
       name: 'Екскурсійні тури',
       href: '/tours',
       className: isColor(color, LINK_CLASS_NAME, `${LINK_CLASS_NAME} ${LINK_CLASS_NAME}--black`)
-    }
+    } */
   ];
 
   const authLinks = [
