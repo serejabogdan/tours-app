@@ -18,6 +18,7 @@ import {setCurrentUser} from '../../redux/actions';
 import {auth} from '../../firebase.config';
 import RequestForm from '../RequestForm';
 import Admin from '../admin/Admin';
+import Profile from '../Profile';
 
 function App({setCurrentUser}) {
   useEffect(() => {
@@ -33,10 +34,11 @@ function App({setCurrentUser}) {
         <Route path='/order' component={RequestForm} />
         <Route path='/tour/:id' component={Tour} />
         <Route path='/search' component={SearchBoard} />
-        <Route path='/hot' component={Offer} />
         <Route path='/register' component={Signup} />
         <Route path='/in' component={Signin} />
         <Route path='/admin' component={Admin} />
+        <Route path='/profile' component={Profile} />
+
         <Redirect to='/search/result' />
       </Switch>
     </div>
