@@ -1,12 +1,12 @@
 import React from 'react';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import './Datepicker.css';
+import './MultiDatepicker.css';
 import DatePicker, {registerLocale} from 'react-datepicker';
 import locale_uk from 'date-fns/locale/uk';
 registerLocale('uk', locale_uk);
 
-function Datepicker({classNames, startDate, setStartDate, endDate, setEndDate, ...props}) {
+function MultiDatepicker({classNames, startDate, setStartDate, endDate, setEndDate, ...props}) {
   function maxDate(startDate, months) {
     const date = new Date(startDate);
     return new Date(date.setMonth(date.getMonth() + months));
@@ -46,4 +46,4 @@ function Datepicker({classNames, startDate, setStartDate, endDate, setEndDate, .
   );
 }
 
-export default Datepicker;
+export default MultiDatepicker;
