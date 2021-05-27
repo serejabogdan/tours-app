@@ -17,10 +17,10 @@ import {connect} from 'react-redux';
 import {setCurrentUser} from '../../redux/actions';
 import {auth} from '../../firebase.config';
 import RequestForm from '../RequestForm';
-import Admin from '../admin/Admin';
 import Profile from '../Profile';
+import PrivateRoute from '../../shared/PrivateRoute';
 
-function App({setCurrentUser}) {
+function App({setCurrentUser, userAuth}) {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -36,8 +36,7 @@ function App({setCurrentUser}) {
         <Route path='/search' component={SearchBoard} />
         <Route path='/register' component={Signup} />
         <Route path='/in' component={Signin} />
-        <Route path='/admin' component={Admin} />
-        <Route path='/profile' component={Profile} />
+        <PrivateRoute path='/profile' isUserAuth={userAuth} component={Profile} />
 
         <Redirect to='/search/result' />
       </Switch>
@@ -45,8 +44,14 @@ function App({setCurrentUser}) {
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userAuth: state.userAuth.currentUser
+  };
+};
+
 const mapDispatchToProps = {
   setCurrentUser
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

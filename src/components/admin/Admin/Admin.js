@@ -8,13 +8,13 @@ import OrderCards from '../OrderCards';
 function Admin() {
   return (
     <div>
-      <NavLink to='/admin/addtour'>Додати тур</NavLink>
-      <NavLink to='/admin/orders'>Заявки</NavLink>
+      <NavLink to='/profile/addtour'>Додати тур</NavLink>
+      <NavLink to='/profile/orders'>Заявки</NavLink>
       {/* <NavLink to='/admin/addtour'>Додати тур</NavLink> */}
 
       <Switch>
-        <Route path='/admin/addtour' component={AddTourForm} />
-        <Route path='/admin/orders' component={OrderCards} />
+        <Route path='/profile/addtour' component={AddTourForm} />
+        <Route path='/profile/orders' component={OrderCards} />
       </Switch>
     </div>
   );
