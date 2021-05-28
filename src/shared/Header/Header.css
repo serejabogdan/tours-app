@@ -75,11 +75,12 @@
   .header {
     position: relative;
     z-index: 50;
-    padding: 10px 10px 0 10px;
+    padding: 10px;
+    background-color: #fff;
   }
   .header__burger {
     display: block;
-    position: fixed;
+    position: absolute;
     width: 30px;
     height: 20px;
     top: 20px;
@@ -125,9 +126,10 @@
     transform: scale(0);
   }
   .header__body {
+    width: 100%;
     display: flex;
     /* background-color: #fff; */
-    position: fixed;
+    position: relative;
     z-index: 10;
   }
   /* .header__body {
@@ -171,5 +173,8 @@
   .header__logo--nav {
     display: flex;
     margin-bottom: 0.9rem;
+  }
+  body.lock {
+    overflow: hidden;
   }
 }

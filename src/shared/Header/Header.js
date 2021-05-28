@@ -31,7 +31,7 @@ function Header({userAuth}) {
               className='header__link'
               activeClassName='header__link--active'
               to='/profile/orders'
-              onClick={(e) => setIsOpenMenu(!isOpenMenu)}
+              onClick={onChangeIsOpenMenuState}
             >
               Профіль
             </NavLink>
@@ -48,12 +48,17 @@ function Header({userAuth}) {
           activeClassName='header__link--active'
           to={href}
           key={name}
-          onClick={(e) => setIsOpenMenu(!isOpenMenu)}
+          onClick={onChangeIsOpenMenuState}
         >
           {name}
         </NavLink>
       ));
     }
+  }
+
+  function onChangeIsOpenMenuState() {
+    setIsOpenMenu(!isOpenMenu);
+    document.body.classList.toggle('lock');
   }
 
   function handleLogOut(e) {
@@ -70,7 +75,7 @@ function Header({userAuth}) {
           </svg>
           <span className='header__text'>подорож</span>
         </div>
-        <div className={`header__burger ${isOpenMenu && 'active'}`} onClick={(e) => setIsOpenMenu(!isOpenMenu)}>
+        <div className={`header__burger ${isOpenMenu && 'active'}`} onClick={onChangeIsOpenMenuState}>
           <span></span>
         </div>
         <nav className={`header__nav ${isOpenMenu && 'active'}`}>
@@ -84,7 +89,7 @@ function Header({userAuth}) {
             className={LINK_CLASS_NAME}
             activeClassName='header__link--active'
             to='/search/result'
-            onClick={(e) => setIsOpenMenu(!isOpenMenu)}
+            onClick={onChangeIsOpenMenuState}
           >
             Пошук
           </NavLink>
