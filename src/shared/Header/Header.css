@@ -23,7 +23,7 @@
 
 .header__icon {
   width: 50px;
-  margin-right: 14px;
+  /* margin-right: 14px; */
   fill: var(--big-title-color);
   transition: all 0.3s ease;
 }
@@ -67,18 +67,23 @@
   color: var(--main-bg-color);
 }
 
+.header__logo--nav {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .header {
     position: relative;
     z-index: 50;
+    padding: 10px 10px 0 10px;
   }
   .header__burger {
     display: block;
     position: fixed;
     width: 30px;
     height: 20px;
-    top: 20px;
-    right: 40px;
+    top: 10px;
+    right: 10px;
     z-index: 50;
   }
   .header__burger span {
@@ -89,6 +94,7 @@
     height: 2px;
     top: 9px;
     z-index: 50;
+    transition: all 0.3s ease;
   }
   .header__burger:before,
   .header__burger:after {
@@ -99,6 +105,7 @@
     height: 2px;
     left: 0;
     z-index: 50;
+    transition: all 0.3s ease;
   }
   .header__burger::before {
     top: 0;
@@ -106,7 +113,24 @@
   .header__burger::after {
     bottom: 0;
   }
+  .header__burger.active:before {
+    transform: rotate(45deg);
+    top: 9px;
+  }
+  .header__burger.active:after {
+    transform: rotate(-45deg);
+    bottom: 9px;
+  }
+  .header__burger.active span {
+    transform: scale(0);
+  }
   .header__body {
+    display: flex;
+    /* background-color: #fff; */
+    position: fixed;
+    z-index: 10;
+  }
+  /* .header__body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,23 +139,37 @@
     width: 100%;
     height: 100%;
     background-color: #fff;
-  }
+  } */
   .header__nav {
     display: flex;
     flex-direction: column;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    transition: all 0.3s ease;
+  }
+  .header__nav.active {
+    top: 0;
   }
   .header__link {
-    font-size: 2rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
   }
 
   .header__icon {
-    width: 70px;
-    fill: var(--big-title-color);
     transition: all 0.3s ease;
   }
 
   .header__link {
     padding: 0.8rem 1.6rem;
     border-radius: 2rem;
+  }
+
+  .header__logo--nav {
+    display: flex;
+    margin-bottom: 0.9rem;
   }
 }
