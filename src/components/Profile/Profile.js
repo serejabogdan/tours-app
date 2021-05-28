@@ -3,14 +3,12 @@ import './Profile.css';
 import {connect} from 'react-redux';
 import {database} from '../../firebase.config';
 
-import Admin from '../admin/Admin';
 import UserOrders from './UserOrders';
 
 function Profile({userAuth, ...props}) {
   const [user, setUser] = useState({
     name: '',
-    email: '',
-    isAdmin: false
+    email: ''
   });
   useEffect(() => {
     const userRef = database.ref(`users/${userAuth.uid}`);
@@ -23,6 +21,7 @@ function Profile({userAuth, ...props}) {
       userRef.off('value');
     };
   }, [userAuth]);
+
   return (
     <div className='profile'>
       <div className='profile__info'>
@@ -33,7 +32,9 @@ function Profile({userAuth, ...props}) {
           <span>E-mail:</span> {user?.email}
         </h2>
       </div>
-      <div className='profile__tours'>{user.isAdmin ? <Admin /> : <UserOrders />}</div>
+      <div className='profile__tours'>
+        <UserOrders />
+      </div>
     </div>
   );
 }

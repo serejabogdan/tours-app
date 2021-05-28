@@ -18,6 +18,7 @@ import {setCurrentUser} from '../../redux/actions';
 import {auth} from '../../firebase.config';
 import RequestForm from '../RequestForm';
 import Profile from '../Profile';
+import Admin from '../admin/Admin';
 import PrivateRoute from '../../shared/PrivateRoute';
 
 function App({setCurrentUser, userAuth}) {
@@ -36,6 +37,7 @@ function App({setCurrentUser, userAuth}) {
         <Route path='/search' component={SearchBoard} />
         <Route path='/register' component={Signup} />
         <Route path='/in' component={Signin} />
+        <PrivateRoute path='/admin' isUserAuth={userAuth} component={Admin} />
         <PrivateRoute path='/profile' isUserAuth={userAuth} component={Profile} />
 
         <Redirect to='/search/result' />

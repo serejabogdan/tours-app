@@ -30,7 +30,7 @@ function Header({userAuth}) {
             <NavLink
               className='header__link'
               activeClassName='header__link--active'
-              to='/profile/orders'
+              to='/profile'
               onClick={onChangeIsOpenMenuState}
             >
               Профіль
@@ -92,6 +92,14 @@ function Header({userAuth}) {
             onClick={onChangeIsOpenMenuState}
           >
             Пошук
+          </NavLink>
+          <NavLink
+            className={LINK_CLASS_NAME}
+            activeClassName='header__link--active'
+            to='/admin/orders'
+            onClick={onChangeIsOpenMenuState}
+          >
+            Адмін
           </NavLink>
           {renderAuthOrLogout(authLinks, userAuth)}
         </nav>

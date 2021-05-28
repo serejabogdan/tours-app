@@ -15,19 +15,21 @@ function UserOrders({userAuth, ...props}) {
     ref.on('value', (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        data.orders = Object.values(data.orders);
-        console.log(data);
-        setUser({
-          ...data,
-          orders: data.orders.map((order) => ({
-            ...order,
-            search: {
-              ...order.search,
-              startDate: new Date(order.search.startDate),
-              endDate: new Date(order.search.endDate)
-            }
-          }))
-        });
+        if (data.orders) {
+          data.orders = Object.values(data.orders);
+          setUser({
+            ...data,
+            orders: data.orders.map((order) => ({
+              ...order,
+              search: {
+                ...order.search,
+                startDate: new Date(order.search.startDate),
+                endDate: new Date(order.search.endDate)
+              }
+            }))
+          });
+        }
+        setUser(data);
       }
     });
     return () => {

@@ -1,3 +1,9 @@
 .OrderCards {
   display: flex;
 }
+
+@media (max-width: 768px) {
+  .OrderCards {
+    flex-direction: column;
+  }
+}
