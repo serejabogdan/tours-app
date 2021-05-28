@@ -1,13 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Header.css';
 
 import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {signOut} from '../utils/auth';
+import {database} from '../../firebase.config';
 
 function Header({userAuth}) {
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const LINK_CLASS_NAME = 'header__link';
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    const userRef = database.ref(`users/${userAuth.uid}/isAdmin`);
+    userRef.get().then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        setIsAdmin(data);
+      }
+    });
+    return () => {
+      // userRef.off('value');
+    };
+  }, [userAuth]);
 
   const authLinks = [
     {
@@ -93,14 +107,16 @@ function Header({userAuth}) {
           >
             Пошук
           </NavLink>
-          <NavLink
-            className={LINK_CLASS_NAME}
-            activeClassName='header__link--active'
-            to='/admin/orders'
-            onClick={onChangeIsOpenMenuState}
-          >
-            Адмін
-          </NavLink>
+          {isAdmin && (
+            <NavLink
+              className={LINK_CLASS_NAME}
+              activeClassName='header__link--active'
+              to='/admin/orders'
+              onClick={onChangeIsOpenMenuState}
+            >
+              Адмін
+            </NavLink>
+          )}
           {renderAuthOrLogout(authLinks, userAuth)}
         </nav>
       </div>
