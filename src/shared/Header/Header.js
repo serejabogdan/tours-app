@@ -11,13 +11,15 @@ function Header({userAuth}) {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    const userRef = database.ref(`users/${userAuth.uid}/isAdmin`);
-    userRef.get().then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        setIsAdmin(data);
-      }
-    });
+    if (userAuth) {
+      const userRef = database.ref(`users/${userAuth.uid}/isAdmin`);
+      userRef.get().then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          setIsAdmin(data);
+        }
+      });
+    }
     return () => {
       // userRef.off('value');
     };
