@@ -17,7 +17,7 @@ function Profile({userAuth, ...props}) {
     userRef.on('value', (snapshot) => {
       const data = snapshot.val();
 
-      setUser(data);
+      setUser((state) => ({...state, ...data}));
     });
     return () => {
       userRef.off('value');
