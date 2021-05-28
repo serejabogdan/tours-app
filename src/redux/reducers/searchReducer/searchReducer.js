@@ -15,7 +15,6 @@ function initialState() {
     const parsedData = JSON.parse(localStorageData);
     parsedData.startDate = new Date(parsedData.startDate);
     parsedData.endDate = new Date(parsedData.endDate);
-
     return parsedData;
   }
   return {

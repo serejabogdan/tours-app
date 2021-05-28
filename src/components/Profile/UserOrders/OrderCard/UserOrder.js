@@ -3,15 +3,13 @@ import './UserOrder.css';
 import {database} from '../../../../firebase.config';
 
 function UserOrder({id, ...props}) {
+  console.log(props);
   const {name, rate, country, resort, description, price, urls} = props.tour;
   const {city, startDate, endDate} = props.search;
 
-  function handleClick() {
-    console.log(id);
-
-    // const key = pushedUrl.getKey();
+  /* function handleClick() {
     database.ref(`orders/${id}`).update({isActive: false});
-  }
+  } */
 
   return (
     <div className='UserOrder'>
@@ -42,9 +40,9 @@ function UserOrder({id, ...props}) {
           )}
         </div>
         <div className='UserOrder__text'>Переліт (з м. {city})</div>
-        <div className='UserOrder__text UserOrder__description'>
+        {/* <div className='UserOrder__text UserOrder__description'>
           Клієнт: {props.user.name}, телефон: {props.user.tel}, e-mail: {props.user.email}
-        </div>
+        </div> */}
       </div>
       <div className='UserOrder__other'>
         <div className='reviews'>{/* <a href='./index.html'>0 відгуків</a> */}</div>
@@ -53,9 +51,9 @@ function UserOrder({id, ...props}) {
             <span className='price'>{price}</span>
             <span className='currency'> грн</span>
           </div>
-          <button className='UserOrder__btn btn' onClick={handleClick}>
+          {/* <button className='UserOrder__btn btn' onClick={handleClick}>
             Оброблено
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

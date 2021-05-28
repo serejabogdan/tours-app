@@ -1,3 +1,9 @@
 .UserOrders {
   display: flex;
 }
+
+@media (max-width: 768px) {
+  .UserOrders {
+    flex-direction: column;
+  }
+}

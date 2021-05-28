@@ -7,14 +7,20 @@ import OrderCards from '../OrderCards';
 
 function Admin() {
   return (
-    <div>
-      <NavLink to='/profile/addtour'>Додати тур</NavLink>
-      <NavLink to='/profile/orders'>Заявки</NavLink>
+    <div className='admin'>
+      <nav className='admin__nav'>
+        <NavLink className='admin__link header__link' activeClassName='header__link--active' to='/admin/addtour'>
+          Додати тур
+        </NavLink>
+        <NavLink className='admin__link header__link' activeClassName='header__link--active' to='/admin/orders'>
+          Заявки
+        </NavLink>
+      </nav>
       {/* <NavLink to='/admin/addtour'>Додати тур</NavLink> */}
 
       <Switch>
-        <Route path='/profile/addtour' component={AddTourForm} />
-        <Route path='/profile/orders' component={OrderCards} />
+        <Route path='/admin/addtour' component={AddTourForm} />
+        <Route path='/admin/orders' component={OrderCards} />
       </Switch>
     </div>
   );

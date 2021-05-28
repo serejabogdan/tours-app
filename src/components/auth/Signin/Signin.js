@@ -3,41 +3,48 @@ import './Signin.css';
 
 import {signin} from '../../../shared/utils/auth';
 import {useHistory} from 'react-router';
+import {useForm} from 'react-hook-form';
 
 function Signin() {
-  const [formData, setFormData] = useState({login: 'serhii.bohdan@nure.ua', password: 'nure123'});
+  const {
+    register,
+    handleSubmit,
+    formState: {errors}
+  } = useForm();
   const history = useHistory();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    signin(formData.login, formData.password);
+  function onSubmit(data) {
+    const {email, password} = data;
+    signin(email, password);
     history.push('/hot');
   }
 
   return (
-    <form className='signin' onSubmit={handleSubmit}>
-      <label>
-        <span>Login:</span>
-        <input
-          className='input'
-          type='text'
-          value={formData.login}
-          onChange={(e) => setFormData((prevState) => ({...prevState, login: e.target.value}))}
-        />
-      </label>
-      <label>
-        <span>Password:</span>
-        <input
-          className='input'
-          type='password'
-          value={formData.password}
-          onChange={(e) => setFormData((prevState) => ({...prevState, password: e.target.value}))}
-        />
-      </label>
-      <button className='submit-btn btn' type='submit'>
-        Go!
-      </button>
-    </form>
+    <div className='signin'>
+      <div className='signin__right-side'>
+        <form className='signin__form' onSubmit={handleSubmit(onSubmit)}>
+          <label>
+            <span>E-mail:</span>
+            <input
+              className={`input ${errors.email && 'input-error'}`}
+              type='email'
+              {...register('email', {required: true, pattern: /.+@.+\..+/i})}
+            />
+          </label>
+          <label>
+            <span>Пароль:</span>
+            <input
+              className={`input ${errors.password && 'input-error'}`}
+              type='password'
+              {...register('password', {required: true})}
+            />
+          </label>
+          <button className='submit-btn btn' type='submit'>
+            Увійти
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 

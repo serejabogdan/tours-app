@@ -30,3 +30,10 @@
 .clear-btn:hover {
   color: #4d9baa;
 }
+
+@media (max-width: 768px) {
+  .ToursSearch {
+    display: flex;
+    flex-direction: column;
+  }
+}

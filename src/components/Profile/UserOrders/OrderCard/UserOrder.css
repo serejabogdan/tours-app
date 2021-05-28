@@ -96,3 +96,9 @@
   background-color: #387c89;
   text-decoration: none;
 }
+
+@media (max-width: 768px) {
+  .UserOrder {
+    flex-basis: 100%;
+  }
+}

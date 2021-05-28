@@ -9,33 +9,39 @@ import {database} from '../../../firebase.config';
 import {setTours} from '../../../redux/actions';
 
 function UserOrders({userAuth, ...props}) {
-  const [orders, setOrders] = useState([]);
+  const [user, setUser] = useState({});
   useEffect(() => {
-    const ref = database.ref(`users/${userAuth.uid}/orders`);
+    const ref = database.ref(`users/${userAuth.uid}`);
     ref.on('value', (snapshot) => {
-      console.log(Object.values(snapshot.val()));
       if (snapshot.exists()) {
-        const data = Object.values(snapshot.val());
-        setOrders(
-          data.map((item) => ({
-            ...item,
-            search: {...item.search, startDate: new Date(item.search.startDate), endDate: new Date(item.search.endDate)}
-          }))
-        );
+        const data = snapshot.val();
+        if (data.orders) {
+          data.orders = Object.values(data.orders);
+          setUser({
+            ...data,
+            orders: data.orders.map((order) => ({
+              ...order,
+              search: {
+                ...order.search,
+                startDate: new Date(order.search.startDate),
+                endDate: new Date(order.search.endDate)
+              }
+            }))
+          });
+        }
+        setUser(data);
       }
     });
     return () => {
       ref.off('value');
     };
-  }, []);
+  }, [userAuth]);
 
   return (
     <div className='UserOrders'>
-      {console.log(orders)}
-      {orders
-        ? orders.map(({id, tour, search, user}, index) => (
-            <OrderCard key={index} id={id} tour={tour} user={user} search={search} />
-          ))
+      {console.log(user)}
+      {user?.orders?.length
+        ? user.orders.map(({id, tour, search}, index) => <OrderCard key={index} id={id} tour={tour} search={search} />)
         : 'Немає замовлень'}
     </div>
   );

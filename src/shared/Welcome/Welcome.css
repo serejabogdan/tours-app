@@ -62,3 +62,12 @@
 .submit-btn {
   height: 70%;
 }
+
+@media (max-width: 768px) {
+  .search__form {
+    display: block;
+  }
+  .welcome__board {
+    padding: 1rem 1rem;
+  }
+}

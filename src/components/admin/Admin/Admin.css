@@ -1,0 +1,8 @@
+@media (max-width: 768px) {
+  .admin__link {
+    margin: 0;
+  }
+  .admin__nav {
+    padding: 0.5rem 0;
+  }
+}
