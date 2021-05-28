@@ -1,2 +1,12 @@
 @import url('./styles/controls.css');
 @import url('./styles/main.css');
+
+@media (max-width: 768px) {
+  .App {
+    padding: 0 10px;
+  }
+
+  .App .header {
+    margin: 0 -10px;
+  }
+}

@@ -66,15 +66,8 @@
   background-color: var(--big-title-color);
   color: var(--main-bg-color);
 }
-/* 
-.header__burger {
-  display: none;
-} */
 
 @media (max-width: 768px) {
-  /* body {
-    overflow: hidden;
-  } */
   .header {
     position: relative;
     z-index: 50;
