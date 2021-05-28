@@ -61,3 +61,18 @@
 .input-error {
   border: 1px solid darkred;
 }
+
+@media (max-width: 768px) {
+  .signup {
+    margin: 0 10px;
+  }
+  .signup__left-side {
+    display: none;
+  }
+  .signup__right-side {
+    flex-basis: 100%;
+    padding: 2rem;
+    box-shadow: 3px 4px 1rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.7rem;
+  }
+}

@@ -7,7 +7,6 @@ import {useForm} from 'react-hook-form';
 import {auth, database} from '../../../firebase.config';
 
 function Signup() {
-  // const [formData, setFormData] = useState({login: 'balgar@gmail.com', password: '123123', passwordConfirm: ''});
   const {
     register,
     handleSubmit,
@@ -69,46 +68,12 @@ function Signup() {
             />
           </label>
           <button className='submit-btn btn' type='submit'>
-            До зірок!
+            Полетіли!
           </button>
         </form>
       </div>
     </div>
   );
-  /* (
-    <form className='signup' onSubmit={handleSubmit}>
-      <label>
-        <span>Login:</span>
-        <input
-          className='input'
-          type='text'
-          value={formData.login}
-          onChange={(e) => setFormData((prevState) => ({...prevState, login: e.target.value}))}
-        />
-      </label>
-      <label>
-        <span>Password:</span>
-        <input
-          className='input'
-          type='password'
-          value={formData.password}
-          onChange={(e) => setFormData((prevState) => ({...prevState, password: e.target.value}))}
-        />
-      </label>
-      <label>
-        <span>Confirm password:</span>
-        <input
-          className='input'
-          type='password'
-          value={formData.passwordConfirm}
-          onChange={(e) => setFormData((prevState) => ({...prevState, passwordConfirm: e.target.value}))}
-        />
-      </label>
-      <button className='submit-btn btn' type='submit'>
-        Go!
-      </button>
-    </form>
-  ); */
 }
 
 export default Signup;
