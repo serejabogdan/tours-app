@@ -1,3 +1,4 @@
+import {dateOffsetByDays} from '../../../shared/utils/date';
 import {SET_SEARCH_DATA} from '../../types';
 
 /* const initialState = {
@@ -10,26 +11,29 @@ import {SET_SEARCH_DATA} from '../../types';
 }; */
 
 function initialState() {
-  const localStorageData = localStorage.getItem('search');
-  if (localStorageData) {
-    const parsedData = JSON.parse(localStorageData);
+  const sessionStorageData = sessionStorage.getItem('search');
+  if (sessionStorageData) {
+    const parsedData = JSON.parse(sessionStorageData);
     parsedData.startDate = new Date(parsedData.startDate);
     parsedData.endDate = new Date(parsedData.endDate);
+    const startDate = dateOffsetByDays(new Date(), 7);
+    const endDate = dateOffsetByDays(new Date(), 14);
+    if (parsedData.startDate < startDate) {
+      parsedData.startDate = startDate;
+    }
+    if (parsedData.endDate < endDate) {
+      parsedData.endDate = endDate;
+    }
     return parsedData;
   }
   return {
     country: 'Єгипет',
     city: 'Київ',
-    startDate: new Date(),
-    endDate: generateEndDate(),
+    startDate: dateOffsetByDays(new Date(), 7),
+    endDate: dateOffsetByDays(new Date(), 14),
     adults: 2,
     children: 0
   };
-}
-
-function generateEndDate() {
-  const date = new Date();
-  return new Date(date.setDate(date.getDate() + 7));
 }
 
 export const searchReducer = (state = initialState(), action) => {
