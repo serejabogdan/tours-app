@@ -17,7 +17,7 @@ function UserOrders({userAuth, ...props}) {
         const data = snapshot.val();
         if (data.orders) {
           data.orders = Object.values(data.orders);
-          setUser({
+          /* setUser({
             ...data,
             orders: data.orders.map((order) => ({
               ...order,
@@ -27,7 +27,7 @@ function UserOrders({userAuth, ...props}) {
                 endDate: new Date(order.search.endDate)
               }
             }))
-          });
+          }); */
         }
         setUser(data);
       }

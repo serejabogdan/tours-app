@@ -28,7 +28,7 @@ function OrderCard({id, ...props}) {
           {country}, {resort}
         </div>
         <div className='OrderCard__text'>
-          З {startDate.toLocaleDateString()} по {endDate.toLocaleDateString()}
+          З {new Date(startDate).toLocaleDateString()} по {new Date(endDate).toLocaleDateString()}
         </div>
         <div className='OrderCard__text'>
           {props.tour.filters.find((filter) =>

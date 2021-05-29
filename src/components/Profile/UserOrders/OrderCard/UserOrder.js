@@ -26,7 +26,7 @@ function UserOrder({id, ...props}) {
           {country}, {resort}
         </div>
         <div className='UserOrder__text'>
-          З {startDate.toLocaleDateString()} по {endDate.toLocaleDateString()}
+          З {new Date(startDate).toLocaleDateString()} по {new Date(endDate).toLocaleDateString()}
         </div>
         <div className='UserOrder__text'>
           {props.tour.filters.find((filter) =>
