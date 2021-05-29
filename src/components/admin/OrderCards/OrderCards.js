@@ -15,12 +15,13 @@ function OrderCards(props) {
     ref.on('value', (snapshot) => {
       if (snapshot.exists()) {
         const data = Object.values(snapshot.val());
-        setOrders(
+        setOrders(data);
+        /* setOrders(
           data.map((item) => ({
             ...item,
             search: {...item.search, startDate: new Date(item.search.startDate), endDate: new Date(item.search.endDate)}
           }))
-        );
+        ); */
       }
     });
     return () => {
@@ -34,7 +35,7 @@ function OrderCards(props) {
     <div className='OrderCards'>
       {ordersFilter.length
         ? ordersFilter.map(({id, tour, search, user}, index) => (
-            <OrderCard key={id} id={id} tour={tour} user={user} search={search} />
+            <OrderCard key={index} id={id} tour={tour} user={user} search={search} />
           ))
         : 'Немає замовлень'}
     </div>
