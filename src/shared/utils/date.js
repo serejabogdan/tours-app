@@ -14,6 +14,5 @@ export function dateOffsetByDays(date, days) {
 
 export function dateOffsetByMonths(date, months) {
   const newDate = dateCopy(date);
-
   return new Date(newDate.setMonth(newDate.getMonth() + months));
 }

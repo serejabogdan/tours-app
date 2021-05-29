@@ -79,7 +79,10 @@ function Tour(props) {
                 <div className='tour__info-wrapper'>
                   <h2 className='tour__title title-h2'>Інформація про тур</h2>
                   <ul className='tour__info-list list'>
-                    <li>Виїзд {search.startDate.toLocaleDateString()}, 7 ночей</li>
+                    <li>
+                      Виїзд {search.startDate.toLocaleDateString()},{' '}
+                      {search.endDate.getDate() - search.startDate.getDate()} діб
+                    </li>
                     <li>Виліт з м. {search.city}</li>
                     <li>Кімната стандарт</li>
                     <li>

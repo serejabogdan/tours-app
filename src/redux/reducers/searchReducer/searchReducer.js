@@ -11,9 +11,9 @@ import {SET_SEARCH_DATA} from '../../types';
 }; */
 
 function initialState() {
-  const sessionStorageData = sessionStorage.getItem('search');
-  if (sessionStorageData) {
-    const parsedData = JSON.parse(sessionStorageData);
+  const localStorageData = localStorage.getItem('search');
+  if (localStorageData) {
+    const parsedData = JSON.parse(localStorageData);
     parsedData.startDate = new Date(parsedData.startDate);
     parsedData.endDate = new Date(parsedData.endDate);
     const startDate = dateOffsetByDays(new Date(), 7);
