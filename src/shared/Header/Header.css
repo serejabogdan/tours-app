@@ -1,6 +1,12 @@
 .header {
   height: 60px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header__body {
+  display: flex;
   justify-content: space-between;
 }
 
@@ -83,7 +89,7 @@
     position: absolute;
     width: 30px;
     height: 20px;
-    top: 20px;
+    top: 15px;
     right: 10px;
     z-index: 50;
   }
