@@ -1,37 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import {connect} from 'react-redux';
-import {database} from '../../firebase.config';
 import './RequestForm.css';
 
+import {useForm} from 'react-hook-form';
+import {connect} from 'react-redux';
+import {useHistory} from 'react-router';
+import {database} from '../../firebase.config';
+
 function RequestForm({tour, search, userAuth, ...props}) {
-  const [user, setUser] = useState({name: '', email: '', tel: ''});
-  const [state, setstate] = useState({name: '', tel: '', email: ''});
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: {errors}
+  } = useForm();
+  const history = useHistory();
 
   useEffect(() => {
     if (userAuth) {
       database
         .ref(`users/${userAuth.uid}`)
         .get()
-        .then((snapshot) => setUser(snapshot.val()));
+        .then((snapshot) => {
+          setValue('name', snapshot.val().name);
+          setValue('tel', snapshot.val().tel);
+          setValue('email', snapshot.val().email);
+        });
     }
     return () => {};
   }, []);
 
-  function changeState(e, attr) {
-    const value = e.target.value;
-    setstate((state) => ({...state, [attr]: value}));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    orderFormation();
+  function onSubmit(userData) {
+    console.log(register('name', {required: true, pattern: /^\D+$/g}));
+    orderFormation(userData);
 
     if (userAuth) {
       addOrderToUser();
     }
   }
 
-  async function orderFormation() {
+  async function orderFormation(userData) {
     const order = Object.assign(
       {isActive: true},
       {tour},
@@ -42,7 +49,7 @@ function RequestForm({tour, search, userAuth, ...props}) {
           endDate: search.endDate.toDateString()
         }
       },
-      {user: {...state}}
+      {user: {...userData}}
     );
     const ref = database.ref(`/orders`);
     const pushedUrl = await ref.push(order);
@@ -52,7 +59,7 @@ function RequestForm({tour, search, userAuth, ...props}) {
     props.setOrder(false);
   }
 
-  async function addOrderToUser() {
+  async function addOrderToUser(userData) {
     const order = Object.assign(
       {},
       {tour},
@@ -63,7 +70,7 @@ function RequestForm({tour, search, userAuth, ...props}) {
           endDate: search.endDate.toDateString()
         }
       },
-      {user: {...state}}
+      {user: {...userData}}
     );
     const ref = await database.ref(`/users/${userAuth.uid}/orders`);
     const pushedUrl = await ref.push(order);
@@ -85,36 +92,30 @@ function RequestForm({tour, search, userAuth, ...props}) {
               <button onClick={() => props.setOrder(false)}>&#10006;</button>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className='request-form__fields'>
               <label>
                 <span>Ім'я:</span>
                 <input
-                  className='input'
+                  className={`input ${errors.name && 'input-error'}`}
                   type='text'
-                  // value={state.name}
-                  onChange={(e) => changeState(e, 'name')}
-                  defaultValue={user.name}
+                  {...register('name', {required: true, pattern: /^\D+$/g})}
                 />
               </label>
               <label>
                 <span>Телефон:</span>
                 <input
-                  className='input'
-                  type='text'
-                  // value={state.tel}
-                  onChange={(e) => changeState(e, 'tel')}
-                  defaultValue={user.tel}
+                  className={`input ${errors.tel && 'input-error'}`}
+                  type='tel'
+                  {...register('tel', {required: true, pattern: /^0\d{8}\d$/i})}
                 />
               </label>
               <label>
                 <span>E-mail:</span>
                 <input
-                  className='input'
-                  type='text'
-                  // value={state.email}
-                  onChange={(e) => changeState(e, 'email')}
-                  defaultValue={user.email}
+                  className={`input ${errors.email && 'input-error'}`}
+                  type='email'
+                  {...register('email', {required: true, pattern: /@.+\..+/i})}
                 />
               </label>
             </div>
