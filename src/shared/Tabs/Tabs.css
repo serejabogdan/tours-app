@@ -15,8 +15,9 @@
   cursor: pointer;
 }
 .Tabs__link {
+  box-sizing: border-box;
   border-radius: 0.25rem;
-  display: block;
+  /* display: block; */
   padding: 0.5rem 1rem;
   color: #ff8508;
   background-color: transparent;
@@ -35,4 +36,42 @@
 .Tabs__link--active {
   color: #fff;
   background-color: #ff8508;
+}
+
+@media (max-width: 768px) {
+  .Tabs {
+    display: flex;
+    flex-direction: column;
+  }
+  .Tabs__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 1rem 1rem 1rem;
+  }
+  .Tabs__link {
+    flex-basis: 48%;
+    text-align: center;
+    /* margin-right: 10px; */
+    box-sizing: border-box;
+  }
+
+  .main__info,
+  .free__info,
+  .paid__info {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .main__info li,
+  .free__info li,
+  .paid__info li {
+    box-sizing: border-box;
+    flex-basis: 48%;
+    padding: 1rem 1rem;
+    margin: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 }
