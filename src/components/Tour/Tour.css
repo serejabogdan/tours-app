@@ -233,3 +233,15 @@ select {
 .tour__title {
   margin-bottom: 18px;
 }
+
+@media (max-width: 768px) {
+  .hotel__tour {
+    flex-direction: column;
+  }
+  .about {
+    /* display: none; */
+  }
+  .tour__info {
+    box-sizing: border-box;
+  }
+}

@@ -1,3 +1,8 @@
+.admin__nav {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
 @media (max-width: 768px) {
   .admin__link {
     margin: 0;

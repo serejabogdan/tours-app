@@ -1,7 +1,7 @@
 import React from 'react';
 import './Admin.css';
 
-import {NavLink, Route, Switch} from 'react-router-dom';
+import {NavLink, Redirect, Route, Switch} from 'react-router-dom';
 import AddTourForm from '../AddTourForm';
 import OrderCards from '../OrderCards';
 
@@ -21,6 +21,7 @@ function Admin() {
       <Switch>
         <Route path='/admin/addtour' component={AddTourForm} />
         <Route path='/admin/orders' component={OrderCards} />
+        <Redirect to='/admin/orders' />
       </Switch>
     </div>
   );

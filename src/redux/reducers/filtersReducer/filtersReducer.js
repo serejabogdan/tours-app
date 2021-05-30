@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   minPrice: 0,
-  maxPrice: 40000,
+  maxPrice: 400000,
   tourName: '',
   selected: [],
   resorts: []

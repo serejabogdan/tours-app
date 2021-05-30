@@ -13,25 +13,23 @@ import {
 } from '../../../redux/actions';
 import {database} from '../../../firebase.config';
 
-function Filters(
-  {
-    toggleFilter,
-    clearFilters,
-    removeFilter,
-    changeMinPrice,
-    changeMaxPrice,
-    changeTourName,
-    selected,
-    minPrice,
-    maxPrice,
-    tourName,
-    // tours,
-    country,
-    setResorts,
-    resorts
-  },
+function Filters({
+  toggleFilter,
+  clearFilters,
+  removeFilter,
+  changeMinPrice,
+  changeMaxPrice,
+  changeTourName,
+  selected,
+  minPrice,
+  maxPrice,
+  tourName,
+  // tours,
+  country,
+  setResorts,
+  resorts,
   ...props
-) {
+}) {
   const [filters, setFilters] = useState([]);
   useEffect(() => {
     database.ref(`filters/filters`).on('value', (snapshot) => {
@@ -59,7 +57,7 @@ function Filters(
   function clearFiltersBoard() {
     clearFilters();
     changeMinPrice(0);
-    changeMaxPrice(40000);
+    changeMaxPrice(400000);
     changeTourName('');
   }
 

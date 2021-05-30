@@ -238,99 +238,108 @@ function AddTourForm() {
 
   return (
     <div className='wrapper'>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Ім'я:
-          <input
-            type='text'
-            placeholder='name'
-            value={mainState.name}
-            onChange={(e) => setMainState((prevState) => ({...prevState, name: e.target.value}))}
-          />
-        </label>
-        <label>
-          Фоточки:
-          <input type='file' id='file' className='input-block' onChange={onLoadPictures} multiple />
-          {/* <button className='btn'>123</button> */}
-        </label>
-        <label>
-          Країни:
-          <select
-            className='form__control select'
-            value={mainState.country}
-            onChange={(e) => setMainState((prevState) => ({...prevState, country: e.target.value}))}
-          >
-            <option value='Єгипет'>Єгипет</option>
-            <option value='Туреччина'>Туреччина</option>
-            <option value='Домінікана'>Домінікана</option>
-            <option value='Кіпр'>Кіпр</option>
-          </select>
-        </label>
-        <label>
-          Курорт:
-          <select
-            className='form__control select'
-            value={mainState.resort}
-            onChange={(e) => {
-              setMainState((prevState) => ({...prevState, resort: e.target.value}));
-              setMainState((prevState) => {
-                const newFilters = prevState.filters.filter((item) => !resorts.includes(item));
-                return {
-                  ...prevState,
-                  filters: newFilters.concat([e.target.value])
-                };
-              });
-            }}
-          >
-            {resorts &&
-              resorts.map((country) => (
-                <option value={country} key={country}>
-                  {country}
-                </option>
-              ))}
-          </select>
-        </label>
-        <label>
-          Клас готеля:
-          <select
-            className='form__control select'
-            value={mainState.rate}
-            onChange={(e) => {
-              setMainState((prevState) => ({...prevState, rate: e.target.value}));
-              setMainState((prevState) => {
-                const newFilters = prevState.filters.filter((item) => item !== '5*' && item !== '4*' && item !== '3*');
-                return {
-                  ...prevState,
-                  filters: newFilters.concat([e.target.value])
-                };
-              });
-              console.log(mainState);
-            }}
-          >
-            <option value='5*'>5*</option>
-            <option value='4*'>4*</option>
-            <option value='3*'>3*</option>
-          </select>
-        </label>
-        <label>
-          Опис:
-          <input
-            type='text'
-            placeholder='Description'
-            value={mainState.description}
-            onChange={(e) => setMainState((prevState) => ({...prevState, description: e.target.value}))}
-          />
-        </label>
-        <label>
-          Ціна:
-          <input
-            type='text'
-            placeholder='Price'
-            value={mainState.price}
-            onChange={(e) => setMainState((prevState) => ({...prevState, price: e.target.value}))}
-          />
-        </label>
-        <div>
+      <form className='admin-form' onSubmit={handleSubmit}>
+        <div className='admin-form__fields'>
+          <label>
+            Ім'я:
+            <input
+              className='input'
+              type='text'
+              placeholder='name'
+              value={mainState.name}
+              onChange={(e) => setMainState((prevState) => ({...prevState, name: e.target.value}))}
+            />
+          </label>
+          <label>
+            Фотографії тура:
+            <input className='input' type='file' id='file' className='input-block' onChange={onLoadPictures} multiple />
+            {/* <button className='btn'>123</button> */}
+          </label>
+          <label>
+            Країни:
+            <select
+              className='form__control select'
+              value={mainState.country}
+              onChange={(e) => setMainState((prevState) => ({...prevState, country: e.target.value}))}
+            >
+              <option value='Єгипет'>Єгипет</option>
+              <option value='Туреччина'>Туреччина</option>
+              <option value='Домінікана'>Домінікана</option>
+              <option value='Кіпр'>Кіпр</option>
+            </select>
+          </label>
+          <label>
+            Курорт:
+            <select
+              className='form__control select'
+              value={mainState.resort}
+              onChange={(e) => {
+                setMainState((prevState) => ({...prevState, resort: e.target.value}));
+                setMainState((prevState) => {
+                  const newFilters = prevState.filters.filter((item) => !resorts.includes(item));
+                  return {
+                    ...prevState,
+                    filters: newFilters.concat([e.target.value])
+                  };
+                });
+              }}
+            >
+              {resorts &&
+                resorts.map((country) => (
+                  <option value={country} key={country}>
+                    {country}
+                  </option>
+                ))}
+            </select>
+          </label>
+          <label>
+            Клас готеля:
+            <select
+              className='form__control select'
+              value={mainState.rate}
+              onChange={(e) => {
+                setMainState((prevState) => ({...prevState, rate: e.target.value}));
+                setMainState((prevState) => {
+                  const newFilters = prevState.filters.filter(
+                    (item) => item !== '5*' && item !== '4*' && item !== '3*'
+                  );
+                  return {
+                    ...prevState,
+                    filters: newFilters.concat([e.target.value])
+                  };
+                });
+                console.log(mainState);
+              }}
+            >
+              <option value='5*'>5*</option>
+              <option value='4*'>4*</option>
+              <option value='3*'>3*</option>
+            </select>
+          </label>
+          <label>
+            Ціна:
+            <input
+              className='input'
+              type='text'
+              placeholder='Price'
+              value={mainState.price}
+              onChange={(e) => setMainState((prevState) => ({...prevState, price: e.target.value}))}
+            />
+          </label>
+          <label>
+            Опис:
+            <textarea
+              rows='5'
+              cols='50'
+              className='input'
+              type='text'
+              placeholder='Description'
+              value={mainState.description}
+              onChange={(e) => setMainState((prevState) => ({...prevState, description: e.target.value}))}
+            ></textarea>
+          </label>
+        </div>
+        <div className='admin-form__filters'>
           Фільтри*:
           <div>
             {filters.map(({title, body}) => {
@@ -351,7 +360,7 @@ function AddTourForm() {
             })}
           </div>
         </div>
-        <div className='services'>
+        <div className='admin-form__services services'>
           Послуги:
           <div>
             {services.map((service) => {
@@ -367,7 +376,9 @@ function AddTourForm() {
           </div>
         </div>
         <div className='submit-block'>
-          <button type='submit'>Відправити</button>
+          <button type='submit' className='submit-btn btn'>
+            Відправити
+          </button>
         </div>
       </form>
     </div>

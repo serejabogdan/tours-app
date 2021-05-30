@@ -70,3 +70,25 @@
   background-color: rgba(56, 124, 137, 0.8);
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .request-form__fields {
+    flex-direction: column;
+  }
+  .request-form {
+    left: 10px;
+    right: 10px;
+  }
+  .request-form__board {
+    padding: 1rem;
+  }
+  .request-form__fields label {
+    margin-bottom: 10px;
+  }
+  .request-form__fields input {
+    font-size: 14px;
+  }
+  .request-form__fields label:last-child {
+    margin-bottom: 0px;
+  }
+}
