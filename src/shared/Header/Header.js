@@ -113,7 +113,7 @@ function Header({userAuth}) {
             <NavLink
               className={LINK_CLASS_NAME}
               activeClassName='header__link--active'
-              to='/admin/orders'
+              to='/admin'
               onClick={onChangeIsOpenMenuState}
             >
               Адмін
