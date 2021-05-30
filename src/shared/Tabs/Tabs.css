@@ -36,3 +36,25 @@
   color: #fff;
   background-color: #ff8508;
 }
+
+.main__info,
+.free__info,
+.paid__info {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .Tabs {
+    display: flex;
+    flex-direction: column;
+  }
+  .Tabs__nav {
+    display: flex;
+    flex-direction: row;
+  }
+  .Tabs__link {
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 10px;
+  }
+}
