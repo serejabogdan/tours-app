@@ -1,9 +1,7 @@
 import React from 'react';
 import './UserOrder.css';
-import {database} from '../../../../firebase.config';
 
 function UserOrder({id, ...props}) {
-  console.log(props);
   const {name, rate, country, resort, description, price, urls} = props.tour;
   const {city, startDate, endDate} = props.search;
 
