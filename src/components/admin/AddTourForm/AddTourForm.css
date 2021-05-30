@@ -1,0 +1,24 @@
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.admin-form__fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.admin-form__fields,
+.admin-form__filters,
+.admin-form__services {
+  border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.admin-form__fields label {
+  display: flex;
+  flex-direction: column;
+}
