@@ -25,12 +25,9 @@ function Profile({userAuth, ...props}) {
   return (
     <div className='profile'>
       <div className='profile__info'>
-        <h2>
-          Ім'я: <span>{user?.name}</span>
-        </h2>
-        <h2>
-          <span>E-mail:</span> {user?.email}
-        </h2>
+        <h2>Ім'я: {user?.name}</h2>
+        <h2>E-mail: {user?.email}</h2>
+        <h2>Телефон: {user.phone ? user.phone : 'Не вказано'}</h2>
       </div>
       <div className='profile__tours'>
         <UserOrders />
