@@ -103,12 +103,7 @@ function AddTourForm() {
     }));
   }
 
-  // TODO: get filters from DB
   const filters = [
-    /* {
-      title: 'Клас отеля',
-      body: ['5*', '4*', '3*']
-    }, */
     {
       title: 'Тип харчування',
       body: ['Без харчування', 'Тільки сніданки', 'Сніданок і вечеря', 'Сніданок, обід і вечеря', 'Все включено']
@@ -253,7 +248,6 @@ function AddTourForm() {
           <label>
             Фотографії тура:
             <input className='input' type='file' id='file' className='input-block' onChange={onLoadPictures} multiple />
-            {/* <button className='btn'>123</button> */}
           </label>
           <label>
             Країни:

@@ -40,23 +40,21 @@ function Header({userAuth}) {
 
   function renderAuthOrLogout(authLinks, userAuth) {
     if (userAuth) {
-      {
-        return (
-          <>
-            <NavLink
-              className='header__link'
-              activeClassName='header__link--active'
-              to='/profile'
-              onClick={onChangeIsOpenMenuState}
-            >
-              Профіль
-            </NavLink>
-            <a href='#' className='header__link' onClick={handleLogOut}>
-              Вийти
-            </a>
-          </>
-        );
-      }
+      return (
+        <>
+          <NavLink
+            className='header__link'
+            activeClassName='header__link--active'
+            to='/profile'
+            onClick={onChangeIsOpenMenuState}
+          >
+            Профіль
+          </NavLink>
+          <a href='#' className='header__link' onClick={handleLogOut}>
+            Вийти
+          </a>
+        </>
+      );
     } else {
       return authLinks.map(({name, href, className}) => (
         <NavLink
@@ -79,6 +77,7 @@ function Header({userAuth}) {
 
   function handleLogOut(e) {
     e.preventDefault();
+    setIsAdmin(false);
     signOut();
   }
 
