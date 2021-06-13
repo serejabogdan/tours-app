@@ -17,17 +17,6 @@ function UserOrders({userAuth, ...props}) {
         const data = snapshot.val();
         if (data.orders) {
           data.orders = Object.values(data.orders);
-          /* setUser({
-            ...data,
-            orders: data.orders.map((order) => ({
-              ...order,
-              search: {
-                ...order.search,
-                startDate: new Date(order.search.startDate),
-                endDate: new Date(order.search.endDate)
-              }
-            }))
-          }); */
         }
         setUser(data);
       }
@@ -46,17 +35,6 @@ function UserOrders({userAuth, ...props}) {
     </div>
   );
 }
-/* 
-const mapStateToProps = (state) => {
-  return {
-    tours: state.tours,
-    search: state.search,
-    selected: state.filters.selected,
-    minPrice: state.filters.minPrice,
-    maxPrice: state.filters.maxPrice,
-    tourName: state.filters.tourName
-  };
-}; */
 
 const mapStateToProps = (state) => {
   return {
