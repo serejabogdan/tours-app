@@ -8,13 +8,14 @@ import UserOrders from './UserOrders';
 function Profile({userAuth, ...props}) {
   const [user, setUser] = useState({
     name: '',
-    email: ''
+    email: '',
+    tel: ''
   });
   useEffect(() => {
     const userRef = database.ref(`users/${userAuth.uid}`);
     userRef.on('value', (snapshot) => {
       const data = snapshot.val();
-
+      console.log(data);
       setUser((state) => ({...state, ...data}));
     });
     return () => {
@@ -25,12 +26,9 @@ function Profile({userAuth, ...props}) {
   return (
     <div className='profile'>
       <div className='profile__info'>
-        <h2>
-          Ім'я: <span>{user?.name}</span>
-        </h2>
-        <h2>
-          <span>E-mail:</span> {user?.email}
-        </h2>
+        <h2>Ім'я: {user?.name}</h2>
+        <h2>E-mail: {user?.email}</h2>
+        <h2>Телефон: {user.tel ? user.tel : 'Не вказано'}</h2>
       </div>
       <div className='profile__tours'>
         <UserOrders />

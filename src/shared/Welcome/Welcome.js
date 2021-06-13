@@ -6,11 +6,6 @@ import './Welcome.css';
 import {clearFilters, setSearchData, setTours} from '../../redux/actions';
 import {useHistory} from 'react-router-dom';
 
-/* function generateEndDate() {
-  const date = new Date();
-  return new Date(date.setDate(date.getDate() + 7));
-} */
-
 function Welcome({setSearchData, clearFilters, search, ...props}) {
   const [country, setCountry] = useState(search.country);
   const [city, setCity] = useState(search.city);

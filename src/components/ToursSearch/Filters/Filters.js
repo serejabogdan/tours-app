@@ -24,7 +24,6 @@ function Filters({
   minPrice,
   maxPrice,
   tourName,
-  // tours,
   country,
   setResorts,
   resorts,
@@ -139,7 +138,6 @@ const mapStateToProps = (state) => {
     maxPrice: state.filters.maxPrice,
     tourName: state.filters.tourName,
     resorts: state.filters.resorts,
-    // tours: state.tours,
     country: state.search.country
   };
 };

@@ -7,9 +7,6 @@ function OrderCard({id, ...props}) {
   const {city, startDate, endDate} = props.search;
 
   function handleClick() {
-    console.log(id);
-
-    // const key = pushedUrl.getKey();
     database.ref(`orders/${id}`).update({isActive: false});
   }
 
@@ -47,7 +44,7 @@ function OrderCard({id, ...props}) {
         </div>
       </div>
       <div className='OrderCard__other'>
-        <div className='reviews'>{/* <a href='./index.html'>0 відгуків</a> */}</div>
+        <div className='reviews'></div>
         <div className='OrderCard__other-bottom'>
           <div className='OrderCard__price'>
             <span className='price'>{price}</span>

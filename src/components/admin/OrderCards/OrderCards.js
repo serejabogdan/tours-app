@@ -16,12 +16,6 @@ function OrderCards(props) {
       if (snapshot.exists()) {
         const data = Object.values(snapshot.val());
         setOrders(data);
-        /* setOrders(
-          data.map((item) => ({
-            ...item,
-            search: {...item.search, startDate: new Date(item.search.startDate), endDate: new Date(item.search.endDate)}
-          }))
-        ); */
       }
     });
     return () => {

@@ -6,7 +6,6 @@ import 'react-slideshow-image/dist/styles.css';
 
 const settings = {
   easing: 'ease'
-  // indicators: true
 };
 
 function Slider(props) {

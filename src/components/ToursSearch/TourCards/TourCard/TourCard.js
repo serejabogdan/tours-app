@@ -38,7 +38,7 @@ function TourCard(props) {
         <div className='TourCard__text TourCard__description'>{description}</div>
       </div>
       <div className='TourCard__other'>
-        <div className='reviews'>{/* <a href='./index.html'>0 відгуків</a> */}</div>
+        <div className='reviews'></div>
         <div className='TourCard__other-bottom'>
           <div className='TourCard__price'>
             <span className='price'>{price}</span>
