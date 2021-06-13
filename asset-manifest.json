@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/tours-app/static/css/main.723723aa.chunk.css",
-    "main.js": "/tours-app/static/js/main.af3ccef6.chunk.js",
-    "main.js.map": "/tours-app/static/js/main.af3ccef6.chunk.js.map",
+    "main.css": "/tours-app/static/css/main.6a208c26.chunk.css",
+    "main.js": "/tours-app/static/js/main.9f47ed59.chunk.js",
+    "main.js.map": "/tours-app/static/js/main.9f47ed59.chunk.js.map",
     "runtime-main.js": "/tours-app/static/js/runtime-main.f7c644fc.js",
     "runtime-main.js.map": "/tours-app/static/js/runtime-main.f7c644fc.js.map",
     "static/css/2.9d7bb686.chunk.css": "/tours-app/static/css/2.9d7bb686.chunk.css",
-    "static/js/2.7612e5ff.chunk.js": "/tours-app/static/js/2.7612e5ff.chunk.js",
-    "static/js/2.7612e5ff.chunk.js.map": "/tours-app/static/js/2.7612e5ff.chunk.js.map",
+    "static/js/2.d56699cf.chunk.js": "/tours-app/static/js/2.d56699cf.chunk.js",
+    "static/js/2.d56699cf.chunk.js.map": "/tours-app/static/js/2.d56699cf.chunk.js.map",
     "index.html": "/tours-app/index.html",
     "static/css/2.9d7bb686.chunk.css.map": "/tours-app/static/css/2.9d7bb686.chunk.css.map",
-    "static/css/main.723723aa.chunk.css.map": "/tours-app/static/css/main.723723aa.chunk.css.map",
-    "static/js/2.7612e5ff.chunk.js.LICENSE.txt": "/tours-app/static/js/2.7612e5ff.chunk.js.LICENSE.txt",
+    "static/css/main.6a208c26.chunk.css.map": "/tours-app/static/css/main.6a208c26.chunk.css.map",
+    "static/js/2.d56699cf.chunk.js.LICENSE.txt": "/tours-app/static/js/2.d56699cf.chunk.js.LICENSE.txt",
     "static/media/bg-home1.50dfaba4.jpg": "/tours-app/static/media/bg-home1.50dfaba4.jpg",
     "static/media/Welcome.css": "/tours-app/static/media/bg.c70526a9.png"
   },
   "entrypoints": [
     "static/js/runtime-main.f7c644fc.js",
     "static/css/2.9d7bb686.chunk.css",
-    "static/js/2.7612e5ff.chunk.js",
-    "static/css/main.723723aa.chunk.css",
-    "static/js/main.af3ccef6.chunk.js"
+    "static/js/2.d56699cf.chunk.js",
+    "static/css/main.6a208c26.chunk.css",
+    "static/js/main.9f47ed59.chunk.js"
   ]
 }
