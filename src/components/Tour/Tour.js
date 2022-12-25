@@ -1,69 +1,137 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Tour.css';
-import slider from '../../assets/hotels/fortuna.jpg';
 
 import TourTabs from './TourTabs';
 import Slider from '../../shared/Slider';
 
+import {connect} from 'react-redux';
+import {Link, useHistory} from 'react-router-dom';
+import RequestForm from '../RequestForm';
+import {database} from '../../firebase.config';
+
 function Tour(props) {
-  const {match} = props;
+  const {match, search} = props;
+  const id = match.params.id;
+  const [order, setOrder] = useState(false);
+  const [tour, setTour] = useState({});
+
+  useEffect(() => {
+    const tourRef = database.ref(`tours/${search.country}/${id}`);
+    tourRef.on('value', (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      setTour(data);
+    });
+    return () => {
+      tourRef.off('value');
+    };
+  }, []);
+
+  /* function getTour() {
+    return tours.find((tour) => tour.id === id);
+  }
+  const tour = getTour();
+  const history = useHistory(); */
+  /* if (!tour) {
+    history.push('/');
+    return null;
+  } */
+
+  function getTourPrice() {
+    if (search.children > 0) {
+      return Number(tour.price) * Number(search.adults) * Number(search.children / 2);
+    }
+    return Number(tour.price) * Number(search.adults);
+  }
+
+  function tourNumberOfPeople() {
+    if (search.children > 0) {
+      return (
+        <span>
+          тур за {search.adults} дорослих та {search.children} дітей
+        </span>
+      );
+    }
+    return <span>тур за {search.adults} дорослих</span>;
+  }
 
   return (
-    <div className="wrapper">
-      <section className="hotel">
-        <div className="hotel__titles">
-          <h1 className="title-h1">TIVOLI HOTEL & AQUA PARK ( EX :TROPICANA TIVOLI) {match.params.id}</h1>
-          <div className="hotel__text">Шарм-эль-Шейх, Египет</div>
-        </div>
-        <div className="hotel__tour tour">
-          <div className="tour__slider slider">
-            <Slider />
-          </div>
-
-          <div className="tour__info">
-            <div className="tour__info-wrapper">
-              <h2 className="tour__title title-h2">Інформація про тур</h2>
-              <ul className="tour__info-list list">
-                <li>Виїзд 25.04, 7 ночей</li>
-                <li>Виліт Киев</li>
-                <li>Кімната стандарт</li>
-                <li>Все включено</li>
-                <li>Все включено</li>
-              </ul>
-              <div className="tour__added">
-                <h4 className="tour__added-title title-h4">Включено</h4>
-                <span className="tour__text text">Проезд, проживание, страховка, трансфер</span>
-              </div>
-              <div className="tour__price-info">
-                <div className="price">
-                  16 027 <span>грн</span>
-                </div>
-                <span>тур за 2 взрослых</span>
+    <div className='wrapper'>
+      {!Object.keys(tour).length ? (
+        'Завантаження'
+      ) : (
+        <>
+          <section className='hotel'>
+            <div className='hotel__titles'>
+              <h1 className='title-h1'>
+                {tour.name}, {tour.rate}
+              </h1>
+              <div className='hotel__text'>
+                {tour.resort}, {tour.country}
               </div>
             </div>
-            <button className="request-btn btn">Оформити заявку</button>
-          </div>
-        </div>
-      </section>
-      <section className="about">
-        {/* <h2 className="title-h2" id="about">
-          Описание отеля
-        </h2>
-        <p className="about__text">Небольшой уютный отель для экономичного и спокойного отдыха. Недалеко от отеля расположен район Il Mercato и Старый город.</p>
-        <h2 className="title-h2">Об отеле</h2>
-        <p className="about__text">
-          Открыт в 1998 году, последняя реновация прошла в 2019 году. Отель состоит из комплекса 2-этажных корпусов. Всего 114 номеров: standard room (jacuzzi pool view, макс. 2+1 чел., душ, балкон
-          или терраса, есть номера только с оконом, 36 м2). Доп. место - односпальная кровать. Superior room (pool, aquapark view, макс. 3+1 чел, комната поделена на спальную часть и гостиную с
-          диваном и креслом без двери (open space), балкон или терраса, душ, 54 м2). Есть Family rooms (реновированные, спальня + гостиная с диваном и кухней с дверью или без двери). К оплате
-          принимаются кредитные карты: Visa, MasterCard Размещение с животными: нет
-        </p>
-        <h2 className="title-h2">Расположение</h2>
-        <p className="about__text">20 км от аэропорта, в 6 км от Naama Bay, в 2 км от Старого города, в районе Hadaba, на второй линии.</p>
- */}
-        <TourTabs />
-      </section>
+            <div className='hotel__tour tour'>
+              <div className='tour__slider slider'>
+                <Slider urls={tour.urls} />
+              </div>
+
+              <div className='tour__info'>
+                <div className='tour__info-wrapper'>
+                  <h2 className='tour__title title-h2'>Інформація про тур</h2>
+                  <ul className='tour__info-list list'>
+                    <li>
+                      Виїзд {search.startDate.toLocaleDateString()},{' '}
+                      {search.endDate.getDate() - search.startDate.getDate()} діб
+                    </li>
+                    <li>Виліт з м. {search.city}</li>
+                    <li>Кімната стандарт</li>
+                    <li>
+                      {tour.filters.find((filter) =>
+                        [
+                          'Без харчування',
+                          'Тільки сніданки',
+                          'Сніданок і вечеря',
+                          'Все включено',
+                          'Сніданок, обід і вечеря'
+                        ].includes(filter)
+                      )}
+                    </li>
+                  </ul>
+                  <div className='tour__added'>
+                    <h4 className='tour__added-title title-h4'>Включено</h4>
+                    <span className='tour__text text'>Проїзд, проживання, страховка</span>
+                  </div>
+                  <div className='tour__price-info'>
+                    <div className='price'>
+                      {getTourPrice()} <span>грн</span>
+                    </div>
+                    {tourNumberOfPeople()}
+                  </div>
+                </div>
+                {/* <Link className='request-btn btn' to={`/order`}>
+              Оформити заявку
+            </Link> */}
+                {order && <RequestForm tour={tour} search={search} setOrder={setOrder} />}
+                <button className='request-btn btn' onClick={() => setOrder(true)}>
+                  Оформити заявку
+                </button>
+              </div>
+            </div>
+          </section>
+          <section className='about'>
+            <TourTabs services={tour.services} />
+          </section>
+        </>
+      )}
     </div>
   );
 }
 
-export default Tour;
+const mapStateToProps = (state) => {
+  return {
+    tours: state.tours,
+    search: state.search
+  };
+};
+
+export default connect(mapStateToProps)(Tour);

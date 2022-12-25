@@ -5,7 +5,11 @@ import {
   TOGGLE_FILTER,
   CHANGE_MIN_PRICE,
   CHANGE_MAX_PRICE,
-  CHANGE_TOUR_NAME
+  CHANGE_TOUR_NAME,
+  SET_TOURS,
+  SET_CURRENT_USER,
+  SET_RESORTS,
+  SET_USER
 } from './types';
 
 export function setSearchData(data) {
@@ -15,44 +19,72 @@ export function setSearchData(data) {
   };
 }
 
-export function toggleFilter(data) {
+export function toggleFilter(filter) {
   return {
     type: TOGGLE_FILTER,
-    payload: data
+    payload: filter
   };
 }
 
-export function removeFilter(data) {
+export function removeFilter(filter) {
   return {
     type: REMOVE_FILTER,
-    payload: data
+    payload: filter
   };
 }
 
-export function clearFilters(data) {
+export function clearFilters(filters) {
   return {
     type: CLEAR_FILTERS,
-    payload: data
+    payload: filters
   };
 }
 
-export function changeMinPrice(data) {
+export function changeMinPrice(price) {
   return {
     type: CHANGE_MIN_PRICE,
-    payload: data
+    payload: price
   };
 }
 
-export function changeMaxPrice(data) {
+export function changeMaxPrice(price) {
   return {
     type: CHANGE_MAX_PRICE,
-    payload: data
+    payload: price
   };
 }
 
-export function changeTourName(data) {
+export function changeTourName(tourName) {
   return {
     type: CHANGE_TOUR_NAME,
-    payload: data
+    payload: tourName
+  };
+}
+
+export function setTours(tours) {
+  return {
+    type: SET_TOURS,
+    payload: tours
+  };
+}
+
+export function setCurrentUser(user) {
+  return {
+    type: SET_CURRENT_USER,
+    payload: user
+  };
+}
+
+export function setResorts(resorts) {
+  return {
+    type: SET_RESORTS,
+    payload: resorts
+  };
+}
+
+export function setUser(user) {
+  return {
+    type: SET_USER,
+    payload: user
   };
 }

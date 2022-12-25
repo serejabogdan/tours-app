@@ -3,15 +3,14 @@ import './ToursSearch.css';
 
 import TourCards from './TourCards/TourCards';
 import Filters from './Filters';
+import Welcome from '../../shared/Welcome';
 
 function ToursSearch() {
   return (
-    <div className="wrapper">
-      <section className="ToursSearch">
-        <Filters />
-        <TourCards />
-      </section>
-    </div>
+    <section className='ToursSearch'>
+      <Filters />
+      <TourCards />
+    </section>
   );
 }
 

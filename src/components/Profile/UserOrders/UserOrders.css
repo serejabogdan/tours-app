@@ -1,0 +1,10 @@
+.UserOrders {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .UserOrders {
+    flex-direction: column;
+  }
+}
